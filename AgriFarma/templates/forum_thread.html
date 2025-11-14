@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% block title %}{{ thread.title }}{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{{ url_for('static', filename='css/forum.css') }}">{% endblock %}
+{% block content %}
+<div class="row g-4">
+  <div class="col-12 col-lg-8">
+    <div class="thread-card">
+      <div class="thread-title">{{ thread.title }}</div>
+      <div class="thread-meta">
+        Started by {{ thread.author.name if thread.author else 'Unknown' }} ({{ thread.author.email if thread.author else '' }}) · 
+        {{ thread.created_at.strftime('%b %d, %Y') if thread.created_at else 'Recent' }}
+        {% if thread.is_pinned %}<span class="badge bg-warning ms-2">Pinned</span>{% endif %}
+        {% if thread.is_locked %}<span class="badge bg-secondary ms-2">Locked</span>{% endif %}
+        {% if thread.is_solved %}<span class="badge bg-success ms-2">Solved</span>{% endif %}
+      </div>
+      <div class="mt-3">{{ thread.content }}</div>
+      <div class="small text-muted mt-2">👁️ {{ thread.view_count }} views</div>
+    </div>
+    
+    <h6 class="mt-4 mb-3">💬 Replies ({{ replies|length }})</h6>
+    {% for reply in replies %}
+    <div class="thread-card mb-2" id="reply-{{ reply.id }}">
+      <div class="thread-meta mb-1">
+        <strong>{{ reply.author.name if reply.author else 'Unknown' }}</strong> 
+        ({{ reply.author.email if reply.author else '' }}) · 
+        {{ reply.created_at.strftime('%b %d, %Y %H:%M') if reply.created_at else 'Recent' }}
+        {% if reply.is_solution %}<span class="badge bg-success ms-2">✓ Solution</span>{% endif %}
+      </div>
+      <div>{{ reply.content }}</div>
+    </div>
+    {% else %}
+    <p class="text-muted">No replies yet. Be the first to respond!</p>
+    {% endfor %}
+    
+    {% if pagination and pagination.pages > 1 %}
+    <nav aria-label="Reply pagination" class="mt-3">
+      <ul class="pagination pagination-sm">
+        {% if pagination.has_prev %}
+        <li class="page-item"><a class="page-link" href="{{ url_for('forum.thread_detail', thread_id=thread.id, slug=thread.slug, page=pagination.prev_num) }}">Previous</a></li>
+        {% endif %}
+        {% for page_num in pagination.iter_pages(left_edge=1, right_edge=1) %}
+          {% if page_num %}
+            <li class="page-item {% if page_num == pagination.page %}active{% endif %}">
+              <a class="page-link" href="{{ url_for('forum.thread_detail', thread_id=thread.id, slug=thread.slug, page=page_num) }}">{{ page_num }}</a>
+            </li>
+          {% else %}
+            <li class="page-item disabled"><span class="page-link">...</span></li>
+          {% endif %}
+        {% endfor %}
+        {% if pagination.has_next %}
+        <li class="page-item"><a class="page-link" href="{{ url_for('forum.thread_detail', thread_id=thread.id, slug=thread.slug, page=pagination.next_num) }}">Next</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+    {% endif %}
+    
+    {% if current_user.is_authenticated and not thread.is_locked %}
+    <form method="POST" action="{{ url_for('forum.post_reply', thread_id=thread.id, slug=thread.slug) }}" class="mt-4">
+      {{ form.hidden_tag() }}
+      <div class="mb-3">
+        {{ form.content(class="form-control", rows="4", placeholder="Share your knowledge or ask a follow-up...") }}
+        {% if form.content.errors %}
+          <div class="text-danger small">{{ form.content.errors[0] }}</div>
+        {% endif %}
+      </div>
+      <button type="submit" class="btn btn-success">Post Reply</button>
+    </form>
+    {% elif thread.is_locked %}
+    <div class="alert alert-warning mt-4">
+      🔒 This thread is locked. No new replies can be posted.
+    </div>
+    {% else %}
+    <div class="alert alert-info mt-4">
+      Please <a href="{{ url_for('auth.login') }}">login</a> to reply to this thread.
+    </div>
+    {% endif %}
+  </div>
+  
+  <div class="col-12 col-lg-4">
+    <div class="sidebar-latest">
+      <h6>Thread Info</h6>
+      <p class="small mb-1"><strong>Category:</strong> {{ thread.category.name if thread.category else 'General' }}</p>
+      <p class="small mb-1"><strong>Created:</strong> {{ thread.created_at.strftime('%b %d, %Y') if thread.created_at else 'N/A' }}</p>
+      <p class="small mb-1"><strong>Last Activity:</strong> {{ thread.last_activity.strftime('%b %d, %Y') if thread.last_activity else 'N/A' }}</p>
+      <p class="small mb-0"><strong>Replies:</strong> {{ thread.get_reply_count() }}</p>
+    </div>
+    
+    {% if latest_posts %}
+    <div class="sidebar-latest mt-3">
+      <h6>Related Threads</h6>
+      <ul class="mb-0">
+        {% for rel in latest_posts[:5] %}
+          {% if rel.id != thread.id %}
+          <li class="mb-2"><a href="{{ url_for('forum.thread_detail', thread_id=rel.id, slug=rel.slug) }}" class="text-decoration-none">{{ rel.title }}</a></li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

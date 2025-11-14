@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container my-4">
+  <h2>Products Management</h2>
+  <div class="row mb-3">
+    <div class="col-md-3"><div class="card p-2"><small>Active Products</small><h4 class="mb-0">{{ total_active }}</h4></div></div>
+    <div class="col-md-3"><div class="card p-2"><small>Featured</small><h4 class="mb-0">{{ featured_count }}</h4></div></div>
+    <div class="col-md-3"><div class="card p-2"><small>Low Stock</small><h4 class="mb-0">{{ low_stock }}</h4></div></div>
+    <div class="col-md-3"><div class="card p-2"><small>Total Units Sold</small><h4 class="mb-0">{{ total_sold_units }}</h4></div></div>
+  </div>
+  <h5>Top Selling</h5>
+  <div class="row mb-4">
+    {% for p in top_selling %}
+      <div class="col-md-3 mb-2">
+        <div class="border rounded p-2 h-100">
+          <strong>{{ p.name }}</strong><br>
+          <small>Sold: {{ p.sold_count }} | Stock: {{ p.stock_quantity }}</small>
+        </div>
+      </div>
+    {% else %}
+      <div class="col-12 text-muted">No products yet.</div>
+    {% endfor %}
+  </div>
+  <h5>Category Summary</h5>
+  <table class="table table-sm table-bordered mb-4">
+    <thead><tr><th>Category</th><th>Products</th><th>Stock Total</th><th>Sold Total</th></tr></thead>
+    <tbody>
+      {% for row in category_summary %}
+        <tr><td>{{ row.category }}</td><td>{{ row.product_count }}</td><td>{{ row.stock_total }}</td><td>{{ row.sold_total }}</td></tr>
+      {% else %}
+        <tr><td colspan="4" class="text-center text-muted">No data.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <h5>All Products</h5>
+  <table class="table table-sm table-hover">
+    <thead><tr><th>Name</th><th>Category</th><th>Price</th><th>Stock</th><th>Sold</th><th>Featured</th><th>Active</th></tr></thead>
+    <tbody>
+    {% for p in products %}
+      <tr>
+        <td>{{ p.name }}</td>
+        <td>{{ p.category }}</td>
+        <td>PKR {{ '%.2f'|format(p.price) }}</td>
+        <td class="{% if p.is_low_stock() %}text-danger{% endif %}">{{ p.stock_quantity }}</td>
+        <td>{{ p.sold_count }}</td>
+        <td>{% if p.is_featured %}<span class="badge badge-success">Yes</span>{% else %}No{% endif %}</td>
+        <td>{% if p.is_active %}<span class="badge badge-primary">Active</span>{% else %}Inactive{% endif %}</td>
+      </tr>
+    {% else %}
+      <tr><td colspan="7" class="text-center text-muted">No products.</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

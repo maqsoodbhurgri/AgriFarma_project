@@ -1,0 +1,436 @@
+{
+  "version": "1.0.0",
+  "modules": [
+    {
+      "id": "auth",
+      "name": "Authentication & Authorization",
+      "priority": "critical",
+      "requirements": [
+        {
+          "id": "auth-001",
+          "name": "User Registration",
+          "routes": ["/register"],
+          "templates": ["accounts/register.html"],
+          "models": ["User"],
+          "keywords": ["RegisterForm", "db.session.add", "generate_password_hash"]
+        },
+        {
+          "id": "auth-002",
+          "name": "User Login",
+          "routes": ["/login"],
+          "templates": ["accounts/login.html"],
+          "models": ["User"],
+          "keywords": ["LoginForm", "login_user", "check_password_hash"]
+        },
+        {
+          "id": "auth-003",
+          "name": "User Logout",
+          "routes": ["/logout"],
+          "templates": [],
+          "models": [],
+          "keywords": ["logout_user"]
+        },
+        {
+          "id": "auth-004",
+          "name": "Password Reset",
+          "routes": ["/reset-password"],
+          "templates": ["home/auth-reset-password.html"],
+          "models": ["User"],
+          "keywords": ["reset_password", "email"]
+        },
+        {
+          "id": "auth-005",
+          "name": "Role-Based Access Control",
+          "routes": [],
+          "templates": [],
+          "models": ["Role"],
+          "keywords": ["@admin_required", "@login_required", "current_user.is_admin"]
+        },
+        {
+          "id": "auth-006",
+          "name": "User Profile Management",
+          "routes": ["/profile"],
+          "templates": ["home/profile.html"],
+          "models": ["User"],
+          "keywords": ["profile_picture", "expertise_level", "bio"]
+        }
+      ]
+    },
+    {
+      "id": "forum",
+      "name": "Community Forum",
+      "priority": "high",
+      "requirements": [
+        {
+          "id": "forum-001",
+          "name": "Forum Categories",
+          "routes": ["/forum", "/forum/category/<slug>"],
+          "templates": ["forum/index.html", "forum/category_detail.html"],
+          "models": ["ForumCategory"],
+          "keywords": ["ForumCategory", "slug", "icon"]
+        },
+        {
+          "id": "forum-002",
+          "name": "Create Thread",
+          "routes": ["/forum/new-thread"],
+          "templates": ["forum/new_thread.html"],
+          "models": ["ForumThread"],
+          "keywords": ["ThreadForm", "title", "content"]
+        },
+        {
+          "id": "forum-003",
+          "name": "Thread Listing & Detail",
+          "routes": ["/forum/thread/<id>"],
+          "templates": ["forum/thread_detail.html"],
+          "models": ["ForumThread"],
+          "keywords": ["view_count", "is_pinned", "is_locked"]
+        },
+        {
+          "id": "forum-004",
+          "name": "Reply to Thread",
+          "routes": ["/forum/thread/<id>/reply"],
+          "templates": ["forum/thread_detail.html"],
+          "models": ["ForumReply"],
+          "keywords": ["ReplyForm", "thread_id", "author_id"]
+        },
+        {
+          "id": "forum-005",
+          "name": "Mark Solution",
+          "routes": ["/forum/reply/<id>/mark-solution"],
+          "templates": [],
+          "models": ["ForumReply"],
+          "keywords": ["is_solution", "is_solved"]
+        },
+        {
+          "id": "forum-006",
+          "name": "Forum Moderation",
+          "routes": ["/forum/thread/<id>/pin", "/forum/thread/<id>/lock", "/forum/thread/<id>/delete"],
+          "templates": [],
+          "models": ["ForumThread"],
+          "keywords": ["is_pinned", "is_locked", "is_deleted", "@admin_required"]
+        }
+      ]
+    },
+    {
+      "id": "blog",
+      "name": "Blog & Knowledge Base",
+      "priority": "high",
+      "requirements": [
+        {
+          "id": "blog-001",
+          "name": "Blog Categories",
+          "routes": ["/blog", "/blog/category/<slug>"],
+          "templates": ["blog/index.html"],
+          "models": ["BlogCategory"],
+          "keywords": ["BlogCategory", "slug"]
+        },
+        {
+          "id": "blog-002",
+          "name": "Create Blog Post",
+          "routes": ["/blog/new-post"],
+          "templates": ["blog/new_post.html"],
+          "models": ["BlogPost"],
+          "keywords": ["BlogPostForm", "title", "content", "featured_image"]
+        },
+        {
+          "id": "blog-003",
+          "name": "Blog Post Detail",
+          "routes": ["/blog/post/<id>"],
+          "templates": ["blog/post_detail.html"],
+          "models": ["BlogPost"],
+          "keywords": ["view_count", "is_published", "tags"]
+        },
+        {
+          "id": "blog-004",
+          "name": "Blog Comments",
+          "routes": ["/blog/post/<id>/comment"],
+          "templates": ["blog/post_detail.html"],
+          "models": ["BlogComment"],
+          "keywords": ["CommentForm", "post_id", "is_approved"]
+        },
+        {
+          "id": "blog-005",
+          "name": "Blog Likes",
+          "routes": ["/blog/post/<id>/like"],
+          "templates": [],
+          "models": ["BlogLike"],
+          "keywords": ["like_count", "user_id", "post_id"]
+        },
+        {
+          "id": "blog-006",
+          "name": "Blog Attachments",
+          "routes": [],
+          "templates": ["blog/post_detail.html"],
+          "models": ["BlogAttachment"],
+          "keywords": ["file_path", "mime_type", "attachments"]
+        },
+        {
+          "id": "blog-007",
+          "name": "Blog Moderation",
+          "routes": ["/blog/admin/manage-posts", "/blog/post/<id>/publish", "/blog/post/<id>/delete"],
+          "templates": ["blog/manage_posts.html"],
+          "models": ["BlogPost"],
+          "keywords": ["is_published", "is_deleted", "soft_delete", "@admin_required"]
+        }
+      ]
+    },
+    {
+      "id": "consultancy",
+      "name": "Expert Consultancy",
+      "priority": "high",
+      "requirements": [
+        {
+          "id": "consultancy-001",
+          "name": "Consultant Listing",
+          "routes": ["/consultancy"],
+          "templates": ["consultancy/index.html"],
+          "models": ["ConsultantProfile"],
+          "keywords": ["expertise_areas", "hourly_rate", "is_verified"]
+        },
+        {
+          "id": "consultancy-002",
+          "name": "Consultant Profile",
+          "routes": ["/consultancy/consultant/<id>"],
+          "templates": ["consultancy/consultant_detail.html"],
+          "models": ["ConsultantProfile"],
+          "keywords": ["bio", "specialization", "certifications"]
+        },
+        {
+          "id": "consultancy-003",
+          "name": "Become Consultant",
+          "routes": ["/consultancy/become-consultant"],
+          "templates": ["consultancy/become_consultant.html"],
+          "models": ["ConsultantProfile"],
+          "keywords": ["ConsultantForm", "expertise_areas", "hourly_rate"]
+        },
+        {
+          "id": "consultancy-004",
+          "name": "Contact Consultant",
+          "routes": ["/consultancy/consultant/<id>/contact"],
+          "templates": ["consultancy/consultant_detail.html"],
+          "models": ["ConsultancyMessage"],
+          "keywords": ["ContactConsultantForm", "message", "consultant_id"]
+        },
+        {
+          "id": "consultancy-005",
+          "name": "Consultant Dashboard",
+          "routes": ["/consultancy/dashboard"],
+          "templates": ["consultancy/consultant_dashboard.html"],
+          "models": ["ConsultantProfile", "ConsultancyMessage"],
+          "keywords": ["@login_required", "messages", "total_consultations"]
+        },
+        {
+          "id": "consultancy-006",
+          "name": "Admin Verification",
+          "routes": ["/consultancy/admin/consultants", "/consultancy/consultant/<id>/verify"],
+          "templates": ["consultancy/admin_consultants.html"],
+          "models": ["ConsultantProfile"],
+          "keywords": ["is_verified", "@admin_required"]
+        }
+      ]
+    },
+    {
+      "id": "marketplace",
+      "name": "E-Commerce Marketplace",
+      "priority": "critical",
+      "requirements": [
+        {
+          "id": "marketplace-001",
+          "name": "Product Listing",
+          "routes": ["/marketplace"],
+          "templates": ["marketplace/index.html"],
+          "models": ["Product"],
+          "keywords": ["Product", "price", "stock_quantity"]
+        },
+        {
+          "id": "marketplace-002",
+          "name": "Product Detail",
+          "routes": ["/marketplace/product/<id>"],
+          "templates": ["marketplace/product_detail.html"],
+          "models": ["Product"],
+          "keywords": ["description", "specifications", "images"]
+        },
+        {
+          "id": "marketplace-003",
+          "name": "Product Categories",
+          "routes": ["/marketplace/category/<slug>"],
+          "templates": ["marketplace/category.html"],
+          "models": ["Category"],
+          "keywords": ["Category", "slug", "parent_id"]
+        },
+        {
+          "id": "marketplace-004",
+          "name": "Shopping Cart",
+          "routes": ["/marketplace/cart", "/marketplace/cart/add", "/marketplace/cart/remove"],
+          "templates": ["marketplace/cart.html"],
+          "models": ["CartItem"],
+          "keywords": ["cart", "quantity", "session"]
+        },
+        {
+          "id": "marketplace-005",
+          "name": "Checkout Process",
+          "routes": ["/marketplace/checkout"],
+          "templates": ["marketplace/checkout.html"],
+          "models": ["Order"],
+          "keywords": ["Order", "shipping_address", "payment_method"]
+        },
+        {
+          "id": "marketplace-006",
+          "name": "Order Management",
+          "routes": ["/marketplace/orders", "/marketplace/order/<id>"],
+          "templates": ["marketplace/orders.html", "marketplace/order_detail.html"],
+          "models": ["Order", "OrderItem"],
+          "keywords": ["status", "total_amount", "order_date"]
+        },
+        {
+          "id": "marketplace-007",
+          "name": "Product Reviews",
+          "routes": ["/marketplace/product/<id>/review"],
+          "templates": ["marketplace/product_detail.html"],
+          "models": ["Review"],
+          "keywords": ["rating", "review_text", "is_verified_purchase"]
+        },
+        {
+          "id": "marketplace-008",
+          "name": "Wishlist",
+          "routes": ["/marketplace/wishlist", "/marketplace/wishlist/add"],
+          "templates": ["marketplace/wishlist.html"],
+          "models": ["Wishlist"],
+          "keywords": ["wishlist", "user_id", "product_id"]
+        },
+        {
+          "id": "marketplace-009",
+          "name": "Seller Dashboard",
+          "routes": ["/marketplace/seller/dashboard", "/marketplace/seller/products"],
+          "templates": ["marketplace/seller_dashboard.html"],
+          "models": ["Product"],
+          "keywords": ["seller_id", "is_active"]
+        }
+      ]
+    },
+    {
+      "id": "admin",
+      "name": "Admin Panel",
+      "priority": "high",
+      "requirements": [
+        {
+          "id": "admin-001",
+          "name": "Admin Dashboard",
+          "routes": ["/admin", "/admin/dashboard"],
+          "templates": ["admin/dashboard.html"],
+          "models": [],
+          "keywords": ["@admin_required", "statistics"]
+        },
+        {
+          "id": "admin-002",
+          "name": "User Management",
+          "routes": ["/admin/users"],
+          "templates": ["admin/users.html"],
+          "models": ["User"],
+          "keywords": ["is_active", "role", "@admin_required"]
+        },
+        {
+          "id": "admin-003",
+          "name": "Content Moderation",
+          "routes": ["/admin/moderate"],
+          "templates": ["admin/moderation.html"],
+          "models": ["BlogPost", "ForumThread", "Review"],
+          "keywords": ["is_approved", "is_deleted", "@admin_required"]
+        },
+        {
+          "id": "admin-004",
+          "name": "Order Management",
+          "routes": ["/admin/orders"],
+          "templates": ["admin/orders.html"],
+          "models": ["Order"],
+          "keywords": ["status", "tracking_number", "@admin_required"]
+        },
+        {
+          "id": "admin-005",
+          "name": "Analytics & Reports",
+          "routes": ["/admin/analytics"],
+          "templates": ["admin/analytics.html"],
+          "models": [],
+          "keywords": ["revenue", "sales_data", "@admin_required"]
+        }
+      ]
+    },
+    {
+      "id": "analytics",
+      "name": "Analytics & Reporting",
+      "priority": "medium",
+      "requirements": [
+        {
+          "id": "analytics-001",
+          "name": "Sales Analytics",
+          "routes": ["/analytics/sales"],
+          "templates": ["analytics/sales.html"],
+          "models": ["Order"],
+          "keywords": ["revenue", "chart", "date_range"]
+        },
+        {
+          "id": "analytics-002",
+          "name": "User Analytics",
+          "routes": ["/analytics/users"],
+          "templates": ["analytics/users.html"],
+          "models": ["User"],
+          "keywords": ["registration_trends", "active_users"]
+        },
+        {
+          "id": "analytics-003",
+          "name": "Product Analytics",
+          "routes": ["/analytics/products"],
+          "templates": ["analytics/products.html"],
+          "models": ["Product", "Order"],
+          "keywords": ["top_selling", "inventory_alerts"]
+        }
+      ]
+    },
+    {
+      "id": "notifications",
+      "name": "Notifications System",
+      "priority": "medium",
+      "requirements": [
+        {
+          "id": "notifications-001",
+          "name": "In-App Notifications",
+          "routes": ["/notifications"],
+          "templates": ["notifications/index.html"],
+          "models": ["Notification"],
+          "keywords": ["is_read", "notification_type"]
+        },
+        {
+          "id": "notifications-002",
+          "name": "Email Notifications",
+          "routes": [],
+          "templates": [],
+          "models": ["Notification"],
+          "keywords": ["send_email", "smtp", "email_template"]
+        }
+      ]
+    },
+    {
+      "id": "search",
+      "name": "Search Functionality",
+      "priority": "medium",
+      "requirements": [
+        {
+          "id": "search-001",
+          "name": "Global Search",
+          "routes": ["/search"],
+          "templates": ["search/results.html"],
+          "models": [],
+          "keywords": ["request.args.get", "search", "query"]
+        },
+        {
+          "id": "search-002",
+          "name": "Advanced Filters",
+          "routes": [],
+          "templates": ["marketplace/index.html"],
+          "models": [],
+          "keywords": ["filter_by", "price_range", "category"]
+        }
+      ]
+    }
+  ]
+}

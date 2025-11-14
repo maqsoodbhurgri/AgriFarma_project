@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AgriFarma SRS Compliance Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+        .container { max-width: 1200px; margin: auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #2c3e50; }
+        .summary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin: 30px 0; }
+        .summary-card { padding: 20px; border-radius: 6px; text-align: center; }
+        .summary-card h3 { margin: 0 0 10px 0; font-size: 14px; text-transform: uppercase; }
+        .summary-card .value { font-size: 32px; font-weight: bold; }
+        .completed { background: #d4edda; color: #155724; }
+        .partial { background: #fff3cd; color: #856404; }
+        .missing { background: #f8d7da; color: #721c24; }
+        .total { background: #d1ecf1; color: #0c5460; }
+        .module { margin: 30px 0; border: 1px solid #dee2e6; border-radius: 6px; overflow: hidden; }
+        .module-header { background: #007bff; color: white; padding: 15px; font-size: 18px; font-weight: bold; }
+        .module-priority { float: right; background: rgba(255,255,255,0.2); padding: 5px 10px; border-radius: 4px; font-size: 14px; }
+        .requirement { padding: 15px; border-bottom: 1px solid #dee2e6; }
+        .requirement:last-child { border-bottom: none; }
+        .requirement-header { display: flex; align-items: center; margin-bottom: 8px; }
+        .status-badge { display: inline-block; padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: bold; margin-right: 10px; }
+        .status-completed { background: #28a745; color: white; }
+        .status-partial { background: #ffc107; color: #212529; }
+        .status-missing { background: #dc3545; color: white; }
+        .req-id { font-family: monospace; color: #6c757d; margin-right: 10px; }
+        .completion-bar { height: 8px; background: #e9ecef; border-radius: 4px; margin: 8px 0; overflow: hidden; }
+        .completion-bar-fill { height: 100%; background: #28a745; transition: width 0.3s; }
+        .details { font-size: 13px; color: #6c757d; margin-top: 8px; }
+        .details ul { margin: 5px 0; padding-left: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AgriFarma SRS Compliance Report</h1>
+        <p style="text-align: center; color: #6c757d;">Version 1.0.0 | Scan Date: 2025-11-12</p>
+        
+        <div class="summary">
+            <div class="summary-card total">
+                <h3>Total Requirements</h3>
+                <div class="value">46</div>
+            </div>
+            <div class="summary-card completed">
+                <h3>Completed</h3>
+                <div class="value">8</div>
+                <p>17.4%</p>
+            </div>
+            <div class="summary-card partial">
+                <h3>Partially Done</h3>
+                <div class="value">31</div>
+                <p>67.4%</p>
+            </div>
+            <div class="summary-card missing">
+                <h3>Missing</h3>
+                <div class="value">7</div>
+                <p>15.2%</p>
+            </div>
+        </div>
+
+        <div class="module">
+            <div class="module-header">
+                Authentication & Authorization
+                <span class="module-priority">CRITICAL</span>
+                <div style="clear: both;"></div>
+                <div style="font-size: 14px; margin-top: 5px;">Module Completion: 100.0%</div>
+            </div>
+
+            <div class="requirement">
+                <div class="requirement-header">
+                    <span class="status-badge status-completed">COMPLETED</span>
+                    <span class="req-id">auth-001</span>
+                    <strong>User Registration</strong>
+                </div>
+                <div class="completion-bar">
+                    <div class="completion-bar-fill" style="width: 100.0%"></div>
+                </div>
+                <div class="details">Completion: 100.0%</div>
+</div>
+            <div class="requirement">
+                <div class="requirement-header">
+                    <span class="status-badge status-completed">COMPLETED</span>
+                    <span class="req-id">auth-002</span>
+                    <strong>User Login</strong>
+                </div>
+                <div class="completion-bar">
+                    <div class="completion-bar-fill" style="width: 100.0%"></div>
+                </div>
+                <div class="details">Completion: 100.0%</div>
+</div>
+            <div class="requirement">
+                <div class="requirement-header">
+                    <span class="status-badge status-completed">COMPLETED</span>
+                    <span class="req-id">auth-003</span>
+                    <strong>User Logout</strong>
+                </div>
+                <div class="completion-bar">
+                    <div class="completion-bar-fill" style="width: 100.0%"></div>
+                </div>
+                <div class="details">Completion: 100.0%</div>
+</div>
+            <div class="requirement">
+                <div class="requirement-header">
+                    <span class="status-badge status-completed">COMPLETED</span>
+                    <span class="req-id">auth-004</span>
+                    <strong>Password Reset</strong>
+                </div>
+                <div class="completion-bar">
+                    <div class="completion-bar-fill" style="width: 100.0%"></div>
+                </div>
+                <div class="details">Completion: 100.0%</div>
+</div>
+            <div class="requirement">
+                <div class="requirement-header">
+                    <span class="status-badge status-completed">COMPLETED</span>
+                    <span class="req-id">auth-005</span>
+                    <strong>Role-Based Access Control</strong>
+                </div>
+                <div class="completion-bar">
+                    <div class="completion-bar-fill" style="width: 100.0%"></div>
+                </div>
+                <div class="details">Completion: 100.0%</div>
+</div>
+            <div class="requirement">
+                <div class="requirement-header">
+                    <span class="status-badge status-completed">COMPLETED</span>
+                    <span class="req-id">auth-006</span>
+                    <strong>User Profile Management</strong>
+                </div>
+                <div class="completion-bar">
+                    <div class="completion-bar-fill" style="width: 100.0%"></div>
+                </div>
+                <div class="details">Completion: 100.0%</div>
+</div></div>
+        <div class="module">
+            <div class="module-header">
+                Community Forum
+                <span class="module-priority">HIGH</span>
+                <div style="clear: both;"></div>
+                <div style="font-size: 14px; margin-top: 5px;">Module Completion: 0.0%</div>
+            </div>
+
+            <div class="requirement">
+                <div class="requirement-header">
+                    <span class="status-badge status-partial">PARTIAL</span>
+                    <span class="req-id">forum-001</span>
+                    <strong>Forum Categories</strong>
+                </div>
+                <div class="completion-bar">
+                    <div class="completion-bar-fill" style="width: 50.0%"></div>
+                </div>
+                <div class="details">Completion: 50.0%</div>
+<div class="details"><strong>Missing Routes:</strong> /forum, /forum/category/<slug><br><strong>Missing Models:</strong> ForumCategory<br></div></div>
+            <div class="requirement">
+                <div class="requirement-header">
+                    <span class="status-badge status-partial">PARTIAL</span>
+                    <span class="req-id">forum-002</span>
+                    <strong>Create Thread</strong>
+                </div>
+                <div class="completion-bar">
+                    <div class="completion-bar-fill" style="width: 66.66666666666666%"></div>
+                </div>
+                <div class="details">Completion: 66.7%</div>
+<div class="details"><strong>Missing Routes:</strong> /forum/new-thread<br><strong>Missing Models:</strong> ForumThread<br></div></div>
+            <div class="requirement">
+                <div class="requirement-header">
+                    <span class="status-badge status-partial">PARTIAL</span>
+                    <span class="req-id">forum-003</span>
+                    <strong>Thread Listing & Detail</strong>
+                </div>
+                <div class="completion-bar">
+                    <div class="completion-bar-fill" style="width: 66.66666666666666%"></div>
+                </div>
+                <div class="details">Completion: 66.7%</div>
+<div class="details"><strong>Missing Routes:</strong> /forum/thread/<id><br><strong>Missing Models:</strong> ForumThread<br></div></div>
+            <div class="requirement">
+                <div class="requirement-header">
+                    <span class="status-badge status-partial">PARTIAL</span>
+                    <span class="req-id">forum-004</span>
+                    <strong>Reply to Thread</strong>
+                </div>
+                <div class="completion-bar">
+                    <div class="completion-bar-fill" style="width: 66.66666666666666%"></div>
+                </div>
+                <div class="details">Completion: 66.7%</div>
+<div class="details"><strong>Missing Routes:</strong> /forum/thread/<id>/reply<br><strong>Missing Models:</strong> ForumReply<br></div></div>
+            <div class="requirement">
+                <div class="requirement-header">
+                    <span class="status-badge status-partial">PARTIAL</span>
+                    <span class="req-id">forum-005</span>
+                    <strong>Mark Solution</strong>
+                </div>
+                <div class="completion-bar">
+                    <div class="completion-bar-fill" style="width: 50.0%"></div>
+                </div>
+                <div class="details">Completion: 50.0%</div>
+<div class="details"><strong>Missing Routes:</strong> /forum/reply/<id>/mark-solution<br><strong>Missing Models:</strong> ForumReply<br></div></div>
+            <div class="requirement">
+                <div class="requirement-header">
+                    <span class="status-badge status-partial">PARTIAL</span>
+                    <span class="req-id">forum-006</span>
+                    <strong>Forum Moderation</strong>
+                </div>
+                <div class="completion-bar">
+                    <div class="completion-bar-fill" style="width: 50.0%"></div>
+                </div>
+                <div class="details">Completion: 50.0%</div>
+<div class="details"><strong>Missing Routes:</strong> /forum/thread/<id>/pin, /forum/thread/<id>/lock, /forum/thread/<id>/delete<br><strong>Missing Models:</strong> ForumThread<br></div></div></div>
+        <div class="module">
+            <div class="module-header">
+                Blog & Knowledge Base
+                <span class="module-priority">HIGH</span>
+                <div style="clear: both;"></div>
+                <div style="font-size: 14px; margin-top: 5px;">Module Completion: 14.3%</div>
+            </div>
+
+            <div class="requirement">
+                <div class="requirement-header">
+                    <span class="status-badge status-partial">PARTIAL</span>
+                    <span class="req-id">blog-001</span>
+                    <strong>Blog Categories</strong>
+                </div>
+                <div class="completion-bar">
+                    <div class="completion-bar-fill" style="width: 66.66666666666666%"></div>
+                </div>
+                <div class="details">Completion: 66.7%</div>
+<div class="details"><strong>Missing Routes:</strong> /blog, /blog/category/<slug><br></div></div>
+            <div class="requirement">
+                <div class="requirement-header">
+                    <span class="status-badge status-partial">PARTIAL</span>
+                    <span class="req-id">blog-002</span>
+                    <strong>Create Blog Post</strong>
+                </div>
+                <div class="completion-bar">
+                    <div class="completion-bar-fill" style="width: 71.42857142857143%"></div>
+                </div>
+                <div class="details">Completion: 71.4%</div>
+<div class="details"><strong>Missing Routes:</strong> /blog/new-post<br><strong>Missing Templates:</strong> blog/new_post.html<br></div></div>
+            <div class="requirement">
+                <div class="requirement-header">
+                    <span class="status-badge status-partial">PARTIAL</span>
+                    <span class="req-id">blog-003</span>
+                    <strong>Blog Post Detail</strong>
+                </div>
+                <div class="completion-bar">
+                    <div class="completion-bar-fill" style="width: 83.33333333333334%"></div>
+                </div>
+                <div class="details">Completion: 83.3%</div>
+<div class="details"><strong>Missing Routes:</strong> /blog/post/<id><br></div></div>
+            <div class="requirement">
+                <div class="requirement-header">
+                    <span class="status-badge status-partial">PARTIAL</span>
+                    <span class="req-id">blog-004</span>
+                    <strong>Blog Comments</strong>
+                </div>
+                <div class="completion-bar">
+                    <div class="completion-bar-fill" style="width: 83.33333333333334%"></div>
+                </div>
+                <div class="details">Completion: 83.3%</div>
+<div class="details"><strong>Missing Routes:</strong> /blog/post/<id>/comment<br></div></div>
+            <div class="requirement">
+                <div class="requirement-header">
+                    <span class="status-badge status-partial">PARTIAL</span>
+                    <span class="req-id">blog-005</span>
+                    <strong>Blog Likes</strong>
+                </div>
+                <div class="completion-bar">
+                    <div class="completion-bar-fill" style="width: 80.0%"></div>
+                </div>
+                <div class="details">Completion: 80.0%</div>
+<div class="details"><strong>Missing Routes:</strong> /blog/post/<id>/like<br></div></div>
+            <div class="requirement">
+                <div class="requirement-header">
+                    <span class="status-badge status-completed">COMPLETED</span>
+                    <span class="req-id">blog-006</span>
+                    <strong>Blog Attachments</strong>
+                </div>
+                <div class="completion-bar">
+                    <div class="completion-bar-fill" style="width: 100.0%"></div>
+                </div>
+                <div class="details">Completion: 100.0%</div>
+</div>
+            <div class="requirement">
+                <div class="requirement-header">
+                    <span class="status-badge status-partial">PARTIAL</span>
+                    <span class="req-id">blog-007</span>
+                    <strong>Blog Moderation</strong>
+                </div>
+                <div class="completion-bar">
+                    <div class="completion-bar-fill" style="width: 66.66666666666666%"></div>
+                </div>
+                <div class="details">Completion: 66.7%</div>
+<div class="details"><strong>Missing Routes:</strong> /blog/admin/manage-posts, /blog/post/<id>/publish, /blog/post/<id>/delete<br></div></div></div>
+        <div class="module">
+            <div class="module-header">
+                Expert Consultancy
+                <span class="module-priority">HIGH</span>
+                <div style="clear: both;"></div>
+                <div style="font-size: 14px; margin-top: 5px;">Module Completion: 0.0%</div>
+            </div>
+
+            <div class="requirement">
+                <div class="requirement-header">
+                    <span class="status-badge status-partial">PARTIAL</span>
+                    <span class="req-id">consultancy-001</span>
+                    <strong>Consultant Listing</strong>
+                </div>
+                <div class="completion-bar">
+                    <div class="completion-bar-fill" style="width: 66.66666666666666%"></div>
+                </div>
+                <div class="details">Completion: 66.7%</div>
+<div class="details"><strong>Missing Routes:</strong> /consultancy<br></div></div>
+            <div class="requirement">
+                <div class="requirement-header">
+                    <span class="status-badge status-partial">PARTIAL</span>
+                    <span class="req-id">consultancy-002</span>
+                    <strong>Consultant Profile</strong>
+                </div>
+                <div class="completion-bar">
+                    <div class="completion-bar-fill" style="width: 66.66666666666666%"></div>
+                </div>
+                <div class="details">Completion: 66.7%</div>
+<div class="details"><strong>Missing Routes:</strong> /consultancy/consultant/<id><br></div></div>
+            <div class="requirement">
+                <div class="requirement-header">
+                    <span class="status-badge status-partial">PARTIAL</span>
+                    <span class="req-id">consultancy-003</span>
+                    <strong>Become Consultant</strong>
+                </div>
+                <div class="completion-bar">
+                    <div class="completion-bar-fill" style="width: 50.0%"></div>
+                </div>
+                <div class="details">Completion: 50.0%</div>
+<div class="details"><strong>Missing Routes:</strong> /consultancy/become-consultant<br><strong>Missing Templates:</strong> consultancy/become_consultant.html<br></div></div>
+            <div class="requirement">
+                <div class="requirement-header">
+                    <span class="status-badge status-partial">PARTIAL</span>
+                    <span class="req-id">consultancy-004</span>
+                    <strong>Contact Consultant</strong>
+                </div>
+                <div class="completion-bar">
+                    <div class="completion-bar-fill" style="width: 83.33333333333334%"></div>
+                </div>
+                <div class="details">Completion: 83.3%</div>
+<div class="details"><strong>Missing Routes:</strong> /consultancy/consultant/<id>/contact<br></div></div>
+            <div class="requirement">
+                <div class="requirement-header">
+                    <span class="status-badge status-partial">PARTIAL</span>
+                    <span class="req-id">consultancy-005</span>
+                    <strong>Consultant Dashboard</strong>
+                </div>
+                <div class="completion-bar">
+                    <div class="completion-bar-fill" style="width: 57.14285714285714%"></div>
+                </div>
+                <div class="details">Completion: 57.1%</div>
+<div class="details"><strong>Missing Routes:</strong> /consultancy/dashboard<br><strong>Missing Templates:</strong> consultancy/consultant_dashboard.html<br></div></div>
+            <div class="requirement">
+                <div class="requirement-header">
+                    <span class="status-badge status-partial">PARTIAL</span>
+                    <span class="req-id">consultancy-006</span>
+                    <strong>Admin Verification</strong>
+                </div>
+                <div class="completion-bar">
+                    <div class="completion-bar-fill" style="width: 66.66666666666666%"></div>
+                </div>
+                <div class="details">Completion: 66.7%</div>
+<div class="details"><strong>Missing Routes:</strong> /consultancy/admin/consultants, /consultancy/consultant/<id>/verify<br></div></div></div>
+        <div class="module">
+            <div class="module-header">
+                E-Commerce Marketplace
+                <span class="module-priority">CRITICAL</span>
+                <div style="clear: both;"></div>
+                <div style="font-size: 14px; margin-top: 5px;">Module Completion: 0.0%</div>
+            </div>
+
+            <div class="requirement">
+                <div class="requirement-header">
+                    <span class="status-badge status-partial">PARTIAL</span>
+                    <span class="req-id">marketplace-001</span>
+                    <strong>Product Listing</strong>
+                </div>
+                <div class="completion-bar">
+                    <div class="completion-bar-fill" style="width: 83.33333333333334%"></div>
+                </div>
+                <div class="details">Completion: 83.3%</div>
+<div class="details"><strong>Missing Routes:</strong> /marketplace<br></div></div>
+            <div class="requirement">
+                <div class="requirement-header">
+                    <span class="status-badge status-partial">PARTIAL</span>
+                    <span class="req-id">marketplace-002</span>
+                    <strong>Product Detail</strong>
+                </div>
+                <div class="completion-bar">
+                    <div class="completion-bar-fill" style="width: 50.0%"></div>
+                </div>
+                <div class="details">Completion: 50.0%</div>
+<div class="details"><strong>Missing Routes:</strong> /marketplace/product/<id><br><strong>Missing Templates:</strong> marketplace/product_detail.html<br></div></div>
+            <div class="requirement">
+                <div class="requirement-header">
+                    <span class="status-badge status-partial">PARTIAL</span>
+                    <span class="req-id">marketplace-003</span>
+                    <strong>Product Categories</strong>
+                </div>
+                <div class="completion-bar">
+                    <div class="completion-bar-fill" style="width: 66.66666666666666%"></div>
+                </div>
+                <div class="details">Completion: 66.7%</div>
+<div class="details"><strong>Missing Routes:</strong> /marketplace/category/<slug><br><strong>Missing Templates:</strong> marketplace/category.html<br></div></div>
+            <div class="requirement">
+                <div class="requirement-header">
+                    <span class="status-badge status-partial">PARTIAL</span>
+                    <span class="req-id">marketplace-004</span>
+                    <strong>Shopping Cart</strong>
+                </div>
+                <div class="completion-bar">
+                    <div class="completion-bar-fill" style="width: 62.5%"></div>
+                </div>
+                <div class="details">Completion: 62.5%</div>
+<div class="details"><strong>Missing Routes:</strong> /marketplace/cart, /marketplace/cart/add, /marketplace/cart/remove<br></div></div>
+            <div class="requirement">
+                <div class="requirement-header">
+                    <span class="status-badge status-partial">PARTIAL</span>
+                    <span class="req-id">marketplace-005</span>
+                    <strong>Checkout Process</strong>
+                </div>
+                <div class="completion-bar">
+                    <div class="completion-bar-fill" style="width: 83.33333333333334%"></div>
+                </div>
+                <div class="details">Completion: 83.3%</div>
+<div class="details"><strong>Missing Routes:</strong> /marketplace/checkout<br></div></div>
+            <div class="requirement">
+                <div class="requirement-header">
+                    <span class="status-badge status-partial">PARTIAL</span>
+                    <span class="req-id">marketplace-006</span>
+                    <strong>Order Management</strong>
+                </div>
+                <div class="completion-bar">
+                    <div class="completion-bar-fill" style="width: 77.77777777777779%"></div>
+                </div>
+                <div class="details">Completion: 77.8%</div>
+<div class="details"><strong>Missing Routes:</strong> /marketplace/orders, /marketplace/order/<id><br></div></div>
+            <div class="requirement">
+                <div class="requirement-header">
+                    <span class="status-badge status-missing">MISSING</span>
+                    <span class="req-id">marketplace-007</span>
+                    <strong>Product Reviews</strong>
+                </div>
+                <div class="completion-bar">
+                    <div class="completion-bar-fill" style="width: 16.666666666666664%"></div>
+                </div>
+                <div class="details">Completion: 16.7%</div>
+<div class="details"><strong>Missing Routes:</strong> /marketplace/product/<id>/review<br><strong>Missing Templates:</strong> marketplace/product_detail.html<br><strong>Missing Models:</strong> Review<br></div></div>
+            <div class="requirement">
+                <div class="requirement-header">
+                    <span class="status-badge status-missing">MISSING</span>
+                    <span class="req-id">marketplace-008</span>
+                    <strong>Wishlist</strong>
+                </div>
+                <div class="completion-bar">
+                    <div class="completion-bar-fill" style="width: 28.57142857142857%"></div>
+                </div>
+                <div class="details">Completion: 28.6%</div>
+<div class="details"><strong>Missing Routes:</strong> /marketplace/wishlist, /marketplace/wishlist/add<br><strong>Missing Templates:</strong> marketplace/wishlist.html<br><strong>Missing Models:</strong> Wishlist<br></div></div>
+            <div class="requirement">
+                <div class="requirement-header">
+                    <span class="status-badge status-missing">MISSING</span>
+                    <span class="req-id">marketplace-009</span>
+                    <strong>Seller Dashboard</strong>
+                </div>
+                <div class="completion-bar">
+                    <div class="completion-bar-fill" style="width: 33.33333333333333%"></div>
+                </div>
+                <div class="details">Completion: 33.3%</div>
+<div class="details"><strong>Missing Routes:</strong> /marketplace/seller/dashboard, /marketplace/seller/products<br><strong>Missing Templates:</strong> marketplace/seller_dashboard.html<br></div></div></div>
+        <div class="module">
+            <div class="module-header">
+                Admin Panel
+                <span class="module-priority">HIGH</span>
+                <div style="clear: both;"></div>
+                <div style="font-size: 14px; margin-top: 5px;">Module Completion: 20.0%</div>
+            </div>
+
+            <div class="requirement">
+                <div class="requirement-header">
+                    <span class="status-badge status-completed">COMPLETED</span>
+                    <span class="req-id">admin-001</span>
+                    <strong>Admin Dashboard</strong>
+                </div>
+                <div class="completion-bar">
+                    <div class="completion-bar-fill" style="width: 100.0%"></div>
+                </div>
+                <div class="details">Completion: 100.0%</div>
+</div>
+            <div class="requirement">
+                <div class="requirement-header">
+                    <span class="status-badge status-partial">PARTIAL</span>
+                    <span class="req-id">admin-002</span>
+                    <strong>User Management</strong>
+                </div>
+                <div class="completion-bar">
+                    <div class="completion-bar-fill" style="width: 83.33333333333334%"></div>
+                </div>
+                <div class="details">Completion: 83.3%</div>
+<div class="details"><strong>Missing Routes:</strong> /admin/users<br></div></div>
+            <div class="requirement">
+                <div class="requirement-header">
+                    <span class="status-badge status-partial">PARTIAL</span>
+                    <span class="req-id">admin-003</span>
+                    <strong>Content Moderation</strong>
+                </div>
+                <div class="completion-bar">
+                    <div class="completion-bar-fill" style="width: 50.0%"></div>
+                </div>
+                <div class="details">Completion: 50.0%</div>
+<div class="details"><strong>Missing Routes:</strong> /admin/moderate<br><strong>Missing Templates:</strong> admin/moderation.html<br><strong>Missing Models:</strong> ForumThread, Review<br></div></div>
+            <div class="requirement">
+                <div class="requirement-header">
+                    <span class="status-badge status-partial">PARTIAL</span>
+                    <span class="req-id">admin-004</span>
+                    <strong>Order Management</strong>
+                </div>
+                <div class="completion-bar">
+                    <div class="completion-bar-fill" style="width: 83.33333333333334%"></div>
+                </div>
+                <div class="details">Completion: 83.3%</div>
+<div class="details"><strong>Missing Routes:</strong> /admin/orders<br></div></div>
+            <div class="requirement">
+                <div class="requirement-header">
+                    <span class="status-badge status-missing">MISSING</span>
+                    <span class="req-id">admin-005</span>
+                    <strong>Analytics & Reports</strong>
+                </div>
+                <div class="completion-bar">
+                    <div class="completion-bar-fill" style="width: 40.0%"></div>
+                </div>
+                <div class="details">Completion: 40.0%</div>
+<div class="details"><strong>Missing Routes:</strong> /admin/analytics<br><strong>Missing Templates:</strong> admin/analytics.html<br></div></div></div>
+        <div class="module">
+            <div class="module-header">
+                Analytics & Reporting
+                <span class="module-priority">MEDIUM</span>
+                <div style="clear: both;"></div>
+                <div style="font-size: 14px; margin-top: 5px;">Module Completion: 0.0%</div>
+            </div>
+
+            <div class="requirement">
+                <div class="requirement-header">
+                    <span class="status-badge status-partial">PARTIAL</span>
+                    <span class="req-id">analytics-001</span>
+                    <strong>Sales Analytics</strong>
+                </div>
+                <div class="completion-bar">
+                    <div class="completion-bar-fill" style="width: 50.0%"></div>
+                </div>
+                <div class="details">Completion: 50.0%</div>
+<div class="details"><strong>Missing Routes:</strong> /analytics/sales<br><strong>Missing Templates:</strong> analytics/sales.html<br></div></div>
+            <div class="requirement">
+                <div class="requirement-header">
+                    <span class="status-badge status-missing">MISSING</span>
+                    <span class="req-id">analytics-002</span>
+                    <strong>User Analytics</strong>
+                </div>
+                <div class="completion-bar">
+                    <div class="completion-bar-fill" style="width: 20.0%"></div>
+                </div>
+                <div class="details">Completion: 20.0%</div>
+<div class="details"><strong>Missing Routes:</strong> /analytics/users<br><strong>Missing Templates:</strong> analytics/users.html<br></div></div>
+            <div class="requirement">
+                <div class="requirement-header">
+                    <span class="status-badge status-partial">PARTIAL</span>
+                    <span class="req-id">analytics-003</span>
+                    <strong>Product Analytics</strong>
+                </div>
+                <div class="completion-bar">
+                    <div class="completion-bar-fill" style="width: 50.0%"></div>
+                </div>
+                <div class="details">Completion: 50.0%</div>
+<div class="details"><strong>Missing Routes:</strong> /analytics/products<br><strong>Missing Templates:</strong> analytics/products.html<br></div></div></div>
+        <div class="module">
+            <div class="module-header">
+                Notifications System
+                <span class="module-priority">MEDIUM</span>
+                <div style="clear: both;"></div>
+                <div style="font-size: 14px; margin-top: 5px;">Module Completion: 0.0%</div>
+            </div>
+
+            <div class="requirement">
+                <div class="requirement-header">
+                    <span class="status-badge status-missing">MISSING</span>
+                    <span class="req-id">notifications-001</span>
+                    <strong>In-App Notifications</strong>
+                </div>
+                <div class="completion-bar">
+                    <div class="completion-bar-fill" style="width: 0.0%"></div>
+                </div>
+                <div class="details">Completion: 0.0%</div>
+<div class="details"><strong>Missing Routes:</strong> /notifications<br><strong>Missing Templates:</strong> notifications/index.html<br><strong>Missing Models:</strong> Notification<br></div></div>
+            <div class="requirement">
+                <div class="requirement-header">
+                    <span class="status-badge status-missing">MISSING</span>
+                    <span class="req-id">notifications-002</span>
+                    <strong>Email Notifications</strong>
+                </div>
+                <div class="completion-bar">
+                    <div class="completion-bar-fill" style="width: 0.0%"></div>
+                </div>
+                <div class="details">Completion: 0.0%</div>
+<div class="details"><strong>Missing Models:</strong> Notification<br></div></div></div>
+        <div class="module">
+            <div class="module-header">
+                Search Functionality
+                <span class="module-priority">MEDIUM</span>
+                <div style="clear: both;"></div>
+                <div style="font-size: 14px; margin-top: 5px;">Module Completion: 0.0%</div>
+            </div>
+
+            <div class="requirement">
+                <div class="requirement-header">
+                    <span class="status-badge status-partial">PARTIAL</span>
+                    <span class="req-id">search-001</span>
+                    <strong>Global Search</strong>
+                </div>
+                <div class="completion-bar">
+                    <div class="completion-bar-fill" style="width: 80.0%"></div>
+                </div>
+                <div class="details">Completion: 80.0%</div>
+<div class="details"><strong>Missing Templates:</strong> search/results.html<br></div></div>
+            <div class="requirement">
+                <div class="requirement-header">
+                    <span class="status-badge status-partial">PARTIAL</span>
+                    <span class="req-id">search-002</span>
+                    <strong>Advanced Filters</strong>
+                </div>
+                <div class="completion-bar">
+                    <div class="completion-bar-fill" style="width: 75.0%"></div>
+                </div>
+                <div class="details">Completion: 75.0%</div>
+</div></div>
+    </div>
+</body>
+</html>

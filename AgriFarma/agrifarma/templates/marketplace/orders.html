@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container my-4">
+  <h2>My Orders</h2>
+  <table class="table table-sm table-hover">
+    <thead><tr><th>Order #</th><th>Date</th><th>Status</th><th>Total</th><th>Items</th><th></th></tr></thead>
+    <tbody>
+    {% for o in orders %}
+      <tr>
+        <td>{{ o.order_number }}</td>
+        <td>{{ o.order_date|datetime }}</td>
+        <td><span class="badge badge-info">{{ o.status }}</span></td>
+        <td>PKR {{ '%.2f'|format(o.total_amount) }}</td>
+        <td>{{ o.get_item_count() }}</td>
+        <td><a href="{{ url_for('marketplace.order_detail', order_id=o.id) }}" class="btn btn-sm btn-outline-primary">View</a></td>
+      </tr>
+    {% else %}
+      <tr><td colspan="6" class="text-center text-muted">No orders yet.</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

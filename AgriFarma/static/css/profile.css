@@ -1,0 +1,355 @@
+/* Modern profile styles */
+:root{
+  --cover-overlay: linear-gradient(140deg, rgba(46,125,50,.88), rgba(102,187,106,.75));
+}
+
+/* Profile Hero Section */
+.profile-hero{
+  position:relative;
+  color:#fff;
+  margin-bottom:-40px;
+}
+.profile-cover{
+  height:200px;
+  background:var(--cover-overlay), url('../images/Backgrounds/pexels-quang-nguyen-vinh-222549-2135677.jpg') center/cover no-repeat;
+  box-shadow:0 4px 20px rgba(0,0,0,.15);
+}
+
+/* Avatar and Identity */
+.profile-identity{
+  transform:translateY(-60px);
+  padding:0 20px;
+  margin-bottom:0;
+  display:flex;
+  align-items:flex-end;
+  gap:1rem;
+}
+.avatar-wrapper{
+  width:130px;
+  height:130px;
+  border-radius:50%;
+  overflow:hidden;
+  box-shadow:0 8px 24px rgba(0,0,0,.25);
+  border:5px solid #fff;
+  background:#fff;
+  flex-shrink:0;
+}
+.avatar-img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.avatar-fallback{
+  width:100%;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(135deg,#66bb6a,#43a047);
+  color:#fff;
+  font-weight:700;
+  font-size:52px;
+  text-shadow:0 2px 6px rgba(0,0,0,.3);
+}
+
+/* Text with better visibility */
+.profile-identity h2{
+  color:#fff;
+  text-shadow:0 3px 10px rgba(0,0,0,.5);
+  font-weight:700;
+  margin-bottom:0.3rem;
+  font-size:2rem;
+}
+.text-white-80{
+  color:#fff!important;
+  text-shadow:0 2px 6px rgba(0,0,0,.4);
+  font-size:1rem;
+}
+.bg-glass{
+  background:rgba(255,255,255,.35);
+  backdrop-filter:blur(8px);
+  border:1.5px solid rgba(255,255,255,.5);
+  padding:6px 16px;
+  border-radius:25px;
+  font-size:0.9rem;
+  font-weight:700;
+  text-shadow:0 1px 4px rgba(0,0,0,.3);
+  display:inline-block;
+}
+
+/* Profile Action Buttons */
+.profile-actions{
+  display:flex;
+  gap:0.5rem;
+  flex-wrap:wrap;
+}
+.profile-actions .btn{
+  font-weight:600;
+  padding:8px 20px;
+  border-radius:25px;
+  border-width:2px;
+  box-shadow:0 4px 12px rgba(0,0,0,.2);
+  transition:all 0.3s ease;
+}
+.profile-actions .btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 16px rgba(0,0,0,.3);
+}
+.profile-actions .btn-light{
+  background:#fff;
+  border-color:#fff;
+  color:#2e7d32;
+  font-weight:700;
+}
+.profile-actions .btn-outline-light{
+  background:rgba(255,255,255,.95);
+  border-color:#fff;
+  color:#2e7d32;
+  font-weight:700;
+  border-width:3px;
+}
+.profile-actions .btn-outline-light:hover{
+  background:#fff;
+  color:#1b5e20;
+  border-color:#fff;
+}
+
+/* Stats Cards */
+.stat-gradient{
+  border:none;
+  border-radius:18px;
+  overflow:hidden;
+  color:#fff;
+  box-shadow:0 6px 16px rgba(0,0,0,.12);
+  transition:transform 0.3s ease, box-shadow 0.3s ease;
+}
+.stat-gradient:hover{
+  transform:translateY(-6px);
+  box-shadow:0 12px 28px rgba(0,0,0,.2);
+}
+.stat-gradient .card-body{
+  padding:28px 20px;
+  text-align:center;
+}
+.stat-gradient .stat-icon{
+  font-size:2.5rem;
+  opacity:1;
+  margin-bottom:12px;
+  display:block;
+  filter:drop-shadow(0 2px 4px rgba(0,0,0,.2));
+}
+.stat-gradient .stat-label{
+  opacity:1;
+  font-size:0.8rem;
+  margin:10px 0 0 0;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+.stat-gradient .stat-value{
+  font-size:3rem;
+  font-weight:900;
+  line-height:1;
+  display:block;
+  text-shadow:0 2px 8px rgba(0,0,0,.2);
+}
+.stat-1{background:linear-gradient(135deg,#43a047,#2e7d32);}
+.stat-2{background:linear-gradient(135deg,#ff7043,#f4511e);}
+.stat-3{background:linear-gradient(135deg,#42a5f5,#1e88e5);}
+.stat-4{background:linear-gradient(135deg,#ab47bc,#8e24aa);}
+
+/* Info rows */
+.info-row{
+  display:flex;
+  justify-content:space-between;
+  padding:16px 0;
+  border-bottom:1px solid #e9ecef;
+  align-items:center;
+  transition: background-color 0.2s ease;
+}
+.info-row:hover{
+  background-color:#f1f8f4;
+  padding-left:8px;
+  padding-right:8px;
+  margin-left:-8px;
+  margin-right:-8px;
+  border-radius:8px;
+}
+.info-row:last-child{border-bottom:none}
+.info-row span:first-child{
+  color:#2e7d32;
+  font-weight:700;
+  min-width:180px;
+  font-size:0.75rem;
+  letter-spacing:0.5px;
+  text-transform:uppercase;
+  display:flex;
+  align-items:center;
+}
+.info-row .info-value{
+  color:#1a1a1a;
+  text-align:right;
+  flex:1;
+  font-weight:600;
+  font-size:0.95rem;
+}
+
+/* Profile Info Card */
+.profile-info-card{
+  border:none;
+  border-radius:16px;
+  overflow:hidden;
+  background:#ffffff;
+}
+.profile-info-card .card-header{
+  background:linear-gradient(135deg, #e8f5e9, #c8e6c9);
+  border-bottom:3px solid #2e7d32;
+  padding:1rem 1.25rem;
+  font-size:1.1rem;
+}
+.profile-info-card .card-body{
+  padding:1.5rem 1.25rem;
+  background:#ffffff;
+}
+
+/* Bio Section */
+.bio-section{
+  background:#f1f8f4;
+  padding:1.25rem;
+  border-radius:10px;
+  border-left:5px solid #2e7d32;
+  box-shadow:0 2px 8px rgba(46,125,50,.08);
+}
+.bio-text{
+  color:#1a1a1a;
+  line-height:1.7;
+  font-size:0.95rem;
+  font-weight:500;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .profile-identity {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transform: translateY(-50px);
+  }
+  
+  .profile-identity h2 {
+    font-size: 1.5rem;
+  }
+  
+  .avatar-wrapper {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .profile-actions {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .info-row {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+  
+  .info-row span:first-child,
+  .info-row .info-value {
+    text-align: center;
+    min-width: auto;
+  }
+  
+  .stat-gradient .stat-value {
+    font-size: 2rem;
+  }
+}
+
+/* Better Card Shadows and Borders */
+.card.shadow-sm {
+  box-shadow: 0 2px 8px rgba(0,0,0,.08) !important;
+  border: none;
+  border-radius: 12px;
+}
+
+/* List Group Enhancements */
+.list-group-item {
+  border-left: 3px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.list-group-item:hover {
+  border-left-color: #2e7d32;
+  background-color: #f8f9fa;
+  padding-left: 1.5rem;
+}
+
+.list-group-item a {
+  color: #212529;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.list-group-item a:hover {
+  color: #2e7d32;
+}
+
+/* Profile Header Card */
+.card-header strong {
+  font-size: 1rem;
+  color: #1a1a1a;
+  font-weight: 700;
+}
+
+/* Better text contrast for icons in info rows */
+.info-row i.text-success {
+  color: #2e7d32 !important;
+  font-size: 1rem;
+}
+
+/* Card improvements */
+.card.shadow-sm {
+  box-shadow: 0 2px 12px rgba(0,0,0,.1) !important;
+  border: none;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+/* Ensure good contrast for all text */
+.card-body {
+  color: #1a1a1a;
+}
+
+.text-muted {
+  color: #5a5a5a !important;
+}
+
+/* List items better visibility */
+.list-group-item {
+  border-left: 3px solid transparent;
+  transition: all 0.2s ease;
+  background: #ffffff;
+}
+
+.list-group-item:hover {
+  border-left-color: #2e7d32;
+  background-color: #f1f8f4;
+  padding-left: 1.5rem;
+}
+
+.list-group-item a {
+  color: #1a1a1a;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.list-group-item a:hover {
+  color: #2e7d32;
+}
+
+.list-group-item .text-muted {
+  color: #666666 !important;
+  font-weight: 500;
+}

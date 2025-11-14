@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+{% set page_title = 'Frequently Asked Questions' %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="text-center mb-5">
+    <h1 class="display-4 fw-bold text-success">
+      <i class="fas fa-question-circle me-3"></i>Frequently Asked Questions
+    </h1>
+    <p class="lead text-muted">Find answers to common questions about AgriFarma</p>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <div class="accordion" id="faqAccordion">
+        <!-- General FAQs -->
+        <h3 class="text-success mb-3 mt-4">
+          <i class="fas fa-info-circle me-2"></i>General Information
+        </h3>
+        
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+              What is AgriFarma?
+            </button>
+          </h2>
+          <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              AgriFarma is a comprehensive digital platform designed specifically for farmers in Sindh, Pakistan. It provides access to agricultural resources, marketplace for buying and selling products, expert consultancy services, community forums, and educational content.
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+              How do I create an account?
+            </button>
+          </h2>
+          <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              Click on the "Register" button in the top navigation. Fill in your details including name, email, mobile number, and choose your role (Farmer, Consultant, or Vendor). After registration, you'll receive a confirmation and can start using all features.
+            </div>
+          </div>
+        </div>
+
+        <!-- Marketplace FAQs -->
+        <h3 class="text-success mb-3 mt-5">
+          <i class="fas fa-store me-2"></i>Marketplace
+        </h3>
+
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+              How can I sell my products on the Marketplace?
+            </button>
+          </h2>
+          <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              Navigate to the Marketplace section and click "Add Product". Fill in product details, upload photos, set your price, and publish your listing. Buyers can then contact you directly through the platform.
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+              Is there a fee for listing products?
+            </button>
+          </h2>
+          <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              Currently, listing products on AgriFarma Marketplace is completely free for all registered users. We want to help farmers grow their business without additional costs.
+            </div>
+          </div>
+        </div>
+
+        <!-- Consultancy FAQs -->
+        <h3 class="text-success mb-3 mt-5">
+          <i class="fas fa-user-md me-2"></i>Consultancy Services
+        </h3>
+
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+              How do I find an agricultural consultant?
+            </button>
+          </h2>
+          <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              Visit the Consultancy section to browse verified agricultural consultants. You can filter by specialization, location, and ratings. View their profiles, qualifications, and fees before booking a consultation.
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq6">
+              Can I register as a consultant?
+            </button>
+          </h2>
+          <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              Yes! If you have expertise in agriculture, register as a consultant through your profile. Complete your consultant profile with qualifications, specializations, and set your consultation fees. After verification, you'll be listed in our consultant directory.
+            </div>
+          </div>
+        </div>
+
+        <!-- Forum FAQs -->
+        <h3 class="text-success mb-3 mt-5">
+          <i class="fas fa-comments me-2"></i>Discussion Forum
+        </h3>
+
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq7">
+              How does the Discussion Forum work?
+            </button>
+          </h2>
+          <div id="faq7" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              The Discussion Forum is a community space where farmers can ask questions, share experiences, and help each other. Create a new thread with your question or topic, and other members can reply with answers and advice.
+            </div>
+          </div>
+        </div>
+
+        <!-- Technical FAQs -->
+        <h3 class="text-success mb-3 mt-5">
+          <i class="fas fa-cog me-2"></i>Technical Support
+        </h3>
+
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq8">
+              I forgot my password. What should I do?
+            </button>
+          </h2>
+          <div id="faq8" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              Click on "Login" and then select "Forgot Password". Enter your registered email address, and we'll send you instructions to reset your password.
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq9">
+              How can I contact support?
+            </button>
+          </h2>
+          <div id="faq9" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              You can reach us through the Contact Us page. Fill in the contact form with your query, and our support team will respond within 24-48 hours. For urgent issues, you can also find our phone number and email on the Contact page.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-5 p-4 bg-light rounded">
+        <h4 class="text-success mb-3">Still have questions?</h4>
+        <p class="text-muted mb-3">Can't find the answer you're looking for? Please reach out to our support team.</p>
+        <a href="{{ url_for('main.contact') }}" class="btn btn-success btn-lg">
+          <i class="fas fa-envelope me-2"></i>Contact Support
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

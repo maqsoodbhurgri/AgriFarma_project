@@ -1,0 +1,199 @@
+{% extends 'base.html' %}
+{% set page_title = 'About Us' %}
+
+{% block content %}
+<div class="about-page">
+  <!-- Hero Section -->
+  <section class="page-hero hero-orchard text-white text-center">
+    <div class="container">
+      <h1 class="display-4 fw-bold mb-2">
+        <i class="fas fa-seedling me-2"></i>About AgriFarma
+      </h1>
+      <p class="lead">Empowering Farmers Through Digital Innovation</p>
+    </div>
+  </section>
+
+  <!-- Mission Section -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6 mb-4 mb-lg-0">
+          <h2 class="text-success fw-bold mb-4">
+            <i class="fas fa-bullseye me-3"></i>Our Mission
+          </h2>
+          <p class="lead text-muted">
+            AgriFarma is dedicated to transforming agriculture in Sindh, Pakistan by providing farmers with a comprehensive digital platform that connects them to markets, knowledge, and expert guidance.
+          </p>
+          <p class="text-muted">
+            We believe that every farmer deserves access to modern tools and resources that can help them increase productivity, reduce costs, and improve their livelihoods. Through technology, we're bridging the gap between traditional farming practices and modern agricultural innovations.
+          </p>
+        </div>
+        <div class="col-lg-6">
+          <img src="{{ url_for('static', filename='images/Backgrounds/pexels-quang-nguyen-vinh-222549-2135677.jpg') }}" 
+               alt="Farming in Sindh" 
+               class="img-fluid rounded shadow-lg">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What We Offer -->
+  <section class="py-5">
+    <div class="container">
+      <h2 class="text-center text-success fw-bold mb-5">
+        <i class="fas fa-gifts me-3"></i>What We Offer
+      </h2>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 border-0 shadow-sm">
+            <div class="card-body text-center p-4">
+              <div class="mb-3">
+                <i class="fas fa-store fa-3x text-success"></i>
+              </div>
+              <h4 class="card-title text-success">Marketplace</h4>
+              <p class="card-text text-muted">
+                Buy and sell agricultural products directly, eliminating middlemen and ensuring fair prices for both buyers and sellers.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 border-0 shadow-sm">
+            <div class="card-body text-center p-4">
+              <div class="mb-3">
+                <i class="fas fa-user-md fa-3x text-success"></i>
+              </div>
+              <h4 class="card-title text-success">Expert Consultancy</h4>
+              <p class="card-text text-muted">
+                Connect with verified agricultural consultants who provide professional guidance on crop management, soil health, and farming techniques.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 border-0 shadow-sm">
+            <div class="card-body text-center p-4">
+              <div class="mb-3">
+                <i class="fas fa-comments fa-3x text-success"></i>
+              </div>
+              <h4 class="card-title text-success">Community Forum</h4>
+              <p class="card-text text-muted">
+                Join discussions with fellow farmers, share experiences, ask questions, and learn from the collective wisdom of the community.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 border-0 shadow-sm">
+            <div class="card-body text-center p-4">
+              <div class="mb-3">
+                <i class="fas fa-book-open fa-3x text-success"></i>
+              </div>
+              <h4 class="card-title text-success">Knowledge Base</h4>
+              <p class="card-text text-muted">
+                Access a comprehensive library of articles, guides, and resources on modern farming practices, pest control, and crop cultivation.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 border-0 shadow-sm">
+            <div class="card-body text-center p-4">
+              <div class="mb-3">
+                <i class="fas fa-chart-line fa-3x text-success"></i>
+              </div>
+              <h4 class="card-title text-success">Dashboard</h4>
+              <p class="card-text text-muted">
+                Monitor your activities, track your products, manage consultations, and stay updated with personalized insights and analytics.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 border-0 shadow-sm">
+            <div class="card-body text-center p-4">
+              <div class="mb-3">
+                <i class="fas fa-mobile-alt fa-3x text-success"></i>
+              </div>
+              <h4 class="card-title text-success">Mobile Friendly</h4>
+              <p class="card-text text-muted">
+                Access AgriFarma anytime, anywhere from your smartphone or tablet with our fully responsive platform design.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Vision -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6 order-lg-2 mb-4 mb-lg-0">
+          <h2 class="text-success fw-bold mb-4">
+            <i class="fas fa-eye me-3"></i>Our Vision
+          </h2>
+          <p class="lead text-muted">
+            To become the leading digital platform for farmers across Pakistan, revolutionizing agriculture through technology and innovation.
+          </p>
+          <p class="text-muted">
+            We envision a future where every farmer has equal access to markets, information, and opportunities, regardless of their location or resources. By leveraging technology, we aim to create a sustainable and prosperous agricultural ecosystem.
+          </p>
+        </div>
+        <div class="col-lg-6 order-lg-1">
+          <div class="p-4 bg-white rounded shadow">
+            <h4 class="text-success mb-3">Why Choose AgriFarma?</h4>
+            <ul class="list-unstyled">
+              <li class="mb-3">
+                <i class="fas fa-check-circle text-success me-2"></i>
+                <strong>Free to Use:</strong> No hidden charges for farmers
+              </li>
+              <li class="mb-3">
+                <i class="fas fa-check-circle text-success me-2"></i>
+                <strong>Verified Experts:</strong> All consultants are professionally verified
+              </li>
+              <li class="mb-3">
+                <i class="fas fa-check-circle text-success me-2"></i>
+                <strong>Local Focus:</strong> Specifically designed for Sindh farmers
+              </li>
+              <li class="mb-3">
+                <i class="fas fa-check-circle text-success me-2"></i>
+                <strong>Easy to Use:</strong> Simple interface in local languages
+              </li>
+              <li class="mb-3">
+                <i class="fas fa-check-circle text-success me-2"></i>
+                <strong>Community Driven:</strong> Built by farmers, for farmers
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="py-5 text-center" style="background: linear-gradient(135deg, #43a047, #2e7d32);">
+    <div class="container">
+      <h2 class="text-white fw-bold mb-4">Ready to Join AgriFarma?</h2>
+      <p class="text-white lead mb-4">
+        Become part of a growing community of farmers leveraging technology for better farming
+      </p>
+      {% if not current_user.is_authenticated %}
+      <div class="d-flex gap-3 justify-content-center">
+        <a href="{{ url_for('auth.register') }}" class="btn btn-light btn-lg px-5">
+          <i class="fas fa-user-plus me-2"></i>Register Now
+        </a>
+        <a href="{{ url_for('main.contact') }}" class="btn btn-outline-light btn-lg px-5">
+          <i class="fas fa-envelope me-2"></i>Contact Us
+        </a>
+      </div>
+      {% else %}
+      <a href="{{ url_for('main.dashboard') }}" class="btn btn-light btn-lg px-5">
+        <i class="fas fa-chart-line me-2"></i>Go to Dashboard
+      </a>
+      {% endif %}
+    </div>
+  </section>
+</div>
+{% endblock %}

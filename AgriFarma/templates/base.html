@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}AgriFarma{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AgriFarma - Digital Hub for Farmers in Sindh, Pakistan. Access agricultural resources, marketplace, consultants, and community forums.">
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Global CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/sidebar.css') }}">
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+  <!-- Skip to main content link for accessibility -->
+  <a href="#main-content" class="skip-to-main">Skip to main content</a>
+  <!-- Top Header Bar -->
+  <div class="top-header bg-success text-white py-2">
+    <div class="container-fluid">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <small class="d-flex align-items-center">
+            <i class="fas fa-map-marker-alt me-2"></i>
+            <span>Sindh, Pakistan</span>
+            <span class="mx-3">|</span>
+            <i class="fas fa-envelope me-2"></i>
+            <span>info@agrifarma.pk</span>
+          </small>
+        </div>
+        <div class="col-md-6 text-end">
+          <small>
+            <i class="fas fa-phone-alt me-2"></i>
+            <span>+92 21 1234567</span>
+            <span class="mx-2">|</span>
+            <a href="#" class="text-white text-decoration-none me-2"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="text-white text-decoration-none me-2"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-white text-decoration-none"><i class="fab fa-instagram"></i></a>
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top" role="navigation" aria-label="Main navigation">
+    <div class="container-fluid px-4">
+      <button class="btn btn-success btn-sm me-3 d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas" aria-controls="sidebarOffcanvas" aria-label="Toggle sidebar menu">
+        <i class="fas fa-bars"></i>
+      </button>
+      <a class="navbar-brand d-flex align-items-center" href="/">
+        <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="AgriFarma logo" class="brand-logo me-2">
+        <div class="d-flex flex-column">
+          <span class="fw-bold text-success fs-4">AgriFarma</span>
+          <small class="text-muted" style="font-size: 0.7rem; margin-top: -5px;">Farmers' Digital Hub</small>
+        </div>
+      </a>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#topbarContent" aria-controls="topbarContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="topbarContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-none d-lg-flex">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('main.index') }}"><i class="fas fa-home me-1"></i>Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('main.about') }}"><i class="fas fa-info-circle me-1"></i>About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('main.contact') }}"><i class="fas fa-envelope me-1"></i>Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('main.faqs') }}"><i class="fas fa-question-circle me-1"></i>FAQs</a>
+          </li>
+        </ul>
+        <div class="d-flex align-items-center">
+          {% if current_user.is_authenticated %}
+          <div class="dropdown me-2">
+            <button class="btn btn-outline-success btn-sm dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fas fa-user-circle me-1"></i>{{ current_user.name }}
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+              <li><a class="dropdown-item" href="{{ url_for('auth.profile') }}"><i class="fas fa-user me-2"></i>Profile</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('main.dashboard') }}"><i class="fas fa-chart-line me-2"></i>Dashboard</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item text-danger" href="{{ url_for('auth.logout') }}"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+            </ul>
+          </div>
+          {% else %}
+          <a href="{{ url_for('auth.login') }}" class="btn btn-outline-success btn-sm me-2" aria-label="Login to your account">
+            <i class="fas fa-sign-in-alt me-1"></i>Login
+          </a>
+          <a href="{{ url_for('auth.register') }}" class="btn btn-success btn-sm" aria-label="Register new account">
+            <i class="fas fa-user-plus me-1"></i>Register
+          </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid main-wrapper">
+    <div class="row flex-nowrap">
+      <!-- Off-canvas Sidebar for Mobile -->
+      <div class="offcanvas offcanvas-start d-lg-none" tabindex="-1" id="sidebarOffcanvas" aria-labelledby="sidebarOffcanvasLabel">
+        <div class="offcanvas-header" style="background: linear-gradient(160deg,#2e7d32,#1b5e20);">
+          <h5 class="offcanvas-title text-white fw-bold" id="sidebarOffcanvasLabel">
+            <i class="fas fa-bars me-2"></i>Menu
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close menu"></button>
+        </div>
+        <div class="offcanvas-body p-0" style="background: linear-gradient(160deg,#2e7d32,#1b5e20);">
+          <ul class="nav flex-column px-2 py-3" role="menu">
+            <li class="nav-item" role="none">
+              <a class="nav-link" href="{{ url_for('main.dashboard') }}" data-bs-dismiss="offcanvas" role="menuitem">
+                <i class="fas fa-chart-line me-2"></i>Dashboard
+              </a>
+            </li>
+            <li class="nav-item" role="none">
+              <a class="nav-link" href="{{ url_for('marketplace.index') }}" data-bs-dismiss="offcanvas" role="menuitem">
+                <i class="fas fa-store me-2"></i>Marketplace
+              </a>
+            </li>
+            <li class="nav-item" role="none">
+              <a class="nav-link" href="{{ url_for('forum.index') }}" data-bs-dismiss="offcanvas" role="menuitem">
+                <i class="fas fa-comments me-2"></i>Discussion Forum
+              </a>
+            </li>
+            <li class="nav-item" role="none">
+              <a class="nav-link" href="{{ url_for('consultancy.consultants') }}" data-bs-dismiss="offcanvas" role="menuitem">
+                <i class="fas fa-user-md me-2"></i>Consultancy
+              </a>
+            </li>
+            <li class="nav-item" role="none">
+              <a class="nav-link" href="{{ url_for('blog.index') }}" data-bs-dismiss="offcanvas" role="menuitem">
+                <i class="fas fa-book-open me-2"></i>Blogs & Resources
+              </a>
+            </li>
+            <li class="nav-item mt-3 pt-3" style="border-top: 1px solid rgba(255,255,255,0.2);" role="none">
+              <a class="nav-link" href="{{ url_for('main.about') }}" data-bs-dismiss="offcanvas" role="menuitem">
+                <i class="fas fa-info-circle me-2"></i>About Us
+              </a>
+            </li>
+            <li class="nav-item" role="none">
+              <a class="nav-link" href="{{ url_for('main.contact') }}" data-bs-dismiss="offcanvas" role="menuitem">
+                <i class="fas fa-envelope me-2"></i>Contact Us
+              </a>
+            </li>
+            <li class="nav-item" role="none">
+              <a class="nav-link" href="{{ url_for('main.faqs') }}" data-bs-dismiss="offcanvas" role="menuitem">
+                <i class="fas fa-question-circle me-2"></i>FAQs
+              </a>
+            </li>
+            {% if current_user.is_authenticated and current_user.role and current_user.role.name == 'admin' %}
+              <li class="nav-item mt-3 pt-3" style="border-top: 1px solid rgba(255,255,255,0.2);" role="none">
+                <a class="nav-link" href="{{ url_for('admin.users') }}" data-bs-dismiss="offcanvas" role="menuitem">
+                  <i class="fas fa-users-cog me-2"></i>User Management
+                </a>
+              </li>
+              <li class="nav-item" role="none">
+                <a class="nav-link" href="{{ url_for('admin.reports') }}" data-bs-dismiss="offcanvas" role="menuitem">
+                  <i class="fas fa-chart-bar me-2"></i>Reports
+                </a>
+              </li>
+            {% endif %}
+            <li class="nav-item mt-3 pt-3" style="border-top: 1px solid rgba(255,255,255,0.2);" role="none">
+              <a class="nav-link" href="{{ url_for('auth.profile') }}" data-bs-dismiss="offcanvas" role="menuitem">
+                <i class="fas fa-user-circle me-2"></i>Profile
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Modern Collapsible Sidebar (Desktop) -->
+      <aside class="modern-sidebar d-none d-lg-flex" id="modernSidebar" role="complementary" aria-label="Sidebar navigation">
+        <!-- Sidebar Header - Clickable Toggle -->
+        <div class="sidebar-header" role="button" tabindex="0" aria-label="Toggle sidebar menu">
+          <i class="fas fa-bars sidebar-menu-icon"></i>
+          <span class="sidebar-menu-text">Menu</span>
+        </div>
+        
+        <!-- Sidebar Content -->
+        <div class="sidebar-content">
+          <ul class="nav flex-column sidebar-nav" role="menu">
+            <!-- Main Navigation -->
+            <li class="nav-item" role="none">
+              <a class="nav-link" href="{{ url_for('main.dashboard') }}" role="menuitem" title="Dashboard">
+                <i class="fas fa-chart-line nav-icon"></i>
+                <span class="nav-text">Dashboard</span>
+              </a>
+            </li>
+            <li class="nav-item" role="none">
+              <a class="nav-link" href="{{ url_for('marketplace.index') }}" role="menuitem" title="Marketplace">
+                <i class="fas fa-store nav-icon"></i>
+                <span class="nav-text">Marketplace</span>
+              </a>
+            </li>
+            <li class="nav-item" role="none">
+              <a class="nav-link" href="{{ url_for('forum.index') }}" role="menuitem" title="Discussion Forum">
+                <i class="fas fa-comments nav-icon"></i>
+                <span class="nav-text">Discussion Forum</span>
+              </a>
+            </li>
+            <li class="nav-item" role="none">
+              <a class="nav-link" href="{{ url_for('consultancy.consultants') }}" role="menuitem" title="Consultancy">
+                <i class="fas fa-user-md nav-icon"></i>
+                <span class="nav-text">Consultancy</span>
+              </a>
+            </li>
+            <li class="nav-item" role="none">
+              <a class="nav-link" href="{{ url_for('blog.index') }}" role="menuitem" title="Blogs & Resources">
+                <i class="fas fa-book-open nav-icon"></i>
+                <span class="nav-text">Blogs & Resources</span>
+              </a>
+            </li>
+            
+            <!-- Divider -->
+            <li class="sidebar-divider"></li>
+            
+            <!-- Information Links -->
+            <li class="nav-item" role="none">
+              <a class="nav-link" href="{{ url_for('main.about') }}" role="menuitem" title="About Us">
+                <i class="fas fa-info-circle nav-icon"></i>
+                <span class="nav-text">About Us</span>
+              </a>
+            </li>
+            <li class="nav-item" role="none">
+              <a class="nav-link" href="{{ url_for('main.contact') }}" role="menuitem" title="Contact Us">
+                <i class="fas fa-envelope nav-icon"></i>
+                <span class="nav-text">Contact Us</span>
+              </a>
+            </li>
+            <li class="nav-item" role="none">
+              <a class="nav-link" href="{{ url_for('main.faqs') }}" role="menuitem" title="FAQs">
+                <i class="fas fa-question-circle nav-icon"></i>
+                <span class="nav-text">FAQs</span>
+              </a>
+            </li>
+            
+            {% if current_user.is_authenticated and current_user.role and current_user.role.name == 'admin' %}
+              <!-- Admin Section -->
+              <li class="sidebar-divider"></li>
+              <li class="nav-item" role="none">
+                <a class="nav-link" href="{{ url_for('admin.users') }}" role="menuitem" title="User Management">
+                  <i class="fas fa-users-cog nav-icon"></i>
+                  <span class="nav-text">User Management</span>
+                </a>
+              </li>
+              <li class="nav-item" role="none">
+                <a class="nav-link" href="{{ url_for('admin.reports') }}" role="menuitem" title="Reports">
+                  <i class="fas fa-chart-bar nav-icon"></i>
+                  <span class="nav-text">Reports</span>
+                </a>
+              </li>
+            {% endif %}
+            
+            <!-- User Profile -->
+            <li class="sidebar-divider"></li>
+            <li class="nav-item" role="none">
+              <a class="nav-link" href="{{ url_for('auth.profile') }}" role="menuitem" title="Profile">
+                <i class="fas fa-user-circle nav-icon"></i>
+                <span class="nav-text">Profile</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content p-4" id="main-content" role="main">
+        {% block content %}{% endblock %}
+      </main>
+    </div>
+  </div>
+
+  <!-- Enhanced Footer -->
+  <footer class="footer bg-dark text-white mt-5" role="contentinfo">
+    <div class="container py-5">
+      <div class="row">
+        <!-- About Section -->
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="d-flex align-items-center mb-3">
+            <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="AgriFarma" class="me-2" style="width: 40px; height: 40px; filter: brightness(0) invert(1);">
+            <h5 class="mb-0 fw-bold">AgriFarma</h5>
+          </div>
+          <p class="text-light small">
+            Empowering farmers across Sindh, Pakistan with digital tools for marketplace access, expert consultancy, community forums, and agricultural knowledge.
+          </p>
+          <div class="social-links mt-3">
+            <a href="#" class="text-white me-3" aria-label="Facebook"><i class="fab fa-facebook-f fa-lg"></i></a>
+            <a href="#" class="text-white me-3" aria-label="Twitter"><i class="fab fa-twitter fa-lg"></i></a>
+            <a href="#" class="text-white me-3" aria-label="Instagram"><i class="fab fa-instagram fa-lg"></i></a>
+            <a href="#" class="text-white" aria-label="YouTube"><i class="fab fa-youtube fa-lg"></i></a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="col-lg-2 col-md-6 mb-4">
+          <h6 class="text-success fw-bold mb-3">Quick Links</h6>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="{{ url_for('main.index') }}" class="text-light text-decoration-none small"><i class="fas fa-chevron-right me-2"></i>Home</a></li>
+            <li class="mb-2"><a href="{{ url_for('main.about') }}" class="text-light text-decoration-none small"><i class="fas fa-chevron-right me-2"></i>About Us</a></li>
+            <li class="mb-2"><a href="{{ url_for('main.dashboard') }}" class="text-light text-decoration-none small"><i class="fas fa-chevron-right me-2"></i>Dashboard</a></li>
+            <li class="mb-2"><a href="{{ url_for('main.faqs') }}" class="text-light text-decoration-none small"><i class="fas fa-chevron-right me-2"></i>FAQs</a></li>
+          </ul>
+        </div>
+
+        <!-- Services -->
+        <div class="col-lg-3 col-md-6 mb-4">
+          <h6 class="text-success fw-bold mb-3">Our Services</h6>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="{{ url_for('marketplace.index') }}" class="text-light text-decoration-none small"><i class="fas fa-chevron-right me-2"></i>Marketplace</a></li>
+            <li class="mb-2"><a href="{{ url_for('forum.index') }}" class="text-light text-decoration-none small"><i class="fas fa-chevron-right me-2"></i>Community Forum</a></li>
+            <li class="mb-2"><a href="{{ url_for('consultancy.index') }}" class="text-light text-decoration-none small"><i class="fas fa-chevron-right me-2"></i>Expert Consultancy</a></li>
+            <li class="mb-2"><a href="{{ url_for('blog.index') }}" class="text-light text-decoration-none small"><i class="fas fa-chevron-right me-2"></i>Agricultural Blog</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="col-lg-3 col-md-6 mb-4">
+          <h6 class="text-success fw-bold mb-3">Contact Us</h6>
+          <ul class="list-unstyled small">
+            <li class="mb-2 text-light">
+              <i class="fas fa-map-marker-alt text-success me-2"></i>
+              Sindh, Pakistan
+            </li>
+            <li class="mb-2 text-light">
+              <i class="fas fa-phone text-success me-2"></i>
+              +92 21 1234567
+            </li>
+            <li class="mb-2 text-light">
+              <i class="fas fa-envelope text-success me-2"></i>
+              info@agrifarma.pk
+            </li>
+            <li class="mb-2">
+              <a href="{{ url_for('main.contact') }}" class="text-light text-decoration-none">
+                <i class="fas fa-paper-plane text-success me-2"></i>
+                Send Message
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="row mt-4 pt-3 border-top border-secondary">
+        <div class="col-md-6 text-center text-md-start">
+          <small class="text-light">© 2025 AgriFarma. All Rights Reserved.</small>
+        </div>
+        <div class="col-md-6 text-center text-md-end">
+          <small>
+            <a href="#" class="text-light text-decoration-none me-3">Privacy Policy</a>
+            <a href="#" class="text-light text-decoration-none me-3">Terms of Service</a>
+            <a href="{{ url_for('main.contact') }}" class="text-light text-decoration-none">Support</a>
+          </small>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Dark Mode Toggle Button -->
+  <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+    <span id="darkModeIcon">🌙</span>
+  </button>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Dark mode toggle functionality
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const darkModeIcon = document.getElementById('darkModeIcon');
+    const htmlElement = document.documentElement;
+    // Check for saved theme preference or default to light mode
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    htmlElement.setAttribute('data-theme', currentTheme);
+    darkModeIcon.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+    darkModeToggle.addEventListener('click', () => {
+      const theme = htmlElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      htmlElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      darkModeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+    });
+
+    // Sidebar collapse/expand functionality - Using Header as Toggle
+    const sidebarHeader = document.querySelector('.sidebar-header');
+    const modernSidebar = document.getElementById('modernSidebar');
+    const menuIcon = document.querySelector('.sidebar-menu-icon');
+    
+    // Check for saved sidebar state
+    const sidebarCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
+    if (sidebarCollapsed && modernSidebar) {
+      modernSidebar.classList.add('collapsed');
+    }
+    
+    if (sidebarHeader) {
+      sidebarHeader.addEventListener('click', () => {
+        modernSidebar.classList.toggle('collapsed');
+        const isCollapsed = modernSidebar.classList.contains('collapsed');
+        
+        // Save state
+        localStorage.setItem('sidebarCollapsed', isCollapsed);
+      });
+    }
+
+    // Highlight active menu item based on current URL
+    if (modernSidebar) {
+      const currentPath = window.location.pathname;
+      const navLinks = modernSidebar.querySelectorAll('.nav-link');
+      
+      navLinks.forEach(link => {
+        const linkPath = new URL(link.href).pathname;
+        
+        // Exact match or starts with the link path (for sub-pages)
+        if (currentPath === linkPath || (linkPath !== '/' && currentPath.startsWith(linkPath))) {
+          link.classList.add('active');
+          link.setAttribute('aria-current', 'page');
+        } else {
+          link.classList.remove('active');
+          link.removeAttribute('aria-current');
+        }
+      });
+    }
+  </script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

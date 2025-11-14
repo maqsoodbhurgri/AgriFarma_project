@@ -1,0 +1,1690 @@
+{
+  "version": "1.0.0",
+  "scan_date": "2025-11-12",
+  "modules": [
+    {
+      "id": "auth",
+      "name": "Authentication & Authorization",
+      "priority": "critical",
+      "requirements": [
+        {
+          "id": "auth-001",
+          "name": "User Registration",
+          "status": "completed",
+          "completion_rate": 100.0,
+          "details": {
+            "routes": {
+              "matched": [
+                "/register"
+              ],
+              "missing": []
+            },
+            "templates": {
+              "matched": [
+                "accounts/register.html"
+              ],
+              "missing": []
+            },
+            "models": {
+              "matched": [
+                "User"
+              ],
+              "missing": []
+            },
+            "keywords": {
+              "matched": [
+                "RegisterForm",
+                "db.session.add",
+                "generate_password_hash"
+              ],
+              "missing": []
+            },
+            "completion_rate": 100.0
+          }
+        },
+        {
+          "id": "auth-002",
+          "name": "User Login",
+          "status": "completed",
+          "completion_rate": 100.0,
+          "details": {
+            "routes": {
+              "matched": [
+                "/login"
+              ],
+              "missing": []
+            },
+            "templates": {
+              "matched": [
+                "accounts/login.html"
+              ],
+              "missing": []
+            },
+            "models": {
+              "matched": [
+                "User"
+              ],
+              "missing": []
+            },
+            "keywords": {
+              "matched": [
+                "LoginForm",
+                "login_user",
+                "check_password_hash"
+              ],
+              "missing": []
+            },
+            "completion_rate": 100.0
+          }
+        },
+        {
+          "id": "auth-003",
+          "name": "User Logout",
+          "status": "completed",
+          "completion_rate": 100.0,
+          "details": {
+            "routes": {
+              "matched": [
+                "/logout"
+              ],
+              "missing": []
+            },
+            "templates": {
+              "matched": [],
+              "missing": []
+            },
+            "models": {
+              "matched": [],
+              "missing": []
+            },
+            "keywords": {
+              "matched": [
+                "logout_user"
+              ],
+              "missing": []
+            },
+            "completion_rate": 100.0
+          }
+        },
+        {
+          "id": "auth-004",
+          "name": "Password Reset",
+          "status": "completed",
+          "completion_rate": 100.0,
+          "details": {
+            "routes": {
+              "matched": [
+                "/reset-password"
+              ],
+              "missing": []
+            },
+            "templates": {
+              "matched": [
+                "home/auth-reset-password.html"
+              ],
+              "missing": []
+            },
+            "models": {
+              "matched": [
+                "User"
+              ],
+              "missing": []
+            },
+            "keywords": {
+              "matched": [
+                "reset_password",
+                "email"
+              ],
+              "missing": []
+            },
+            "completion_rate": 100.0
+          }
+        },
+        {
+          "id": "auth-005",
+          "name": "Role-Based Access Control",
+          "status": "completed",
+          "completion_rate": 100.0,
+          "details": {
+            "routes": {
+              "matched": [],
+              "missing": []
+            },
+            "templates": {
+              "matched": [],
+              "missing": []
+            },
+            "models": {
+              "matched": [
+                "Role"
+              ],
+              "missing": []
+            },
+            "keywords": {
+              "matched": [
+                "@admin_required",
+                "@login_required",
+                "current_user.is_admin"
+              ],
+              "missing": []
+            },
+            "completion_rate": 100.0
+          }
+        },
+        {
+          "id": "auth-006",
+          "name": "User Profile Management",
+          "status": "completed",
+          "completion_rate": 100.0,
+          "details": {
+            "routes": {
+              "matched": [
+                "/profile"
+              ],
+              "missing": []
+            },
+            "templates": {
+              "matched": [
+                "home/profile.html"
+              ],
+              "missing": []
+            },
+            "models": {
+              "matched": [
+                "User"
+              ],
+              "missing": []
+            },
+            "keywords": {
+              "matched": [
+                "profile_picture",
+                "expertise_level",
+                "bio"
+              ],
+              "missing": []
+            },
+            "completion_rate": 100.0
+          }
+        }
+      ],
+      "module_completion": 100.0
+    },
+    {
+      "id": "forum",
+      "name": "Community Forum",
+      "priority": "high",
+      "requirements": [
+        {
+          "id": "forum-001",
+          "name": "Forum Categories",
+          "status": "partial",
+          "completion_rate": 50.0,
+          "details": {
+            "routes": {
+              "matched": [],
+              "missing": [
+                "/forum",
+                "/forum/category/<slug>"
+              ]
+            },
+            "templates": {
+              "matched": [
+                "forum/index.html",
+                "forum/category_detail.html"
+              ],
+              "missing": []
+            },
+            "models": {
+              "matched": [],
+              "missing": [
+                "ForumCategory"
+              ]
+            },
+            "keywords": {
+              "matched": [
+                "slug",
+                "icon"
+              ],
+              "missing": [
+                "ForumCategory"
+              ]
+            },
+            "completion_rate": 50.0
+          }
+        },
+        {
+          "id": "forum-002",
+          "name": "Create Thread",
+          "status": "partial",
+          "completion_rate": 66.66666666666666,
+          "details": {
+            "routes": {
+              "matched": [],
+              "missing": [
+                "/forum/new-thread"
+              ]
+            },
+            "templates": {
+              "matched": [
+                "forum/new_thread.html"
+              ],
+              "missing": []
+            },
+            "models": {
+              "matched": [],
+              "missing": [
+                "ForumThread"
+              ]
+            },
+            "keywords": {
+              "matched": [
+                "ThreadForm",
+                "title",
+                "content"
+              ],
+              "missing": []
+            },
+            "completion_rate": 66.66666666666666
+          }
+        },
+        {
+          "id": "forum-003",
+          "name": "Thread Listing & Detail",
+          "status": "partial",
+          "completion_rate": 66.66666666666666,
+          "details": {
+            "routes": {
+              "matched": [],
+              "missing": [
+                "/forum/thread/<id>"
+              ]
+            },
+            "templates": {
+              "matched": [
+                "forum/thread_detail.html"
+              ],
+              "missing": []
+            },
+            "models": {
+              "matched": [],
+              "missing": [
+                "ForumThread"
+              ]
+            },
+            "keywords": {
+              "matched": [
+                "view_count",
+                "is_pinned",
+                "is_locked"
+              ],
+              "missing": []
+            },
+            "completion_rate": 66.66666666666666
+          }
+        },
+        {
+          "id": "forum-004",
+          "name": "Reply to Thread",
+          "status": "partial",
+          "completion_rate": 66.66666666666666,
+          "details": {
+            "routes": {
+              "matched": [],
+              "missing": [
+                "/forum/thread/<id>/reply"
+              ]
+            },
+            "templates": {
+              "matched": [
+                "forum/thread_detail.html"
+              ],
+              "missing": []
+            },
+            "models": {
+              "matched": [],
+              "missing": [
+                "ForumReply"
+              ]
+            },
+            "keywords": {
+              "matched": [
+                "ReplyForm",
+                "thread_id",
+                "author_id"
+              ],
+              "missing": []
+            },
+            "completion_rate": 66.66666666666666
+          }
+        },
+        {
+          "id": "forum-005",
+          "name": "Mark Solution",
+          "status": "partial",
+          "completion_rate": 50.0,
+          "details": {
+            "routes": {
+              "matched": [],
+              "missing": [
+                "/forum/reply/<id>/mark-solution"
+              ]
+            },
+            "templates": {
+              "matched": [],
+              "missing": []
+            },
+            "models": {
+              "matched": [],
+              "missing": [
+                "ForumReply"
+              ]
+            },
+            "keywords": {
+              "matched": [
+                "is_solution",
+                "is_solved"
+              ],
+              "missing": []
+            },
+            "completion_rate": 50.0
+          }
+        },
+        {
+          "id": "forum-006",
+          "name": "Forum Moderation",
+          "status": "partial",
+          "completion_rate": 50.0,
+          "details": {
+            "routes": {
+              "matched": [],
+              "missing": [
+                "/forum/thread/<id>/pin",
+                "/forum/thread/<id>/lock",
+                "/forum/thread/<id>/delete"
+              ]
+            },
+            "templates": {
+              "matched": [],
+              "missing": []
+            },
+            "models": {
+              "matched": [],
+              "missing": [
+                "ForumThread"
+              ]
+            },
+            "keywords": {
+              "matched": [
+                "is_pinned",
+                "is_locked",
+                "is_deleted",
+                "@admin_required"
+              ],
+              "missing": []
+            },
+            "completion_rate": 50.0
+          }
+        }
+      ],
+      "module_completion": 0.0
+    },
+    {
+      "id": "blog",
+      "name": "Blog & Knowledge Base",
+      "priority": "high",
+      "requirements": [
+        {
+          "id": "blog-001",
+          "name": "Blog Categories",
+          "status": "partial",
+          "completion_rate": 66.66666666666666,
+          "details": {
+            "routes": {
+              "matched": [],
+              "missing": [
+                "/blog",
+                "/blog/category/<slug>"
+              ]
+            },
+            "templates": {
+              "matched": [
+                "blog/index.html"
+              ],
+              "missing": []
+            },
+            "models": {
+              "matched": [
+                "BlogCategory"
+              ],
+              "missing": []
+            },
+            "keywords": {
+              "matched": [
+                "BlogCategory",
+                "slug"
+              ],
+              "missing": []
+            },
+            "completion_rate": 66.66666666666666
+          }
+        },
+        {
+          "id": "blog-002",
+          "name": "Create Blog Post",
+          "status": "partial",
+          "completion_rate": 71.42857142857143,
+          "details": {
+            "routes": {
+              "matched": [],
+              "missing": [
+                "/blog/new-post"
+              ]
+            },
+            "templates": {
+              "matched": [],
+              "missing": [
+                "blog/new_post.html"
+              ]
+            },
+            "models": {
+              "matched": [
+                "BlogPost"
+              ],
+              "missing": []
+            },
+            "keywords": {
+              "matched": [
+                "BlogPostForm",
+                "title",
+                "content",
+                "featured_image"
+              ],
+              "missing": []
+            },
+            "completion_rate": 71.42857142857143
+          }
+        },
+        {
+          "id": "blog-003",
+          "name": "Blog Post Detail",
+          "status": "partial",
+          "completion_rate": 83.33333333333334,
+          "details": {
+            "routes": {
+              "matched": [],
+              "missing": [
+                "/blog/post/<id>"
+              ]
+            },
+            "templates": {
+              "matched": [
+                "blog/post_detail.html"
+              ],
+              "missing": []
+            },
+            "models": {
+              "matched": [
+                "BlogPost"
+              ],
+              "missing": []
+            },
+            "keywords": {
+              "matched": [
+                "view_count",
+                "is_published",
+                "tags"
+              ],
+              "missing": []
+            },
+            "completion_rate": 83.33333333333334
+          }
+        },
+        {
+          "id": "blog-004",
+          "name": "Blog Comments",
+          "status": "partial",
+          "completion_rate": 83.33333333333334,
+          "details": {
+            "routes": {
+              "matched": [],
+              "missing": [
+                "/blog/post/<id>/comment"
+              ]
+            },
+            "templates": {
+              "matched": [
+                "blog/post_detail.html"
+              ],
+              "missing": []
+            },
+            "models": {
+              "matched": [
+                "BlogComment"
+              ],
+              "missing": []
+            },
+            "keywords": {
+              "matched": [
+                "CommentForm",
+                "post_id",
+                "is_approved"
+              ],
+              "missing": []
+            },
+            "completion_rate": 83.33333333333334
+          }
+        },
+        {
+          "id": "blog-005",
+          "name": "Blog Likes",
+          "status": "partial",
+          "completion_rate": 80.0,
+          "details": {
+            "routes": {
+              "matched": [],
+              "missing": [
+                "/blog/post/<id>/like"
+              ]
+            },
+            "templates": {
+              "matched": [],
+              "missing": []
+            },
+            "models": {
+              "matched": [
+                "BlogLike"
+              ],
+              "missing": []
+            },
+            "keywords": {
+              "matched": [
+                "like_count",
+                "user_id",
+                "post_id"
+              ],
+              "missing": []
+            },
+            "completion_rate": 80.0
+          }
+        },
+        {
+          "id": "blog-006",
+          "name": "Blog Attachments",
+          "status": "completed",
+          "completion_rate": 100.0,
+          "details": {
+            "routes": {
+              "matched": [],
+              "missing": []
+            },
+            "templates": {
+              "matched": [
+                "blog/post_detail.html"
+              ],
+              "missing": []
+            },
+            "models": {
+              "matched": [
+                "BlogAttachment"
+              ],
+              "missing": []
+            },
+            "keywords": {
+              "matched": [
+                "file_path",
+                "mime_type",
+                "attachments"
+              ],
+              "missing": []
+            },
+            "completion_rate": 100.0
+          }
+        },
+        {
+          "id": "blog-007",
+          "name": "Blog Moderation",
+          "status": "partial",
+          "completion_rate": 66.66666666666666,
+          "details": {
+            "routes": {
+              "matched": [],
+              "missing": [
+                "/blog/admin/manage-posts",
+                "/blog/post/<id>/publish",
+                "/blog/post/<id>/delete"
+              ]
+            },
+            "templates": {
+              "matched": [
+                "blog/manage_posts.html"
+              ],
+              "missing": []
+            },
+            "models": {
+              "matched": [
+                "BlogPost"
+              ],
+              "missing": []
+            },
+            "keywords": {
+              "matched": [
+                "is_published",
+                "is_deleted",
+                "soft_delete",
+                "@admin_required"
+              ],
+              "missing": []
+            },
+            "completion_rate": 66.66666666666666
+          }
+        }
+      ],
+      "module_completion": 14.285714285714285
+    },
+    {
+      "id": "consultancy",
+      "name": "Expert Consultancy",
+      "priority": "high",
+      "requirements": [
+        {
+          "id": "consultancy-001",
+          "name": "Consultant Listing",
+          "status": "partial",
+          "completion_rate": 66.66666666666666,
+          "details": {
+            "routes": {
+              "matched": [],
+              "missing": [
+                "/consultancy"
+              ]
+            },
+            "templates": {
+              "matched": [
+                "consultancy/index.html"
+              ],
+              "missing": []
+            },
+            "models": {
+              "matched": [
+                "ConsultantProfile"
+              ],
+              "missing": []
+            },
+            "keywords": {
+              "matched": [
+                "hourly_rate",
+                "is_verified"
+              ],
+              "missing": [
+                "expertise_areas"
+              ]
+            },
+            "completion_rate": 66.66666666666666
+          }
+        },
+        {
+          "id": "consultancy-002",
+          "name": "Consultant Profile",
+          "status": "partial",
+          "completion_rate": 66.66666666666666,
+          "details": {
+            "routes": {
+              "matched": [],
+              "missing": [
+                "/consultancy/consultant/<id>"
+              ]
+            },
+            "templates": {
+              "matched": [
+                "consultancy/consultant_detail.html"
+              ],
+              "missing": []
+            },
+            "models": {
+              "matched": [
+                "ConsultantProfile"
+              ],
+              "missing": []
+            },
+            "keywords": {
+              "matched": [
+                "bio",
+                "specialization"
+              ],
+              "missing": [
+                "certifications"
+              ]
+            },
+            "completion_rate": 66.66666666666666
+          }
+        },
+        {
+          "id": "consultancy-003",
+          "name": "Become Consultant",
+          "status": "partial",
+          "completion_rate": 50.0,
+          "details": {
+            "routes": {
+              "matched": [],
+              "missing": [
+                "/consultancy/become-consultant"
+              ]
+            },
+            "templates": {
+              "matched": [],
+              "missing": [
+                "consultancy/become_consultant.html"
+              ]
+            },
+            "models": {
+              "matched": [
+                "ConsultantProfile"
+              ],
+              "missing": []
+            },
+            "keywords": {
+              "matched": [
+                "ConsultantForm",
+                "hourly_rate"
+              ],
+              "missing": [
+                "expertise_areas"
+              ]
+            },
+            "completion_rate": 50.0
+          }
+        },
+        {
+          "id": "consultancy-004",
+          "name": "Contact Consultant",
+          "status": "partial",
+          "completion_rate": 83.33333333333334,
+          "details": {
+            "routes": {
+              "matched": [],
+              "missing": [
+                "/consultancy/consultant/<id>/contact"
+              ]
+            },
+            "templates": {
+              "matched": [
+                "consultancy/consultant_detail.html"
+              ],
+              "missing": []
+            },
+            "models": {
+              "matched": [
+                "ConsultancyMessage"
+              ],
+              "missing": []
+            },
+            "keywords": {
+              "matched": [
+                "ContactConsultantForm",
+                "message",
+                "consultant_id"
+              ],
+              "missing": []
+            },
+            "completion_rate": 83.33333333333334
+          }
+        },
+        {
+          "id": "consultancy-005",
+          "name": "Consultant Dashboard",
+          "status": "partial",
+          "completion_rate": 57.14285714285714,
+          "details": {
+            "routes": {
+              "matched": [],
+              "missing": [
+                "/consultancy/dashboard"
+              ]
+            },
+            "templates": {
+              "matched": [],
+              "missing": [
+                "consultancy/consultant_dashboard.html"
+              ]
+            },
+            "models": {
+              "matched": [
+                "ConsultantProfile",
+                "ConsultancyMessage"
+              ],
+              "missing": []
+            },
+            "keywords": {
+              "matched": [
+                "@login_required",
+                "messages"
+              ],
+              "missing": [
+                "total_consultations"
+              ]
+            },
+            "completion_rate": 57.14285714285714
+          }
+        },
+        {
+          "id": "consultancy-006",
+          "name": "Admin Verification",
+          "status": "partial",
+          "completion_rate": 66.66666666666666,
+          "details": {
+            "routes": {
+              "matched": [],
+              "missing": [
+                "/consultancy/admin/consultants",
+                "/consultancy/consultant/<id>/verify"
+              ]
+            },
+            "templates": {
+              "matched": [
+                "consultancy/admin_consultants.html"
+              ],
+              "missing": []
+            },
+            "models": {
+              "matched": [
+                "ConsultantProfile"
+              ],
+              "missing": []
+            },
+            "keywords": {
+              "matched": [
+                "is_verified",
+                "@admin_required"
+              ],
+              "missing": []
+            },
+            "completion_rate": 66.66666666666666
+          }
+        }
+      ],
+      "module_completion": 0.0
+    },
+    {
+      "id": "marketplace",
+      "name": "E-Commerce Marketplace",
+      "priority": "critical",
+      "requirements": [
+        {
+          "id": "marketplace-001",
+          "name": "Product Listing",
+          "status": "partial",
+          "completion_rate": 83.33333333333334,
+          "details": {
+            "routes": {
+              "matched": [],
+              "missing": [
+                "/marketplace"
+              ]
+            },
+            "templates": {
+              "matched": [
+                "marketplace/index.html"
+              ],
+              "missing": []
+            },
+            "models": {
+              "matched": [
+                "Product"
+              ],
+              "missing": []
+            },
+            "keywords": {
+              "matched": [
+                "Product",
+                "price",
+                "stock_quantity"
+              ],
+              "missing": []
+            },
+            "completion_rate": 83.33333333333334
+          }
+        },
+        {
+          "id": "marketplace-002",
+          "name": "Product Detail",
+          "status": "partial",
+          "completion_rate": 50.0,
+          "details": {
+            "routes": {
+              "matched": [],
+              "missing": [
+                "/marketplace/product/<id>"
+              ]
+            },
+            "templates": {
+              "matched": [],
+              "missing": [
+                "marketplace/product_detail.html"
+              ]
+            },
+            "models": {
+              "matched": [
+                "Product"
+              ],
+              "missing": []
+            },
+            "keywords": {
+              "matched": [
+                "description",
+                "images"
+              ],
+              "missing": [
+                "specifications"
+              ]
+            },
+            "completion_rate": 50.0
+          }
+        },
+        {
+          "id": "marketplace-003",
+          "name": "Product Categories",
+          "status": "partial",
+          "completion_rate": 66.66666666666666,
+          "details": {
+            "routes": {
+              "matched": [],
+              "missing": [
+                "/marketplace/category/<slug>"
+              ]
+            },
+            "templates": {
+              "matched": [],
+              "missing": [
+                "marketplace/category.html"
+              ]
+            },
+            "models": {
+              "matched": [
+                "Category"
+              ],
+              "missing": []
+            },
+            "keywords": {
+              "matched": [
+                "Category",
+                "slug",
+                "parent_id"
+              ],
+              "missing": []
+            },
+            "completion_rate": 66.66666666666666
+          }
+        },
+        {
+          "id": "marketplace-004",
+          "name": "Shopping Cart",
+          "status": "partial",
+          "completion_rate": 62.5,
+          "details": {
+            "routes": {
+              "matched": [],
+              "missing": [
+                "/marketplace/cart",
+                "/marketplace/cart/add",
+                "/marketplace/cart/remove"
+              ]
+            },
+            "templates": {
+              "matched": [
+                "marketplace/cart.html"
+              ],
+              "missing": []
+            },
+            "models": {
+              "matched": [
+                "CartItem"
+              ],
+              "missing": []
+            },
+            "keywords": {
+              "matched": [
+                "cart",
+                "quantity",
+                "session"
+              ],
+              "missing": []
+            },
+            "completion_rate": 62.5
+          }
+        },
+        {
+          "id": "marketplace-005",
+          "name": "Checkout Process",
+          "status": "partial",
+          "completion_rate": 83.33333333333334,
+          "details": {
+            "routes": {
+              "matched": [],
+              "missing": [
+                "/marketplace/checkout"
+              ]
+            },
+            "templates": {
+              "matched": [
+                "marketplace/checkout.html"
+              ],
+              "missing": []
+            },
+            "models": {
+              "matched": [
+                "Order"
+              ],
+              "missing": []
+            },
+            "keywords": {
+              "matched": [
+                "Order",
+                "shipping_address",
+                "payment_method"
+              ],
+              "missing": []
+            },
+            "completion_rate": 83.33333333333334
+          }
+        },
+        {
+          "id": "marketplace-006",
+          "name": "Order Management",
+          "status": "partial",
+          "completion_rate": 77.77777777777779,
+          "details": {
+            "routes": {
+              "matched": [],
+              "missing": [
+                "/marketplace/orders",
+                "/marketplace/order/<id>"
+              ]
+            },
+            "templates": {
+              "matched": [
+                "marketplace/orders.html",
+                "marketplace/order_detail.html"
+              ],
+              "missing": []
+            },
+            "models": {
+              "matched": [
+                "Order",
+                "OrderItem"
+              ],
+              "missing": []
+            },
+            "keywords": {
+              "matched": [
+                "status",
+                "total_amount",
+                "order_date"
+              ],
+              "missing": []
+            },
+            "completion_rate": 77.77777777777779
+          }
+        },
+        {
+          "id": "marketplace-007",
+          "name": "Product Reviews",
+          "status": "missing",
+          "completion_rate": 16.666666666666664,
+          "details": {
+            "routes": {
+              "matched": [],
+              "missing": [
+                "/marketplace/product/<id>/review"
+              ]
+            },
+            "templates": {
+              "matched": [],
+              "missing": [
+                "marketplace/product_detail.html"
+              ]
+            },
+            "models": {
+              "matched": [],
+              "missing": [
+                "Review"
+              ]
+            },
+            "keywords": {
+              "matched": [
+                "rating"
+              ],
+              "missing": [
+                "review_text",
+                "is_verified_purchase"
+              ]
+            },
+            "completion_rate": 16.666666666666664
+          }
+        },
+        {
+          "id": "marketplace-008",
+          "name": "Wishlist",
+          "status": "missing",
+          "completion_rate": 28.57142857142857,
+          "details": {
+            "routes": {
+              "matched": [],
+              "missing": [
+                "/marketplace/wishlist",
+                "/marketplace/wishlist/add"
+              ]
+            },
+            "templates": {
+              "matched": [],
+              "missing": [
+                "marketplace/wishlist.html"
+              ]
+            },
+            "models": {
+              "matched": [],
+              "missing": [
+                "Wishlist"
+              ]
+            },
+            "keywords": {
+              "matched": [
+                "user_id",
+                "product_id"
+              ],
+              "missing": [
+                "wishlist"
+              ]
+            },
+            "completion_rate": 28.57142857142857
+          }
+        },
+        {
+          "id": "marketplace-009",
+          "name": "Seller Dashboard",
+          "status": "missing",
+          "completion_rate": 33.33333333333333,
+          "details": {
+            "routes": {
+              "matched": [],
+              "missing": [
+                "/marketplace/seller/dashboard",
+                "/marketplace/seller/products"
+              ]
+            },
+            "templates": {
+              "matched": [],
+              "missing": [
+                "marketplace/seller_dashboard.html"
+              ]
+            },
+            "models": {
+              "matched": [
+                "Product"
+              ],
+              "missing": []
+            },
+            "keywords": {
+              "matched": [
+                "is_active"
+              ],
+              "missing": [
+                "seller_id"
+              ]
+            },
+            "completion_rate": 33.33333333333333
+          }
+        }
+      ],
+      "module_completion": 0.0
+    },
+    {
+      "id": "admin",
+      "name": "Admin Panel",
+      "priority": "high",
+      "requirements": [
+        {
+          "id": "admin-001",
+          "name": "Admin Dashboard",
+          "status": "completed",
+          "completion_rate": 100.0,
+          "details": {
+            "routes": {
+              "matched": [
+                "/admin",
+                "/admin/dashboard"
+              ],
+              "missing": []
+            },
+            "templates": {
+              "matched": [
+                "admin/dashboard.html"
+              ],
+              "missing": []
+            },
+            "models": {
+              "matched": [],
+              "missing": []
+            },
+            "keywords": {
+              "matched": [
+                "@admin_required",
+                "statistics"
+              ],
+              "missing": []
+            },
+            "completion_rate": 100.0
+          }
+        },
+        {
+          "id": "admin-002",
+          "name": "User Management",
+          "status": "partial",
+          "completion_rate": 83.33333333333334,
+          "details": {
+            "routes": {
+              "matched": [],
+              "missing": [
+                "/admin/users"
+              ]
+            },
+            "templates": {
+              "matched": [
+                "admin/users.html"
+              ],
+              "missing": []
+            },
+            "models": {
+              "matched": [
+                "User"
+              ],
+              "missing": []
+            },
+            "keywords": {
+              "matched": [
+                "is_active",
+                "role",
+                "@admin_required"
+              ],
+              "missing": []
+            },
+            "completion_rate": 83.33333333333334
+          }
+        },
+        {
+          "id": "admin-003",
+          "name": "Content Moderation",
+          "status": "partial",
+          "completion_rate": 50.0,
+          "details": {
+            "routes": {
+              "matched": [],
+              "missing": [
+                "/admin/moderate"
+              ]
+            },
+            "templates": {
+              "matched": [],
+              "missing": [
+                "admin/moderation.html"
+              ]
+            },
+            "models": {
+              "matched": [
+                "BlogPost"
+              ],
+              "missing": [
+                "ForumThread",
+                "Review"
+              ]
+            },
+            "keywords": {
+              "matched": [
+                "is_approved",
+                "is_deleted",
+                "@admin_required"
+              ],
+              "missing": []
+            },
+            "completion_rate": 50.0
+          }
+        },
+        {
+          "id": "admin-004",
+          "name": "Order Management",
+          "status": "partial",
+          "completion_rate": 83.33333333333334,
+          "details": {
+            "routes": {
+              "matched": [],
+              "missing": [
+                "/admin/orders"
+              ]
+            },
+            "templates": {
+              "matched": [
+                "admin/orders.html"
+              ],
+              "missing": []
+            },
+            "models": {
+              "matched": [
+                "Order"
+              ],
+              "missing": []
+            },
+            "keywords": {
+              "matched": [
+                "status",
+                "tracking_number",
+                "@admin_required"
+              ],
+              "missing": []
+            },
+            "completion_rate": 83.33333333333334
+          }
+        },
+        {
+          "id": "admin-005",
+          "name": "Analytics & Reports",
+          "status": "missing",
+          "completion_rate": 40.0,
+          "details": {
+            "routes": {
+              "matched": [],
+              "missing": [
+                "/admin/analytics"
+              ]
+            },
+            "templates": {
+              "matched": [],
+              "missing": [
+                "admin/analytics.html"
+              ]
+            },
+            "models": {
+              "matched": [],
+              "missing": []
+            },
+            "keywords": {
+              "matched": [
+                "revenue",
+                "@admin_required"
+              ],
+              "missing": [
+                "sales_data"
+              ]
+            },
+            "completion_rate": 40.0
+          }
+        }
+      ],
+      "module_completion": 20.0
+    },
+    {
+      "id": "analytics",
+      "name": "Analytics & Reporting",
+      "priority": "medium",
+      "requirements": [
+        {
+          "id": "analytics-001",
+          "name": "Sales Analytics",
+          "status": "partial",
+          "completion_rate": 50.0,
+          "details": {
+            "routes": {
+              "matched": [],
+              "missing": [
+                "/analytics/sales"
+              ]
+            },
+            "templates": {
+              "matched": [],
+              "missing": [
+                "analytics/sales.html"
+              ]
+            },
+            "models": {
+              "matched": [
+                "Order"
+              ],
+              "missing": []
+            },
+            "keywords": {
+              "matched": [
+                "revenue",
+                "chart"
+              ],
+              "missing": [
+                "date_range"
+              ]
+            },
+            "completion_rate": 50.0
+          }
+        },
+        {
+          "id": "analytics-002",
+          "name": "User Analytics",
+          "status": "missing",
+          "completion_rate": 20.0,
+          "details": {
+            "routes": {
+              "matched": [],
+              "missing": [
+                "/analytics/users"
+              ]
+            },
+            "templates": {
+              "matched": [],
+              "missing": [
+                "analytics/users.html"
+              ]
+            },
+            "models": {
+              "matched": [
+                "User"
+              ],
+              "missing": []
+            },
+            "keywords": {
+              "matched": [],
+              "missing": [
+                "registration_trends",
+                "active_users"
+              ]
+            },
+            "completion_rate": 20.0
+          }
+        },
+        {
+          "id": "analytics-003",
+          "name": "Product Analytics",
+          "status": "partial",
+          "completion_rate": 50.0,
+          "details": {
+            "routes": {
+              "matched": [],
+              "missing": [
+                "/analytics/products"
+              ]
+            },
+            "templates": {
+              "matched": [],
+              "missing": [
+                "analytics/products.html"
+              ]
+            },
+            "models": {
+              "matched": [
+                "Product",
+                "Order"
+              ],
+              "missing": []
+            },
+            "keywords": {
+              "matched": [
+                "top_selling"
+              ],
+              "missing": [
+                "inventory_alerts"
+              ]
+            },
+            "completion_rate": 50.0
+          }
+        }
+      ],
+      "module_completion": 0.0
+    },
+    {
+      "id": "notifications",
+      "name": "Notifications System",
+      "priority": "medium",
+      "requirements": [
+        {
+          "id": "notifications-001",
+          "name": "In-App Notifications",
+          "status": "missing",
+          "completion_rate": 0.0,
+          "details": {
+            "routes": {
+              "matched": [],
+              "missing": [
+                "/notifications"
+              ]
+            },
+            "templates": {
+              "matched": [],
+              "missing": [
+                "notifications/index.html"
+              ]
+            },
+            "models": {
+              "matched": [],
+              "missing": [
+                "Notification"
+              ]
+            },
+            "keywords": {
+              "matched": [],
+              "missing": [
+                "is_read",
+                "notification_type"
+              ]
+            },
+            "completion_rate": 0.0
+          }
+        },
+        {
+          "id": "notifications-002",
+          "name": "Email Notifications",
+          "status": "missing",
+          "completion_rate": 0.0,
+          "details": {
+            "routes": {
+              "matched": [],
+              "missing": []
+            },
+            "templates": {
+              "matched": [],
+              "missing": []
+            },
+            "models": {
+              "matched": [],
+              "missing": [
+                "Notification"
+              ]
+            },
+            "keywords": {
+              "matched": [],
+              "missing": [
+                "send_email",
+                "smtp",
+                "email_template"
+              ]
+            },
+            "completion_rate": 0.0
+          }
+        }
+      ],
+      "module_completion": 0.0
+    },
+    {
+      "id": "search",
+      "name": "Search Functionality",
+      "priority": "medium",
+      "requirements": [
+        {
+          "id": "search-001",
+          "name": "Global Search",
+          "status": "partial",
+          "completion_rate": 80.0,
+          "details": {
+            "routes": {
+              "matched": [
+                "/search"
+              ],
+              "missing": []
+            },
+            "templates": {
+              "matched": [],
+              "missing": [
+                "search/results.html"
+              ]
+            },
+            "models": {
+              "matched": [],
+              "missing": []
+            },
+            "keywords": {
+              "matched": [
+                "request.args.get",
+                "search",
+                "query"
+              ],
+              "missing": []
+            },
+            "completion_rate": 80.0
+          }
+        },
+        {
+          "id": "search-002",
+          "name": "Advanced Filters",
+          "status": "partial",
+          "completion_rate": 75.0,
+          "details": {
+            "routes": {
+              "matched": [],
+              "missing": []
+            },
+            "templates": {
+              "matched": [
+                "marketplace/index.html"
+              ],
+              "missing": []
+            },
+            "models": {
+              "matched": [],
+              "missing": []
+            },
+            "keywords": {
+              "matched": [
+                "filter_by",
+                "category"
+              ],
+              "missing": [
+                "price_range"
+              ]
+            },
+            "completion_rate": 75.0
+          }
+        }
+      ],
+      "module_completion": 0.0
+    }
+  ],
+  "summary": {
+    "total_requirements": 46,
+    "completed": 8,
+    "partial": 31,
+    "missing": 7
+  }
+}

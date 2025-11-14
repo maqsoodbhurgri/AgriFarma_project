@@ -1,0 +1,173 @@
+{% extends "base.html" %}
+
+{% block title %}Shopping Cart{% endblock %}
+
+{% block extra_css %}
+<style>
+.cart-hero {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)),
+              url('{{ url_for('static', filename='images/Backgrounds/pexels-nc-farm-bureau-mark-2255920.jpg') }}');
+  background-size: cover;
+  background-position: center;
+  padding: 3rem 0;
+  margin-bottom: 2rem;
+  border-radius: 16px;
+  color: white;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+.cart-hero h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+}
+.cart-item-card {
+  border: none;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+.cart-item-card:hover {
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+.empty-cart {
+  padding: 4rem 2rem;
+  text-align: center;
+}
+.empty-cart i {
+  font-size: 5rem;
+  opacity: 0.3;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="cart-hero">
+  <div class="container">
+    <h1><i class="fas fa-shopping-cart me-3"></i>Shopping Cart</h1>
+  </div>
+</div>
+
+<div class="container mb-5">
+  {% if items %}
+  <form method="POST" action="{{ url_for('marketplace.cart_update') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="card shadow-sm mb-4">
+          <div class="card-header bg-light">
+            <h5 class="mb-0"><i class="fas fa-list me-2"></i>Cart Items ({{ items|length }})</h5>
+          </div>
+          <div class="card-body p-0">
+            {% for item in items %}
+            <div class="cart-item-card p-3 border-bottom">
+              <div class="row align-items-center">
+                <div class="col-md-6">
+                  <div class="d-flex align-items-center">
+                    {% if item.product.image_url %}
+                    <img src="{{ item.product.image_url }}" alt="{{ item.product.name }}" 
+                         class="rounded" style="width: 80px; height: 80px; object-fit: cover;">
+                    {% else %}
+                    <div class="bg-light rounded d-flex align-items-center justify-content-center" 
+                         style="width: 80px; height: 80px;">
+                      <i class="fas fa-box text-muted"></i>
+                    </div>
+                    {% endif %}
+                    <div class="ms-3">
+                      <h6 class="mb-1">
+                        <a href="{{ url_for('marketplace.product', product_id=item.product.id) }}" 
+                           class="text-decoration-none text-dark fw-bold">
+                          {{ item.product.name }}
+                        </a>
+                      </h6>
+                      <p class="text-muted small mb-0">{{ item.product.category }}</p>
+                      <p class="text-success small mb-0"><i class="fas fa-check-circle"></i> In Stock</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-2 text-center">
+                  <p class="text-muted small mb-0">Price</p>
+                  <h6 class="mb-0">Rs. {{ '%.2f'|format(item.unit_price) }}</h6>
+                </div>
+                <div class="col-md-2 text-center">
+                  <p class="text-muted small mb-0">Quantity</p>
+                  <input type="number" name="qty_{{ item.product.id }}" 
+                         value="{{ item.quantity }}" 
+                         min="1" max="{{ item.product.stock_quantity }}" 
+                         class="form-control form-control-sm text-center" 
+                         style="max-width: 80px; margin: 0 auto;">
+                </div>
+                <div class="col-md-2 text-center">
+                  <p class="text-muted small mb-0">Total</p>
+                  <h6 class="text-success mb-0">Rs. {{ '%.2f'|format(item.total_price) }}</h6>
+                  <button type="submit"
+                          class="btn btn-sm btn-link text-danger p-0 mt-1"
+                          formmethod="post"
+                          formaction="{{ url_for('marketplace.cart_remove', product_id=item.product.id) }}"
+                          title="Remove item">
+                    <i class="fas fa-trash"></i> Remove
+                  </button>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        
+        <div class="d-flex justify-content-between">
+          <a href="{{ url_for('marketplace.index') }}" class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left me-2"></i>Continue Shopping
+          </a>
+          <button type="submit" class="btn btn-success">
+            <i class="fas fa-sync me-2"></i>Update Cart
+          </button>
+        </div>
+      </div>
+      
+      <div class="col-lg-4">
+        <div class="card shadow-sm">
+          <div class="card-header bg-success text-white">
+            <h5 class="mb-0"><i class="fas fa-calculator me-2"></i>Order Summary</h5>
+          </div>
+          <div class="card-body">
+            <div class="d-flex justify-content-between mb-2">
+              <span>Subtotal:</span>
+              <strong>Rs. {{ '%.2f'|format(subtotal) }}</strong>
+            </div>
+            <div class="d-flex justify-content-between mb-2">
+              <span>Shipping:</span>
+              <strong>Rs. {{ '%.2f'|format(shipping_fee) }}</strong>
+            </div>
+            <div class="d-flex justify-content-between mb-3 pb-3 border-bottom">
+              <span>Tax:</span>
+              <strong>Rs. {{ '%.2f'|format(tax_amount) }}</strong>
+            </div>
+            <div class="d-flex justify-content-between mb-4">
+              <h5 class="mb-0">Total:</h5>
+              <h5 class="text-success mb-0">Rs. {{ '%.2f'|format(total) }}</h5>
+            </div>
+            <a href="{{ url_for('marketplace.checkout') }}" 
+               class="btn btn-success w-100 btn-lg">
+              <i class="fas fa-credit-card me-2"></i>Proceed to Checkout
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  
+  {% else %}
+  <div class="card shadow-sm">
+    <div class="card-body empty-cart">
+      <i class="fas fa-shopping-cart text-muted mb-4"></i>
+      <h3 class="mb-3">Your cart is empty</h3>
+      <p class="text-muted mb-4">Looks like you haven't added anything to your cart yet.</p>
+      <a href="{{ url_for('marketplace.index') }}" class="btn btn-success btn-lg">
+        <i class="fas fa-shopping-bag me-2"></i>Start Shopping
+      </a>
+    </div>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

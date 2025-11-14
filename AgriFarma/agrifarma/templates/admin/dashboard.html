@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block extra_css %}
+<style>
+.admin-hero {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)),
+              url('{{ url_for('static', filename='images/Backgrounds/pexels-quang-nguyen-vinh-222549-2131784.jpg') }}');
+  background-size: cover;
+  background-position: center;
+  padding: 4rem 0;
+  margin-bottom: 2rem;
+  border-radius: 16px;
+  color: white;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+.admin-hero h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+  margin-bottom: 0.5rem;
+}
+.stats-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+.stats-card {
+  border: none;
+  border-radius: 16px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+.stats-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+}
+.card-variant-1 { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+.card-variant-2 { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; }
+.card-variant-3 { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; }
+.card-variant-4 { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="admin-hero">
+  <div class="container">
+    <h1><i class="fas fa-user-shield me-3"></i>Admin Dashboard</h1>
+    <p class="mb-0" style="font-size: 1.2rem;">System Management & Analytics</p>
+  </div>
+</div>
+
+<div class="container mb-5">
+    <div class="row g-4 mb-4">
+        <div class="col-md-3">
+            <div class="card stats-card card-variant-1 shadow text-center">
+                <div class="card-body">
+                    <div class="stats-icon">👥</div>
+                    <h3 class="mb-1">0</h3>
+                    <p class="mb-0 opacity-90">Total Users</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            <div class="card stats-card card-variant-2 shadow text-center">
+                <div class="card-body">
+                    <div class="stats-icon">💬</div>
+                    <h3 class="mb-1">0</h3>
+                    <p class="mb-0 opacity-90">Forum Topics</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            <div class="card stats-card card-variant-3 shadow text-center">
+                <div class="card-body">
+                    <div class="stats-icon">📚</div>
+                    <h3 class="mb-1">0</h3>
+                    <p class="mb-0 opacity-90">Blog Posts</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            <div class="card stats-card card-variant-4 shadow text-center">
+                <div class="card-body">
+                    <div class="stats-icon">🛒</div>
+                    <h3 class="mb-1">0</h3>
+                    <p class="mb-0 opacity-90">Products</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Quick Actions</h5>
+                </div>
+                <div class="card-body">
+                    <div class="list-group">
+                        <a href="{{ url_for('admin.users') }}" class="list-group-item list-group-item-action">
+                            <i class="bi bi-people"></i> Manage Users
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <i class="bi bi-chat-dots"></i> Moderate Forum
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <i class="bi bi-book"></i> Manage Blog Posts
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <i class="bi bi-shop"></i> Manage Products
+                        </a>
+                        <a href="{{ url_for('admin.settings') }}" class="list-group-item list-group-item-action">
+                            <i class="bi bi-gear"></i> System Settings
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Recent Activity</h5>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted">No recent activity to display.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

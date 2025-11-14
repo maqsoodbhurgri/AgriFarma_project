@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block title %}My Orders{% endblock %}
+
+{% block extra_css %}
+<style>
+.orders-hero {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)),
+              url('{{ url_for('static', filename='images/Backgrounds/pexels-nc-farm-bureau-mark-2255920.jpg') }}');
+  background-size: cover;
+  background-position: center;
+  padding: 3rem 0;
+  margin-bottom: 2rem;
+  border-radius: 16px;
+  color: white;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+.orders-hero h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+}
+.order-card {
+  border: none;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  margin-bottom: 1rem;
+}
+.order-card:hover {
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transform: translateY(-2px);
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="orders-hero">
+  <div class="container">
+    <h1><i class="fas fa-shopping-bag me-3"></i>My Orders</h1>
+    <p>Track your purchases and order history</p>
+  </div>
+</div>
+
+<div class="container mb-5">
+  {% if orders %}
+  <div class="row">
+    {% for o in orders %}
+    <div class="col-12 mb-3">
+      <div class="card order-card shadow-sm">
+        <div class="card-body">
+          <div class="row align-items-center">
+            <div class="col-md-2">
+              <h6 class="text-muted small mb-0">Order Number</h6>
+              <h5 class="mb-0 fw-bold">#{{ o.order_number }}</h5>
+            </div>
+            <div class="col-md-2">
+              <h6 class="text-muted small mb-0">Date</h6>
+              <p class="mb-0">{{ o.order_date.strftime('%b %d, %Y') if o.order_date else 'N/A' }}</p>
+            </div>
+            <div class="col-md-2">
+              <h6 class="text-muted small mb-0">Status</h6>
+              <span class="badge bg-{{ 'success' if o.status == 'delivered' else 'warning' if o.status == 'pending' else 'info' }}">{{ o.status|title }}</span>
+            </div>
+            <div class="col-md-2">
+              <h6 class="text-muted small mb-0">Items</h6>
+              <p class="mb-0"><i class="fas fa-box me-1"></i>{{ o.get_item_count() }} items</p>
+            </div>
+            <div class="col-md-2">
+              <h6 class="text-muted small mb-0">Total</h6>
+              <h5 class="mb-0 text-success">Rs. {{ '%.2f'|format(o.total_amount) }}</h5>
+            </div>
+            <div class="col-md-2 text-end">
+              <a href="{{ url_for('marketplace.order_detail', order_id=o.id) }}" class="btn btn-outline-success">
+                <i class="fas fa-eye me-1"></i>View Details
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="card shadow-sm">
+    <div class="card-body text-center py-5">
+      <i class="fas fa-shopping-bag text-muted mb-3" style="font-size: 4rem; opacity: 0.3;"></i>
+      <h4 class="mb-3">No orders yet</h4>
+      <p class="text-muted mb-4">You haven't placed any orders. Start shopping now!</p>
+      <a href="{{ url_for('marketplace.index') }}" class="btn btn-success btn-lg">
+        <i class="fas fa-shopping-cart me-2"></i>Browse Products
+      </a>
+    </div>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

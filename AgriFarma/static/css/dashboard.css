@@ -1,0 +1,20 @@
+/* Dashboard Specific Styling */
+.dashboard-title {
+  color: #2e7d32;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.card-title {
+  color: #388e3c;
+  font-weight: 500;
+}
+
+.btn-success {
+  background-color: #388e3c;
+  border: none;
+}
+
+.btn-success:hover {
+  background-color: #1b5e20;
+}

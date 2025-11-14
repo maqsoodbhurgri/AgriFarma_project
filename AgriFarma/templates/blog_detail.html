@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block title %}{{ post.title }}{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{{ url_for('static', filename='css/forum.css') }}">{% endblock %}
+{% block content %}
+<div class="thread-card">
+  {% if post.featured_image %}
+  <img src="{{ url_for('static', filename=post.featured_image) }}" alt="{{ post.title }} - Article Cover Image" class="img-fluid mb-3" style="max-height:400px;object-fit:cover;width:100%;">
+  {% else %}
+  <img src="{{ url_for('static', filename='img/backgrounds/blog-placeholder.jpg') }}" alt="{{ post.title }} - No featured image" class="img-fluid mb-3" style="max-height:400px;object-fit:cover;width:100%;">
+  {% endif %}
+  <h3 class="thread-title">{{ post.title }}</h3>
+  <div class="thread-meta mb-3">
+    By {{ post.author.name if post.author else 'Unknown' }} · 
+    {{ post.published_at.strftime('%B %d, %Y') if post.published_at else 'Recent' }}
+    {% if post.category %}| {{ post.category.name }}{% endif %}
+  </div>
+  <div class="content mb-4">
+    {{ post.content|safe }}
+  </div>
+  <div class="d-flex justify-content-between align-items-center small text-muted border-top pt-3">
+    <div>
+      <span class="me-3">👁️ {{ post.view_count }} views</span>
+      <span class="me-3">👍 {{ post.like_count }} likes</span>
+      {% if current_user.is_authenticated %}
+      <form method="POST" action="{{ url_for('blog.like_post', post_id=post.id) }}" class="d-inline">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <button type="submit" class="btn btn-sm btn-outline-primary">
+          <i class="fas fa-thumbs-up"></i> Like
+        </button>
+      </form>
+      {% endif %}
+    </div>
+    <div>
+      {% if post.tags %}
+      <span class="me-3">Tags: {{ post.tags }}</span>
+      {% endif %}
+      {% if current_user.is_authenticated and (current_user.id == post.author_id or current_user.is_admin()) %}
+      <a href="{{ url_for('blog.edit_post', post_id=post.id) }}" class="btn btn-sm btn-outline-secondary">
+        <i class="fas fa-edit"></i> Edit
+      </a>
+      <form method="POST" action="{{ url_for('blog.delete_post', post_id=post.id) }}" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this post?')">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <button type="submit" class="btn btn-sm btn-outline-danger">
+          <i class="fas fa-trash"></i> Delete
+        </button>
+      </form>
+      {% endif %}
+    </div>
+  </div>
+</article>
+
+<!-- Comments Section -->
+{% if comments %}
+<h5 class="mt-4 mb-3">💬 Comments ({{ comments|length }})</h5>
+{% for comment in comments %}
+<div class="thread-card mb-2">
+  <div class="thread-meta mb-1">
+    <strong>{{ comment.author.name if comment.author else 'Anonymous' }}</strong> · 
+    {{ comment.created_at.strftime('%b %d, %Y') if comment.created_at else 'Recent' }}
+  </div>
+  <div>{{ comment.content }}</div>
+</div>
+{% endfor %}
+{% endif %}
+
+{% if current_user.is_authenticated and comment_form %}
+<h6 class="mt-4">Leave a Comment</h6>
+<form method="POST" action="{{ url_for('blog.add_comment', post_id=post.id, slug=post.slug) }}">
+  {{ comment_form.hidden_tag() }}
+  <div class="mb-2">
+    {{ comment_form.content(class="form-control", rows="4", placeholder="Share your thoughts...") }}
+  </div>
+  <button type="submit" class="btn btn-success">Post Comment</button>
+</form>
+{% elif not current_user.is_authenticated %}
+<div class="alert alert-info mt-4">
+  <a href="{{ url_for('auth.login') }}">Login</a> to comment on this article.
+</div>
+{% endif %}
+
+<!-- Related Posts -->
+{% if related_posts %}
+<h6 class="mt-4 mb-3">Related Articles</h6>
+<div class="row">
+  {% for rel in related_posts %}
+  <div class="col-md-4 mb-2">
+    <div class="thread-card">
+      <div class="thread-title small">{{ rel.title }}</div>
+      <a href="{{ url_for('blog.post_detail', post_id=rel.id, slug=rel.slug) }}" class="btn btn-success btn-sm mt-2">Read</a>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+<div class="mt-4">
+  <a href="{{ url_for('blog.index') }}" class="btn btn-outline-success">← Back to Knowledge Base</a>
+</div>
+{% endblock %}

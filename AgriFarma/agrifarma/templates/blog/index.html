@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+<style>
+.blog-hero {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)),
+              url('{{ url_for('static', filename='images/Backgrounds/pexels-quang-nguyen-vinh-222549-2131784.jpg') }}');
+  background-size: cover;
+  background-position: center;
+  padding: 4rem 0;
+  margin-bottom: 2rem;
+  border-radius: 16px;
+  color: white;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+.blog-hero h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+  margin-bottom: 1rem;
+}
+.blog-hero p {
+  font-size: 1.3rem;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="blog-hero">
+  <div class="container">
+    <h1><i class="fas fa-book me-3"></i>Knowledge Base</h1>
+    <p>Learn from agricultural experts and improve your farming practices</p>
+  </div>
+</div>
+
+<div class="container my-5">
+    
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="d-flex justify-content-between align-items-center">
+                <h4>Latest Articles</h4>
+                {% if current_user.is_authenticated and (current_user.is_admin() or current_user.is_consultant()) %}
+                    <a href="{{ url_for('blog.create_post') }}" class="btn btn-success">
+                        <i class="bi bi-plus-circle"></i> Write Article
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body text-center text-muted py-5">
+                    <i class="bi bi-book display-1 mb-3"></i>
+                    <p>No articles yet. Check back soon for valuable insights!</p>
+                    {% if current_user.is_authenticated and (current_user.is_admin() or current_user.is_consultant()) %}
+                        <a href="{{ url_for('blog.create_post') }}" class="btn btn-success mt-2">Write First Article</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h6 class="mb-0">Categories</h6>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled mb-0">
+                        <li><a href="#" class="text-decoration-none">Crop Management</a></li>
+                        <li><a href="#" class="text-decoration-none">Soil Health</a></li>
+                        <li><a href="#" class="text-decoration-none">Pest Control</a></li>
+                        <li><a href="#" class="text-decoration-none">Irrigation</a></li>
+                        <li><a href="#" class="text-decoration-none">Market Trends</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

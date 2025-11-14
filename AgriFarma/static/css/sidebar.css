@@ -1,0 +1,361 @@
+/* Modern Collapsible Sidebar Styles for AgriFarma */
+
+/* Sidebar Container */
+.modern-sidebar {
+  position: fixed;
+  left: 0;
+  top: 110px; /* Below navbar + top header */
+  height: calc(100vh - 110px);
+  width: 260px;
+  background: #ffffff;
+  box-shadow: 2px 0 15px rgba(0, 0, 0, 0.08);
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-right: 1px solid #e0e0e0;
+}
+
+.modern-sidebar.collapsed {
+  width: 70px;
+}
+
+/* When collapsed, hide the entire sidebar content except header */
+.modern-sidebar.collapsed .sidebar-content {
+  display: none;
+}
+
+/* Sidebar Header with Menu Text - Now Clickable Toggle */
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem 1.5rem;
+  background: #2e7d32;
+  border-bottom: none;
+  gap: 0.75rem;
+  min-height: 60px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  user-select: none;
+}
+
+/* When collapsed, center the header and show only icon */
+.modern-sidebar.collapsed .sidebar-header {
+  padding: 1.25rem 0.75rem;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.sidebar-header:hover {
+  background: #1b5e20;
+}
+
+.sidebar-header:active {
+  background: #145018;
+}
+
+.sidebar-menu-icon {
+  color: #fff;
+  font-size: 1.5rem;
+  min-width: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.modern-sidebar.collapsed .sidebar-menu-icon {
+  font-size: 1.8rem;
+}
+
+.sidebar-menu-text {
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+
+.modern-sidebar.collapsed .sidebar-menu-text {
+  font-size: 0.65rem;
+  margin-top: 2px;
+}
+
+/* Sidebar Content */
+.sidebar-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0.5rem 0;
+}
+
+.sidebar-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-content::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.sidebar-content::-webkit-scrollbar-thumb {
+  background: rgba(46, 125, 50, 0.3);
+  border-radius: 3px;
+}
+
+.sidebar-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(46, 125, 50, 0.5);
+}
+
+/* Sidebar Toggle Button - HIDDEN, using header instead */
+.sidebar-toggle {
+  display: none;
+}
+
+/* Navigation Menu */
+.sidebar-nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  padding-top: 0.5rem;
+}
+
+.sidebar-nav .nav-item {
+  margin: 0.3rem 0.875rem;
+}
+
+/* Sidebar Divider */
+.sidebar-divider {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.1);
+  margin: 1rem 1.5rem;
+  list-style: none;
+}
+
+.modern-sidebar.collapsed .sidebar-divider {
+  margin: 1rem 0.75rem;
+}
+
+.sidebar-nav .nav-link {
+  display: flex;
+  align-items: center;
+  padding: 0.875rem 1.125rem;
+  color: #2d3a2d;
+  text-decoration: none;
+  border-radius: 10px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  gap: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+/* Icon Styles */
+.nav-icon {
+  font-size: 1.25rem;
+  min-width: 26px;
+  width: 26px;
+  text-align: center;
+  color: #2e7d32;
+  transition: all 0.3s ease;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Text Styles */
+.nav-text {
+  font-size: 0.95rem;
+  font-weight: 500;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+  flex: 1;
+}
+
+/* Collapsed state - hide text */
+.modern-sidebar.collapsed .nav-text {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+}
+
+.modern-sidebar.collapsed .nav-link {
+  justify-content: center;
+  padding: 0.875rem;
+  margin: 0.3rem 0.5rem;
+}
+
+.modern-sidebar.collapsed .nav-item {
+  margin: 0.3rem 0.5rem;
+}
+
+/* Hover Effect with Ripple */
+.sidebar-nav .nav-link::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(46, 125, 50, 0.1);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.sidebar-nav .nav-link:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.sidebar-nav .nav-link:hover {
+  background: rgba(46, 125, 50, 0.08);
+  transform: translateX(5px);
+  color: #2e7d32;
+  border-left: 3px solid #2e7d32;
+}
+
+.modern-sidebar.collapsed .nav-link:hover {
+  transform: translateX(0) scale(1.05);
+  border-left: none;
+}
+
+.sidebar-nav .nav-link:hover .nav-icon {
+  transform: scale(1.15);
+  color: #2e7d32;
+}
+
+/* Active Link State */
+.sidebar-nav .nav-link.active,
+.sidebar-nav .nav-link[aria-current="page"] {
+  background: linear-gradient(90deg, rgba(46, 125, 50, 0.15), rgba(46, 125, 50, 0.05));
+  color: #2e7d32;
+  font-weight: 600;
+  border-left: 4px solid #2e7d32;
+}
+
+.sidebar-nav .nav-link.active .nav-icon,
+.sidebar-nav .nav-link[aria-current="page"] .nav-icon {
+  color: #2e7d32;
+  transform: scale(1.12);
+}
+
+/* Focus State for Accessibility */
+.sidebar-nav .nav-link:focus {
+  outline: 2px solid rgba(46, 125, 50, 0.5);
+  outline-offset: 2px;
+}
+
+/* Main Content Adjustment */
+.main-content {
+  margin-left: 260px;
+  transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  width: calc(100% - 260px);
+  min-height: calc(100vh - 110px);
+  margin-top: 110px;
+}
+
+.modern-sidebar.collapsed ~ .main-content {
+  margin-left: 70px;
+  width: calc(100% - 70px);
+}
+
+/* Tooltip for collapsed sidebar */
+.modern-sidebar.collapsed .nav-link {
+  position: relative;
+}
+
+.modern-sidebar.collapsed .nav-link::after {
+  content: attr(title);
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #1b5e20;
+  color: white;
+  padding: 0.625rem 0.875rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, left 0.3s ease;
+  margin-left: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  z-index: 1002;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.modern-sidebar.collapsed .nav-link:hover::after {
+  opacity: 1;
+  left: calc(100% + 8px);
+}
+
+/* Dark Mode Support */
+[data-theme="dark"] .modern-sidebar {
+  background: linear-gradient(180deg, #1b5e20 0%, #0d3310 100%);
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] .sidebar-toggle {
+  background: #1b5e20;
+  border-color: #2d2d2d;
+}
+
+[data-theme="dark"] .sidebar-nav .nav-link:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .modern-sidebar.collapsed .nav-link::after {
+  background: #1b5e20;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 991px) {
+  .modern-sidebar {
+    display: none !important;
+  }
+  
+  .main-content {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+}
+
+/* Animation for page load */
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.modern-sidebar {
+  animation: slideInFromLeft 0.4s ease-out;
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .modern-sidebar,
+  .sidebar-nav .nav-link,
+  .sidebar-toggle,
+  .main-content {
+    transition: none !important;
+    animation: none !important;
+  }
+}

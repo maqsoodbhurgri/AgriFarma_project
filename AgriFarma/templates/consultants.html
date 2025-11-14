@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block title %}Consultants Directory{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/consultants.css') }}">
+<style>
+.consultants-hero {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)),
+              url('{{ url_for('static', filename='images/Backgrounds/pexels-ironic-751096.jpg') }}');
+  background-size: cover;
+  background-position: center;
+  padding: 4rem 0;
+  margin-bottom: 2rem;
+  border-radius: 16px;
+  color: white;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+.consultants-hero h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+  margin-bottom: 1rem;
+}
+.consultants-hero p {
+  font-size: 1.3rem;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="consultants-hero">
+  <div class="container">
+    <h1><i class="fas fa-user-md me-3"></i>Expert Consultants</h1>
+    <p>Get professional agricultural advice from verified experts</p>
+  </div>
+</div>
+
+<div class="row">
+  {% if consultants %}
+    {% for consultant in consultants %}
+    <div class="col-md-4 mb-3">
+      <div class="consultant-card">
+        {% if consultant.user and consultant.user.profile_picture %}
+        <img src="{{ url_for('static', filename=consultant.user.profile_picture) }}" alt="{{ consultant.user.name }} - Agricultural Consultant" class="img-fluid rounded-circle mb-3 mx-auto d-block" style="max-width:120px;max-height:120px;object-fit:cover;">
+        {% else %}
+        <img src="{{ url_for('static', filename='img/backgrounds/consultant-placeholder.jpg') }}" alt="Consultant profile - No photo available" class="img-fluid rounded-circle mb-3 mx-auto d-block" style="max-width:120px;max-height:120px;object-fit:cover;">
+        {% endif %}
+        <div class="consultant-name">{{ consultant.user.name if consultant.user else 'Consultant' }}</div>
+        <div class="consultant-category">{{ consultant.specialization or 'General Agriculture' }}</div>
+        {% if consultant.rating > 0 %}
+        <p class="small mb-1">⭐ {{ consultant.rating }}/5.0</p>
+        {% endif %}
+        <p class="small text-muted mb-2">{{ consultant.total_sessions }} sessions completed</p>
+        {% if consultant.hourly_rate %}
+        <p class="small mb-2">Rs. {{ consultant.hourly_rate }}/hour</p>
+        {% endif %}
+        <a href="{{ url_for('consultancy.consultant_detail', consultant_id=consultant.id) }}" class="btn btn-contact">View Profile</a>
+      </div>
+    </div>
+    {% endfor %}
+  {% else %}
+  <div class="col-12">
+    <div class="empty-state text-center p-5">
+      <div class="empty-state-icon mb-3">🧑‍🌾</div>
+      <h5 class="mb-3">No Consultants Available</h5>
+      <p class="text-muted mb-4">No agricultural consultants are currently listed.<br>Please check back soon or contact support for assistance.</p>
+    </div>
+  </div>
+  {% endif %}
+</div>
+
+{% if specialization %}
+<div class="mt-3">
+  <a href="{{ url_for('consultancy.consultants') }}" class="btn btn-outline-secondary btn-sm">Clear Filter</a>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,210 @@
+{% extends 'base.html' %}
+{% set page_title = 'Contact Us' %}
+
+{% block content %}
+<div class="contact-page">
+  <!-- Hero Section -->
+  <section class="page-hero hero-field text-white text-center">
+    <div class="container">
+      <h1 class="display-5 fw-bold mb-2">
+        <i class="fas fa-envelope me-2"></i>Contact Us
+      </h1>
+      <p class="lead">We're here to help! Get in touch with our team</p>
+    </div>
+  </section>
+
+  <!-- Contact Content -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row g-4">
+        <!-- Contact Form -->
+        <div class="col-lg-7">
+          <div class="card border-0 shadow-sm">
+            <div class="card-body p-4">
+              <h3 class="text-success fw-bold mb-4">
+                <i class="fas fa-paper-plane me-2"></i>Send us a Message
+              </h3>
+              <form method="POST" action="{{ url_for('main.contact') }}">
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label class="form-label fw-semibold">
+                      <i class="fas fa-user text-success me-2"></i>Your Name
+                    </label>
+                    <input type="text" name="name" class="form-control" placeholder="Enter your full name" required
+                           value="{% if current_user.is_authenticated %}{{ current_user.name }}{% endif %}">
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label fw-semibold">
+                      <i class="fas fa-envelope text-success me-2"></i>Email Address
+                    </label>
+                    <input type="email" name="email" class="form-control" placeholder="your.email@example.com" required
+                           value="{% if current_user.is_authenticated %}{{ current_user.email }}{% endif %}">
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label fw-semibold">
+                      <i class="fas fa-phone text-success me-2"></i>Phone Number
+                    </label>
+                    <input type="tel" name="phone" class="form-control" placeholder="+92 3XX XXXXXXX"
+                           value="{% if current_user.is_authenticated %}{{ current_user.mobile }}{% endif %}">
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label fw-semibold">
+                      <i class="fas fa-tag text-success me-2"></i>Subject
+                    </label>
+                    <select name="subject" class="form-select" required>
+                      <option value="">Select a subject</option>
+                      <option value="general">General Inquiry</option>
+                      <option value="support">Technical Support</option>
+                      <option value="marketplace">Marketplace Issue</option>
+                      <option value="consultancy">Consultancy Query</option>
+                      <option value="partnership">Partnership Opportunity</option>
+                      <option value="feedback">Feedback & Suggestions</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label fw-semibold">
+                      <i class="fas fa-comment-dots text-success me-2"></i>Message
+                    </label>
+                    <textarea name="message" class="form-control" rows="6" placeholder="Write your message here..." required></textarea>
+                  </div>
+                  <div class="col-12">
+                    <button type="submit" class="btn btn-success btn-lg px-5">
+                      <i class="fas fa-paper-plane me-2"></i>Send Message
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="col-lg-5">
+          <div class="card border-0 shadow-sm mb-4" style="background: linear-gradient(135deg, #e8f5e9, #c8e6c9);">
+            <div class="card-body p-4">
+              <h4 class="text-success fw-bold mb-4">
+                <i class="fas fa-info-circle me-2"></i>Contact Information
+              </h4>
+              
+              <div class="mb-4">
+                <h6 class="text-success fw-bold mb-2">
+                  <i class="fas fa-map-marker-alt me-2"></i>Address
+                </h6>
+                <p class="text-muted mb-0">
+                  AgriFarma Digital Hub<br>
+                  Agriculture Department, Sindh<br>
+                  Karachi, Pakistan
+                </p>
+              </div>
+
+              <div class="mb-4">
+                <h6 class="text-success fw-bold mb-2">
+                  <i class="fas fa-envelope me-2"></i>Email
+                </h6>
+                <p class="mb-0">
+                  <a href="mailto:support@agrifarma.pk" class="text-decoration-none text-success fw-semibold">
+                    support@agrifarma.pk
+                  </a>
+                </p>
+                <p class="mb-0">
+                  <a href="mailto:info@agrifarma.pk" class="text-decoration-none text-success fw-semibold">
+                    info@agrifarma.pk
+                  </a>
+                </p>
+              </div>
+
+              <div class="mb-4">
+                <h6 class="text-success fw-bold mb-2">
+                  <i class="fas fa-phone me-2"></i>Phone
+                </h6>
+                <p class="mb-0">
+                  <a href="tel:+922199000111" class="text-decoration-none text-success fw-semibold">
+                    +92-21-99000111
+                  </a>
+                </p>
+                <p class="mb-0">
+                  <a href="tel:+923001234567" class="text-decoration-none text-success fw-semibold">
+                    +92-300-1234567
+                  </a>
+                </p>
+              </div>
+
+              <div class="mb-0">
+                <h6 class="text-success fw-bold mb-2">
+                  <i class="fas fa-clock me-2"></i>Office Hours
+                </h6>
+                <p class="text-muted mb-1">Monday - Friday: 9:00 AM - 5:00 PM</p>
+                <p class="text-muted mb-0">Saturday: 9:00 AM - 1:00 PM</p>
+                <p class="text-muted mb-0">Sunday: Closed</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card border-0 shadow-sm">
+            <div class="card-body p-4">
+              <h5 class="text-success fw-bold mb-3">
+                <i class="fas fa-question-circle me-2"></i>Need Quick Help?
+              </h5>
+              <p class="text-muted mb-3">
+                Check out our FAQ page for instant answers to common questions.
+              </p>
+              <a href="{{ url_for('main.faqs') }}" class="btn btn-outline-success w-100">
+                <i class="fas fa-book-reader me-2"></i>Visit FAQs
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Social Media Section -->
+  <section class="py-5 bg-light">
+    <div class="container text-center">
+      <h3 class="text-success fw-bold mb-4">
+        <i class="fas fa-share-alt me-2"></i>Connect With Us
+      </h3>
+      <p class="text-muted mb-4">Follow us on social media for updates, tips, and agricultural news</p>
+      <div class="d-flex gap-3 justify-content-center flex-wrap">
+        <a href="#" class="btn btn-outline-success btn-lg" style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 50%;">
+          <i class="fab fa-facebook-f fa-lg"></i>
+        </a>
+        <a href="#" class="btn btn-outline-success btn-lg" style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 50%;">
+          <i class="fab fa-twitter fa-lg"></i>
+        </a>
+        <a href="#" class="btn btn-outline-success btn-lg" style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 50%;">
+          <i class="fab fa-instagram fa-lg"></i>
+        </a>
+        <a href="#" class="btn btn-outline-success btn-lg" style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 50%;">
+          <i class="fab fa-youtube fa-lg"></i>
+        </a>
+        <a href="#" class="btn btn-outline-success btn-lg" style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 50%;">
+          <i class="fab fa-whatsapp fa-lg"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+  .contact-page .form-control,
+  .contact-page .form-select {
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 0.75rem;
+    transition: all 0.3s ease;
+  }
+  
+  .contact-page .form-control:focus,
+  .contact-page .form-select:focus {
+    border-color: #2e7d32;
+    box-shadow: 0 0 0 0.2rem rgba(46, 125, 50, 0.15);
+  }
+  
+  .contact-page .form-label {
+    color: #2e7d32;
+    margin-bottom: 0.5rem;
+  }
+</style>
+{% endblock %}

@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% block title %}Marketplace{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/marketplace.css') }}">
+<style>
+.marketplace-hero {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)),
+              url('{{ url_for('static', filename='images/Backgrounds/pexels-nc-farm-bureau-mark-2255920.jpg') }}');
+  background-size: cover;
+  background-position: center;
+  padding: 4rem 0;
+  margin-bottom: 2rem;
+  border-radius: 16px;
+  color: white;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+.marketplace-hero h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+  margin-bottom: 1rem;
+}
+.marketplace-hero p {
+  font-size: 1.3rem;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="marketplace-hero text-center">
+  <div class="container">
+    <h1><i class="fas fa-shopping-cart me-3"></i>Agri Marketplace</h1>
+    <p class="mb-3">Quality Agricultural Products & Equipment for Modern Farmers</p>
+    {% if current_user.is_authenticated and current_user.role and current_user.role.name in ['farmer', 'vendor'] %}
+    <a href="{{ url_for('marketplace.product_new') }}" class="btn btn-light btn-lg">
+      <i class="fas fa-plus-circle me-2"></i>Add Your Product
+    </a>
+    {% endif %}
+  </div>
+</div>
+
+<!-- Featured Products -->
+{% if featured_products %}
+<div class="mb-4">
+  <h5 class="mb-3">⭐ Featured Products</h5>
+  <div class="row">
+    {% for product in featured_products %}
+    <div class="col-md-3 col-sm-6 mb-3">
+      <div class="product-card">
+        {% if product.image_url %}
+        <img src="{{ url_for('static', filename=product.image_url) }}" alt="{{ product.name }} - {{ product.category }}" class="img-fluid mb-2" style="max-height:150px;object-fit:cover;width:100%;">
+        {% else %}
+        <img src="{{ url_for('static', filename='img/backgrounds/product-placeholder.jpg') }}" alt="{{ product.name }} - No image available" class="img-fluid mb-2" style="max-height:150px;object-fit:cover;width:100%;">
+        {% endif %}
+        <div class="product-title">{{ product.name }}</div>
+        <div class="product-price">Rs. {{ product.price }}</div>
+        <p class="small text-muted mb-2">{{ product.category }}</p>
+        <a href="{{ url_for('marketplace.product', product_id=product.id) }}" class="cart-btn btn-sm">View Details</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+
+<!-- All Products -->
+<div class="row">
+  {% if products %}
+    {% for product in products %}
+    <div class="col-md-4 col-sm-6 mb-3">
+      <div class="product-card">
+        {% if product.image_url %}
+        <img src="{{ url_for('static', filename=product.image_url) }}" alt="{{ product.name }} - {{ product.category }}" class="img-fluid mb-2" style="max-height:180px;object-fit:cover;width:100%;">
+        {% else %}
+        <img src="{{ url_for('static', filename='img/backgrounds/product-placeholder.jpg') }}" alt="{{ product.name }} - No image available" class="img-fluid mb-2" style="max-height:180px;object-fit:cover;width:100%;">
+        {% endif %}
+        <div class="product-title">{{ product.name }}</div>
+        <div class="product-price">Rs. {{ product.price }}</div>
+        {% if product.get_discount_percentage() > 0 %}
+        <p class="small text-success mb-1">{{ product.get_discount_percentage() }}% off</p>
+        {% endif %}
+        <p class="small text-muted mb-2">{{ product.category }} | Stock: {{ product.stock_quantity }}</p>
+        {% if product.rating > 0 %}
+        <p class="small mb-2">⭐ {{ product.rating }}/5.0 ({{ product.review_count }} reviews)</p>
+        {% endif %}
+        <a href="{{ url_for('marketplace.product', product_id=product.id) }}" class="cart-btn btn-sm">View Details</a>
+      </div>
+    </div>
+    {% endfor %}
+  {% else %}
+  <div class="col-12">
+    <div class="empty-state text-center p-5">
+      <div class="empty-state-icon mb-3">🛒</div>
+      <h5 class="mb-3">No Products Found</h5>
+      <p class="text-muted mb-4">The marketplace is currently empty or there are no products matching your search.<br>Check back soon for agricultural supplies!</p>
+      {% if current_user.is_authenticated and current_user.role and current_user.role.name in ['farmer', 'vendor'] %}
+      <a href="{{ url_for('marketplace.product_new') }}" class="btn btn-success">Add First Product</a>
+      {% endif %}
+    </div>
+  </div>
+  {% endif %}
+</div>
+
+<!-- Category Filter -->
+{% if categories %}
+<div class="mt-4">
+  <h6>Filter by Category:</h6>
+  <div class="btn-group flex-wrap" role="group">
+    <a href="{{ url_for('marketplace.index') }}" class="btn btn-outline-success btn-sm">All</a>
+    {% for cat in categories %}
+    <a href="{{ url_for('marketplace.index', category=cat) }}" class="btn btn-outline-success btn-sm">{{ cat }}</a>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+{% endblock %}

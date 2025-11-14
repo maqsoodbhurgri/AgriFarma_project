@@ -1,0 +1,27 @@
+<svg width="1920" height="1080" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="greenhouseGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#E8F5E9;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#C8E6C9;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="url(#greenhouseGrad)"/>
+  
+  <!-- Leaf patterns -->
+  <g opacity="0.15">
+    <ellipse cx="200" cy="150" rx="80" ry="40" fill="#2e7d32" transform="rotate(-45 200 150)"/>
+    <ellipse cx="1700" cy="200" rx="100" ry="50" fill="#388e3c" transform="rotate(30 1700 200)"/>
+    <ellipse cx="300" cy="900" rx="90" ry="45" fill="#43a047" transform="rotate(-60 300 900)"/>
+    <ellipse cx="1600" cy="850" rx="110" ry="55" fill="#2e7d32" transform="rotate(45 1600 850)"/>
+    <ellipse cx="1000" cy="200" rx="70" ry="35" fill="#388e3c" transform="rotate(-30 1000 200)"/>
+    <ellipse cx="800" cy="950" rx="85" ry="42" fill="#43a047" transform="rotate(60 800 950)"/>
+  </g>
+  
+  <!-- Decorative circles -->
+  <circle cx="150" cy="400" r="60" fill="#4caf50" opacity="0.1"/>
+  <circle cx="1800" cy="600" r="80" fill="#66bb6a" opacity="0.1"/>
+  <circle cx="500" cy="700" r="50" fill="#2e7d32" opacity="0.1"/>
+  <circle cx="1400" cy="300" r="70" fill="#388e3c" opacity="0.1"/>
+</svg>

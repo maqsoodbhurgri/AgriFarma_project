@@ -1,0 +1,40 @@
+/* Admin Panel Styling */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-table th, .admin-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+.admin-table th {
+  background-color: #2e7d32;
+  color: #fff;
+}
+
+.role-badge {
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+}
+
+.role-badge.admin {
+  background-color: #2e7d32;
+  color: #fff;
+}
+
+.role-badge.user {
+  background-color: #1976d2;
+  color: #fff;
+}
+
+.btn-deactivate {
+  background-color: #fbc02d;
+  border: none;
+}
+
+.btn-deactivate:hover {
+  background-color: #f57f17;
+}

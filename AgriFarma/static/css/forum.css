@@ -1,0 +1,45 @@
+/* Forum Styling */
+.thread-card {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 15px;
+  margin-bottom: 15px;
+  background-color: #fff;
+}
+
+.thread-item-card {
+  border-radius: 12px !important;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.thread-item-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15) !important;
+  border-left: 4px solid #2e7d32 !important;
+}
+
+.thread-item-card .card-body {
+  padding: 1.5rem;
+}
+
+.thread-item-card h5 a:hover {
+  color: #2e7d32 !important;
+  text-decoration: underline !important;
+}
+
+.thread-title {
+  font-weight: bold;
+  color: #2e7d32;
+}
+
+.thread-meta {
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.sidebar-latest {
+  background-color: #f1f8e9;
+  padding: 10px;
+  border-radius: 6px;
+}

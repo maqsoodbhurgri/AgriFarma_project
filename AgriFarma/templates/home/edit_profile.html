@@ -1,0 +1,278 @@
+{% extends 'base.html' %}
+{% set page_title = 'Edit Profile' %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+<style>
+  .edit-profile-container{background:#f8f9fa;padding:2rem 0;min-height:100vh}
+  .form-section-title{font-weight:700;color:#2e7d32;margin-bottom:1rem;font-size:1.1rem;border-left:4px solid #2e7d32;padding-left:12px}
+  .section-divider{border-top:2px solid #e0e0e0;margin:2rem 0}
+  .avatar-edit{position:relative;width:120px;height:120px;border-radius:50%;overflow:hidden;box-shadow:0 8px 24px rgba(46,125,50,.2);border:5px solid #fff;background:#fff}
+  .avatar-edit img,.avatar-edit .avatar-fallback{width:100%;height:100%;object-fit:cover;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#66bb6a,#43a047);color:white;font-weight:700;font-size:48px}
+  .avatar-upload-btn{position:absolute;right:-10px;bottom:-10px;background:#2e7d32;color:#fff;border:none;border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(46,125,50,.5);cursor:pointer;transition:all 0.3s ease}
+  .avatar-upload-btn:hover{background:#1b5e20;transform:scale(1.1);box-shadow:0 6px 16px rgba(46,125,50,.7)}
+  .avatar-upload-btn i{font-size:1.1rem}
+  .preview-img{max-height:160px;border-radius:12px;display:none;box-shadow:0 4px 16px rgba(0,0,0,.15);margin-top:1rem;border:3px solid #2e7d32}
+  .edit-profile-card{border:none;border-radius:16px;box-shadow:0 4px 20px rgba(0,0,0,.08);overflow:hidden}
+  .edit-profile-card .card-body{padding:2.5rem}
+  .form-label{font-weight:600;color:#2e7d32;margin-bottom:0.5rem;font-size:0.9rem;display:flex;align-items:center}
+  .form-label i{margin-right:8px;color:#66bb6a}
+  .form-control,.form-select{border:2px solid #e0e0e0;border-radius:8px;padding:0.65rem 1rem;font-size:0.95rem;transition:all 0.3s ease}
+  .form-control:focus,.form-select:focus{border-color:#2e7d32;box-shadow:0 0 0 0.2rem rgba(46,125,50,.15)}
+  .avatar-section{background:linear-gradient(135deg,#f1f8f4,#e8f5e9);padding:2rem;border-radius:12px;margin-bottom:2rem;border:2px solid #c8e6c9}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="edit-profile-container">
+<div class="container py-4">
+  <div class="d-flex align-items-center mb-4">
+    <a href="{{ url_for('auth.profile') }}" class="btn btn-outline-success me-3">
+      <i class="fa fa-arrow-left me-2"></i>Back to Profile
+    </a>
+    <h2 class="mb-0 text-dark fw-bold">
+      <i class="fas fa-user-edit text-success me-2"></i>Edit Profile
+    </h2>
+  </div>
+
+  <div class="card edit-profile-card">
+    <div class="card-body">
+      <form method="post" enctype="multipart/form-data" novalidate>
+        {{ form.hidden_tag() }}
+
+        <!-- Avatar Section -->
+        <div class="avatar-section">
+          <div class="row g-4 align-items-center">
+            <div class="col-auto">
+              <div class="avatar-edit">
+                {% if current_user.profile_picture %}
+                  <img id="currentAvatar" alt="Profile image" src="{{ url_for('static', filename='uploads/' ~ current_user.profile_picture) }}">
+                {% else %}
+                  <div class="avatar-fallback" id="currentAvatarFallback">{{ (current_user.name or current_user.username)[:1]|upper }}</div>
+                {% endif %}
+                <label class="avatar-upload-btn" for="profile_picture" title="Upload Photo">
+                  <i class="fa fa-camera"></i>
+                </label>
+              </div>
+            </div>
+            <div class="col">
+              <h5 class="mb-2 text-success fw-bold">
+                <i class="fas fa-image me-2"></i>Profile Picture
+              </h5>
+              <p class="text-muted mb-0">
+                Click the camera icon to upload a new profile picture. 
+                Supported formats: JPG, PNG, GIF (Max 5MB)
+              </p>
+              <input id="profile_picture" name="profile_picture" type="file" class="d-none" accept="image/*">
+            </div>
+          </div>
+          <img id="preview" class="preview-img" alt="Preview">
+        </div>
+
+        <!-- Basic Information -->
+        <div class="form-section-title">
+          <i class="fas fa-user-circle me-2"></i>Basic Information
+        </div>
+        <div class="row g-3 mb-4">
+          <div class="col-md-6">
+            <label class="form-label">
+              <i class="fas fa-signature"></i>{{ form.name.label.text }}
+            </label>
+            {{ form.name(class='form-control', placeholder='Your full name') }}
+            {% for e in form.name.errors %}<div class="text-danger small mt-1">{{ e }}</div>{% endfor %}
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">
+              <i class="fas fa-at"></i>{{ form.username.label.text }}
+            </label>
+            {{ form.username(class='form-control', placeholder='Unique username') }}
+            {% for e in form.username.errors %}<div class="text-danger small mt-1">{{ e }}</div>{% endfor %}
+          </div>
+        </div>
+        <!-- Contact Information -->
+        <div class="section-divider"></div>
+        <div class="form-section-title">
+          <i class="fas fa-address-book me-2"></i>Contact Information
+        </div>
+        <div class="row g-3 mb-4">
+          <div class="col-md-6">
+            <label class="form-label">
+              <i class="fas fa-envelope"></i>{{ form.email.label.text }}
+            </label>
+            {{ form.email(class='form-control', placeholder='name@example.com') }}
+            {% for e in form.email.errors %}<div class="text-danger small mt-1">{{ e }}</div>{% endfor %}
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">
+              <i class="fas fa-mobile-alt"></i>{{ form.mobile.label.text }}
+            </label>
+            {{ form.mobile(class='form-control', placeholder='+92 3XX XXXXXXX') }}
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">
+              <i class="fas fa-phone"></i>{{ form.phone.label.text }}
+            </label>
+            {{ form.phone(class='form-control', placeholder='Alternative') }}
+          </div>
+        </div>
+
+        <!-- Location -->
+        <div class="section-divider"></div>
+        <div class="form-section-title">
+          <i class="fas fa-map-marked-alt me-2"></i>Location Details
+        </div>
+        <div class="row g-3 mb-4">
+          <div class="col-md-4">
+            <label class="form-label">
+              <i class="fas fa-city"></i>{{ form.city.label.text }}
+            </label>
+            {{ form.city(class='form-control', placeholder='e.g., Karachi, Lahore') }}
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">
+              <i class="fas fa-map-marker-alt"></i>{{ form.state.label.text }}
+            </label>
+            {{ form.state(class='form-control', placeholder='e.g., Sindh, Punjab') }}
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">
+              <i class="fas fa-flag"></i>{{ form.country.label.text }}
+            </label>
+            {{ form.country(class='form-control', placeholder='e.g., Pakistan') }}
+          </div>
+          <div class="col-md-12">
+            <label class="form-label">
+              <i class="fas fa-home"></i>{{ form.address.label.text }}
+            </label>
+            {{ form.address(class='form-control', rows='2', placeholder='Full address') }}
+          </div>
+        </div>
+
+        <!-- Professional -->
+        <div class="section-divider"></div>
+        <div class="form-section-title">
+          <i class="fas fa-briefcase me-2"></i>Professional Information
+        </div>
+        <div class="row g-3 mb-4">
+          <div class="col-md-4">
+            <label class="form-label">
+              <i class="fas fa-user-tie"></i>{{ form.profession.label.text }}
+            </label>
+            {{ form.profession(class='form-select') }}
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">
+              <i class="fas fa-chart-line"></i>{{ form.expertise_level.label.text }}
+            </label>
+            {{ form.expertise_level(class='form-select') }}
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">
+              <i class="fas fa-star"></i>{{ form.specialization.label.text }}
+            </label>
+            {{ form.specialization(class='form-control', placeholder='e.g., Irrigation, Soil Health') }}
+          </div>
+          <div class="col-md-12">
+            <label class="form-label">
+              <i class="fas fa-certificate"></i>{{ form.qualifications.label.text }}
+            </label>
+            {{ form.qualifications(class='form-control', rows='2', placeholder='Your qualifications and certifications') }}
+          </div>
+          <div class="col-md-12">
+            <label class="form-label">
+              <i class="fas fa-align-left"></i>{{ form.bio.label.text }}
+            </label>
+            {{ form.bio(class='form-control', rows='3', placeholder='Tell us about yourself...') }}
+          </div>
+        </div>
+
+        <!-- Role-specific -->
+        {% if current_user.is_farmer() %}
+        <div class="section-divider"></div>
+        <div class="form-section-title">
+          <i class="fas fa-tractor me-2"></i>Farmer Details
+        </div>
+        <div class="row g-3 mb-4">
+          <div class="col-md-4">
+            <label class="form-label">
+              <i class="fas fa-chart-area"></i>{{ form.farm_size.label.text }}
+            </label>
+            {{ form.farm_size(class='form-control', placeholder='e.g., 10 acres') }}
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">
+              <i class="fas fa-seedling"></i>{{ form.crops_grown.label.text }}
+            </label>
+            {{ form.crops_grown(class='form-control', placeholder='e.g., Wheat, Rice') }}
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">
+              <i class="fas fa-calendar-check"></i>{{ form.farming_experience.label.text }}
+            </label>
+            {{ form.farming_experience(class='form-control', placeholder='e.g., 5 years') }}
+          </div>
+        </div>
+        {% elif current_user.is_consultant() %}
+        <div class="section-divider"></div>
+        <div class="form-section-title">
+          <i class="fas fa-user-md me-2"></i>Consultant Details
+        </div>
+        <div class="row g-3 mb-4">
+          <div class="col-md-6">
+            <label class="form-label">
+              <i class="fas fa-money-bill-wave"></i>{{ form.consultation_fee.label.text }}
+            </label>
+            {{ form.consultation_fee(class='form-control', placeholder='e.g., 2000 PKR') }}
+          </div>
+        </div>
+        {% elif current_user.is_vendor() %}
+        <div class="section-divider"></div>
+        <div class="form-section-title">
+          <i class="fas fa-store me-2"></i>Vendor Details
+        </div>
+        <div class="row g-3 mb-4">
+          <div class="col-md-6">
+            <label class="form-label">
+              <i class="fas fa-building"></i>{{ form.business_name.label.text }}
+            </label>
+            {{ form.business_name(class='form-control', placeholder='Your business name') }}
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">
+              <i class="fas fa-id-card"></i>{{ form.business_license.label.text }}
+            </label>
+            {{ form.business_license(class='form-control', placeholder='License number') }}
+          </div>
+        </div>
+        {% endif %}
+
+        <div class="d-flex justify-content-end gap-2 mt-4 pt-3 border-top">
+          <a href="{{ url_for('auth.profile') }}" class="btn btn-outline-secondary px-4">
+            <i class="fas fa-times me-2"></i>Cancel
+          </a>
+          <button type="submit" class="btn btn-success px-4">
+            <i class="fas fa-save me-2"></i>Save Changes
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  const input = document.getElementById('profile_picture');
+  const preview = document.getElementById('preview');
+  if (input) {
+    input.addEventListener('change', (e) => {
+      const [file] = e.target.files || [];
+      if (!file) return;
+      const url = URL.createObjectURL(file);
+      preview.src = url;
+      preview.style.display = 'block';
+    });
+  }
+</script>
+{% endblock %}

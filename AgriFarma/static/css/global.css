@@ -1,0 +1,464 @@
+/* AgriFarma Global Branding */
+
+/* CSS Variables for theming */
+:root {
+  --agri-primary: #2e7d32;
+  --agri-primary-dark: #1b5e20;
+  --agri-primary-light: #66bb6a;
+  --agri-secondary: #388e3c;
+  --agri-accent: #c62828;
+  --agri-bg: #ffffff;
+  --agri-bg-alt: #f8f9fa;
+  --agri-text: #2d3a2d;
+  --agri-text-muted: #6c757d;
+  --agri-border: #dee2e6;
+  --agri-shadow: rgba(46, 125, 50, 0.15);
+  --agri-card-bg: #ffffff;
+  --agri-sidebar-gradient: linear-gradient(160deg, #2e7d32, #1b5e20);
+  --transition-speed: 0.3s;
+}
+
+/* Dark mode variables */
+[data-theme="dark"] {
+  --agri-bg: #1a1a1a;
+  --agri-bg-alt: #2d2d2d;
+  --agri-text: #e0e0e0;
+  --agri-text-muted: #a0a0a0;
+  --agri-border: #444;
+  --agri-shadow: rgba(0, 0, 0, 0.5);
+  --agri-card-bg: #2d2d2d;
+  --agri-sidebar-gradient: linear-gradient(160deg, #1b5e20, #0d3310);
+}
+
+body {
+  font-family: 'Open Sans', 'Segoe UI', Roboto, sans-serif;
+  /* subtle overlay for readability without washing out images */
+  background: linear-gradient(rgba(255,255,255,0.75), rgba(255,255,255,0.75)), url('../images/Backgrounds/pexels-quang-nguyen-vinh-222549-2135677.jpg') center/cover fixed;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  margin: 0;
+  padding: 0;
+  color: var(--agri-text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: background var(--transition-speed), color var(--transition-speed);
+}
+
+[data-theme="dark"] body {
+  background: linear-gradient(rgba(26,26,26,0.7), rgba(26,26,26,0.7)), url('../images/Backgrounds/pexels-quang-nguyen-vinh-222549-2135677.jpg') center/cover fixed;
+}
+
+.main-wrapper { flex: 1 0 auto; }
+.footer { flex-shrink: 0; }
+
+.navbar-brand {
+  font-weight: bold;
+  color: var(--agri-primary);
+  transition: color var(--transition-speed);
+}
+
+.brand-logo {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+}
+
+/* Dark mode toggle button */
+.dark-mode-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  background: var(--agri-primary);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 1.3rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px var(--agri-shadow);
+  transition: all var(--transition-speed);
+}
+
+.dark-mode-toggle:hover {
+  transform: scale(1.1) rotate(15deg);
+  background: var(--agri-primary-dark);
+}
+
+.dark-mode-toggle:active {
+  transform: scale(0.95);
+}
+
+/* Legacy sidebar styles (now handled by sidebar.css) */
+/* Keeping minimal styles for mobile offcanvas */
+
+.card {
+  margin-bottom: 14px;
+  border: none;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 14px -2px var(--agri-shadow);
+  backdrop-filter: blur(3px);
+  background: var(--agri-card-bg);
+  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px -2px var(--agri-shadow);
+}
+
+/* Empty state styling */
+.empty-state {
+  background: var(--agri-card-bg);
+  border: 2px dashed var(--agri-border);
+  border-radius: 12px;
+  padding: 3rem 2rem;
+  transition: all var(--transition-speed);
+}
+
+.empty-state:hover {
+  border-color: var(--agri-primary-light);
+  background: var(--agri-bg-alt);
+}
+
+.empty-state-icon {
+  font-size: 4rem;
+  line-height: 1;
+  opacity: 0.7;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Button transitions and hover effects */
+.btn {
+  border-radius: 30px;
+  padding: 6px 20px;
+  font-weight: 500;
+  transition: all var(--transition-speed);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.btn-success {
+  background: var(--agri-primary);
+  border-color: var(--agri-primary);
+}
+
+.btn-success:hover {
+  background: var(--agri-primary-dark);
+  border-color: var(--agri-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--agri-shadow);
+}
+
+.btn-success:active {
+  transform: translateY(0);
+}
+
+.btn-outline-success {
+  border-color: var(--agri-primary);
+  color: var(--agri-primary);
+}
+
+.btn-outline-success:hover {
+  background: var(--agri-primary);
+  border-color: var(--agri-primary);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.btn:focus {
+  outline: 3px solid rgba(46, 125, 50, 0.5);
+  outline-offset: 2px;
+}
+
+/* Card hover effects */
+.thread-card, .product-card, .consultant-card {
+  transition: all var(--transition-speed);
+  background: var(--agri-card-bg);
+}
+
+.thread-card:hover, .product-card:hover, .consultant-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px var(--agri-shadow);
+}
+
+/* Accessibility improvements */
+a:focus, button:focus, input:focus, textarea:focus, select:focus {
+  outline: 3px solid var(--agri-primary);
+  outline-offset: 2px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Improved link visibility */
+a {
+  transition: color var(--transition-speed), text-decoration var(--transition-speed);
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Skip to main content link for screen readers */
+.skip-to-main {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--agri-primary);
+  color: white;
+  padding: 8px;
+  text-decoration: none;
+  z-index: 100;
+}
+
+.skip-to-main:focus {
+  top: 0;
+}
+
+/* Enhanced form controls */
+input, textarea, select {
+  transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--agri-primary);
+  box-shadow: 0 0 0 0.2rem rgba(46, 125, 50, 0.25);
+}
+
+/* Responsive tweaks */
+@media (max-width: 991px) {
+  /* Legacy sidebar removed - using offcanvas for mobile */
+  .content-area { padding: 1.5rem !important; }
+  
+  .offcanvas .nav-link {
+    color: #ecf8ec;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    transition: background var(--transition-speed);
+    display: block;
+  }
+  
+  .offcanvas .nav-link:hover {
+    background-color: rgba(255,255,255,0.12);
+  }
+}
+
+@media (max-width: 575px) {
+  .card { border-radius: 10px; }
+  .content-area { padding: 1.2rem !important; }
+  .dark-mode-toggle {
+    width: 45px;
+    height: 45px;
+    font-size: 1.1rem;
+    bottom: 15px;
+    right: 15px;
+  }
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ===== Header Styles ===== */
+.top-header {
+  font-size: 0.875rem;
+  background: linear-gradient(135deg, #2e7d32, #1b5e20) !important;
+}
+
+.top-header a {
+  transition: opacity 0.3s;
+}
+
+.top-header a:hover {
+  opacity: 0.8;
+}
+
+.navbar {
+  padding: 0.75rem 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.navbar-brand {
+  transition: transform 0.3s;
+}
+
+.navbar-brand:hover {
+  transform: translateY(-2px);
+}
+
+.navbar-nav .nav-link {
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  color: #2d3a2d;
+  transition: all 0.3s;
+  position: relative;
+}
+
+.navbar-nav .nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: #2e7d32;
+  transition: all 0.3s;
+  transform: translateX(-50%);
+}
+
+.navbar-nav .nav-link:hover {
+  color: #2e7d32;
+}
+
+.navbar-nav .nav-link:hover::after {
+  width: 80%;
+}
+
+/* ===== Footer Styles ===== */
+.footer {
+  background: linear-gradient(135deg, #1a1a1a, #2d2d2d) !important;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.footer h5, .footer h6 {
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.footer h6::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background: #2e7d32;
+}
+
+.footer a {
+  transition: all 0.3s;
+}
+
+.footer a:hover {
+  color: #66bb6a !important;
+  transform: translateX(5px);
+  display: inline-block;
+}
+
+.footer .social-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(46, 125, 50, 0.2);
+  transition: all 0.3s;
+}
+
+.footer .social-links a:hover {
+  background: #2e7d32;
+  transform: translateY(-3px);
+}
+
+.footer .border-top {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Dropdown menu styling */
+.dropdown-menu {
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  padding: 0.5rem 0;
+}
+
+.dropdown-item {
+  padding: 0.5rem 1.5rem;
+  transition: all 0.3s;
+}
+
+.dropdown-item:hover {
+  background-color: rgba(46, 125, 50, 0.1);
+  color: #2e7d32;
+  padding-left: 2rem;
+}
+
+/* Page hero helpers and per-page backgrounds (uses HD images present in static/images/Backgrounds) */
+.page-hero {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 2rem 1rem;
+  min-height: 260px;
+  display: flex;
+  align-items: center;
+}
+
+.hero-default {
+  background-image: linear-gradient(rgba(255,255,255,0.6), rgba(255,255,255,0.6)), url('../images/Backgrounds/pexels-quang-nguyen-vinh-222549-2135677.jpg');
+}
+
+.hero-field {
+  background-image: linear-gradient(rgba(255,255,255,0.6), rgba(255,255,255,0.6)), url('../images/Backgrounds/pexels-ironic-751096.jpg');
+}
+
+.hero-farm {
+  background-image: linear-gradient(rgba(255,255,255,0.6), rgba(255,255,255,0.6)), url('../images/Backgrounds/pexels-nc-farm-bureau-mark-2255920.jpg');
+}
+
+.hero-orchard {
+  background-image: linear-gradient(rgba(46, 125, 50, 0.75), rgba(30, 81, 40, 0.85)), url('../images/Backgrounds/pexels-quang-nguyen-vinh-222549-2131784.jpg');
+}
+
+.hero-sunset {
+  background-image: linear-gradient(rgba(255,255,255,0.6), rgba(255,255,255,0.6)), url('../images/Backgrounds/pexels-timmossholder-974314.jpg');
+}
+
+/* Main content padding override to reduce extra space added by utility classes */
+.main-content {
+  padding: 1rem 1.25rem !important;
+}
+

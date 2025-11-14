@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+{% block title %}Edit Post{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/forum.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div class="card">
+        <div class="card-header bg-success text-white">
+          <h4 class="mb-0"><i class="fas fa-edit me-2"></i>Edit Article</h4>
+        </div>
+        <div class="card-body">
+          <form method="POST" action="{{ url_for('blog.edit_post', post_id=post.id) }}" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            
+            <div class="row">
+              <div class="col-md-8">
+                <div class="mb-3">
+                  {{ form.title.label(class="form-label") }}
+                  {{ form.title(class="form-control form-control-lg", placeholder="Enter article title") }}
+                  {% if form.title.errors %}
+                    {% for error in form.title.errors %}
+                      <div class="text-danger small">{{ error }}</div>
+                    {% endfor %}
+                  {% endif %}
+                </div>
+                
+                <div class="mb-3">
+                  {{ form.excerpt.label(class="form-label") }}
+                  {{ form.excerpt(class="form-control", rows=2, placeholder="Brief summary (optional)") }}
+                  {% if form.excerpt.errors %}
+                    {% for error in form.excerpt.errors %}
+                      <div class="text-danger small">{{ error }}</div>
+                    {% endfor %}
+                  {% endif %}
+                </div>
+                
+                <div class="mb-3">
+                  {{ form.content.label(class="form-label") }}
+                  {{ form.content(class="form-control", rows=12, placeholder="Write your article content here...") }}
+                  {% if form.content.errors %}
+                    {% for error in form.content.errors %}
+                      <div class="text-danger small">{{ error }}</div>
+                    {% endfor %}
+                  {% endif %}
+                </div>
+              </div>
+              
+              <div class="col-md-4">
+                <div class="mb-3">
+                  {{ form.category_id.label(class="form-label") }}
+                  {{ form.category_id(class="form-select") }}
+                  {% if form.category_id.errors %}
+                    {% for error in form.category_id.errors %}
+                      <div class="text-danger small">{{ error }}</div>
+                    {% endfor %}
+                  {% endif %}
+                </div>
+                
+                <div class="mb-3">
+                  {{ form.tags.label(class="form-label") }}
+                  {{ form.tags(class="form-control", placeholder="wheat, irrigation, organic") }}
+                  <small class="text-muted">Comma-separated tags</small>
+                  {% if form.tags.errors %}
+                    {% for error in form.tags.errors %}
+                      <div class="text-danger small">{{ error }}</div>
+                    {% endfor %}
+                  {% endif %}
+                </div>
+                
+                {% if post.featured_image %}
+                <div class="mb-3">
+                  <label class="form-label">Current Featured Image</label>
+                  <img src="{{ url_for('static', filename=post.featured_image) }}" alt="Current featured image" class="img-fluid mb-2" style="max-height: 150px;">
+                </div>
+                {% endif %}
+                
+                <div class="mb-3">
+                  {{ form.featured_image.label(class="form-label") }}
+                  {{ form.featured_image(class="form-control") }}
+                  <small class="text-muted">Upload new image to replace</small>
+                  {% if form.featured_image.errors %}
+                    {% for error in form.featured_image.errors %}
+                      <div class="text-danger small">{{ error }}</div>
+                    {% endfor %}
+                  {% endif %}
+                </div>
+                
+                <div class="mb-3 form-check">
+                  {{ form.is_featured(class="form-check-input") }}
+                  {{ form.is_featured.label(class="form-check-label") }}
+                </div>
+                
+                <div class="mb-3 form-check">
+                  {{ form.is_published(class="form-check-input") }}
+                  {{ form.is_published.label(class="form-check-label") }}
+                  <small class="text-muted d-block">Uncheck to save as draft</small>
+                </div>
+              </div>
+            </div>
+            
+            <hr>
+            
+            <div class="row">
+              <div class="col-md-12">
+                <h6 class="mb-3">SEO Settings (Optional)</h6>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  {{ form.meta_description.label(class="form-label") }}
+                  {{ form.meta_description(class="form-control", rows=2, placeholder="SEO description") }}
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  {{ form.meta_keywords.label(class="form-label") }}
+                  {{ form.meta_keywords(class="form-control", placeholder="SEO keywords") }}
+                </div>
+              </div>
+            </div>
+            
+            <div class="d-flex justify-content-between mt-4">
+              <a href="{{ url_for('blog.post_detail', post_id=post.id, slug=post.slug) }}" class="btn btn-secondary">Cancel</a>
+              {{ form.submit(class="btn btn-success btn-lg", value="Update Article") }}
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

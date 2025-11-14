@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+{% block title %}{{ category.name }}{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/forum.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container mt-3">
+  <!-- Breadcrumb -->
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{{ url_for('forum.index') }}">Forum</a></li>
+      <li class="breadcrumb-item active">{{ category.name }}</li>
+    </ol>
+  </nav>
+
+  <!-- Category Header -->
+  <div class="card mb-4">
+    <div class="card-body">
+      <h3 class="mb-2"><i class="{{ category.icon }}"></i> {{ category.name }}</h3>
+      {% if category.description %}
+      <p class="text-muted mb-0">{{ category.description }}</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Threads -->
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h5>Threads</h5>
+    <a href="{{ url_for('forum.new_thread') }}" class="btn btn-success"><i class="fas fa-plus-circle me-2"></i>New Thread</a>
+  </div>
+
+  {% if threads %}
+    {% for thread in threads %}
+    <div class="card mb-3 thread-item-card shadow-sm border-0" style="transition: all 0.3s ease;">
+      <div class="card-body">
+        <div class="row">
+          <!-- Author Avatar -->
+          <div class="col-auto">
+            {% if thread.author and thread.author.profile_picture %}
+              {% set pic = thread.author.profile_picture %}
+              {% set pic_path = pic if pic.startswith('images/') or pic.startswith('uploads/') else 'uploads/' ~ pic %}
+              <img src="{{ url_for('static', filename=pic_path) }}" 
+                   alt="{{ thread.author.name }}" 
+                   class="rounded-circle" 
+                   style="width: 60px; height: 60px; object-fit: cover;">
+            {% else %}
+              <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center" 
+                   style="width: 60px; height: 60px; font-size: 24px; font-weight: bold;">
+                {{ (thread.author.name if thread.author else 'U')[0]|upper }}
+              </div>
+            {% endif %}
+          </div>
+          
+          <!-- Thread Content -->
+          <div class="col">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <div class="flex-grow-1">
+                <h5 class="mb-1">
+                  <a href="{{ url_for('forum.thread_detail', thread_id=thread.id, slug=thread.slug) }}" 
+                     class="text-decoration-none text-dark fw-bold" 
+                     style="font-size: 1.1rem;">
+                    {{ thread.title }}
+                  </a>
+                </h5>
+                <div class="d-flex align-items-center gap-2 flex-wrap">
+                  {% if thread.is_pinned %}
+                  <span class="badge bg-warning text-dark">
+                    <i class="fas fa-thumbtack"></i> Pinned
+                  </span>
+                  {% endif %}
+                  {% if thread.is_solved %}
+                  <span class="badge bg-success">
+                    <i class="fas fa-check-circle"></i> Solved
+                  </span>
+                  {% endif %}
+                  {% if thread.is_locked %}
+                  <span class="badge bg-secondary">
+                    <i class="fas fa-lock"></i> Locked
+                  </span>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+            
+            <p class="text-muted mb-2" style="font-size: 0.95rem;">
+              {{ thread.content[:180] }}{% if thread.content|length > 180 %}...{% endif %}
+            </p>
+            
+            <div class="d-flex justify-content-between align-items-center mt-3">
+              <div class="text-muted small d-flex align-items-center gap-3">
+                <span>
+                  <i class="fas fa-user text-success"></i> 
+                  <strong>{{ thread.author.name if thread.author else 'Unknown' }}</strong>
+                </span>
+                <span>
+                  <i class="fas fa-calendar text-primary"></i> 
+                  {{ thread.created_at.strftime('%b %d, %Y') if thread.created_at else 'Recent' }}
+                </span>
+                <span>
+                  <i class="fas fa-eye text-info"></i> 
+                  {{ thread.view_count }} views
+                </span>
+                <span>
+                  <i class="fas fa-comments text-warning"></i> 
+                  {{ thread.get_reply_count() }} replies
+                </span>
+              </div>
+              <a href="{{ url_for('forum.thread_detail', thread_id=thread.id, slug=thread.slug) }}" 
+                 class="btn btn-success btn-sm">
+                <i class="fas fa-arrow-right"></i> View Thread
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    
+    <!-- Pagination -->
+    {% if pagination and pagination.pages > 1 %}
+    <nav aria-label="Thread pagination">
+      <ul class="pagination">
+        {% if pagination.has_prev %}
+        <li class="page-item"><a class="page-link" href="{{ url_for('forum.category_detail', slug=category.slug, page=pagination.prev_num) }}">Previous</a></li>
+        {% endif %}
+        {% for page_num in pagination.iter_pages(left_edge=1, right_edge=1, left_current=2, right_current=2) %}
+          {% if page_num %}
+            <li class="page-item {% if page_num == pagination.page %}active{% endif %}">
+              <a class="page-link" href="{{ url_for('forum.category_detail', slug=category.slug, page=page_num) }}">{{ page_num }}</a>
+            </li>
+          {% else %}
+            <li class="page-item disabled"><span class="page-link">...</span></li>
+          {% endif %}
+        {% endfor %}
+        {% if pagination.has_next %}
+        <li class="page-item"><a class="page-link" href="{{ url_for('forum.category_detail', slug=category.slug, page=pagination.next_num) }}">Next</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+    {% endif %}
+  {% else %}
+    <div class="alert alert-info">
+      No threads in this category yet. <a href="{{ url_for('forum.new_thread') }}">Start the conversation!</a>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

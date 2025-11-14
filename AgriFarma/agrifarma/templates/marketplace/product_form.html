@@ -1,0 +1,252 @@
+{% extends "base.html" %}
+
+{% block title %}{{ 'Add New Product' if mode=='new' else 'Edit Product' }}{% endblock %}
+
+{% block extra_css %}
+<style>
+.product-form-hero {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)),
+              url('{{ url_for('static', filename='images/Backgrounds/pexels-nc-farm-bureau-mark-2255920.jpg') }}');
+  background-size: cover;
+  background-position: center;
+  padding: 3rem 0;
+  margin-bottom: 2rem;
+  border-radius: 16px;
+  color: white;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+.product-form-hero h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="product-form-hero">
+  <div class="container">
+    <h1><i class="fas fa-{{ 'plus-circle' if mode=='new' else 'edit' }} me-3"></i>{{ 'Add New Product' if mode=='new' else 'Edit Product' }}</h1>
+  </div>
+</div>
+
+<div class="container mb-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <div class="card shadow-lg border-0">
+        <div class="card-body p-4">
+          <form method="POST" novalidate>
+            {{ form.hidden_tag() }}
+            
+            <!-- Display Flash Messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for category, message in messages %}
+                  <div class="alert alert-{{ 'danger' if category == 'error' else category }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                  </div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+
+            <!-- Basic Information -->
+            <h5 class="mb-3"><i class="fas fa-info-circle me-2 text-primary"></i>Basic Information</h5>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  {{ form.name.label(class="form-label fw-bold") }}
+                  {{ form.name(class="form-control" + (" is-invalid" if form.name.errors else ""), placeholder="e.g., Premium Wheat Seeds") }}
+                  {% if form.name.errors %}
+                    <div class="invalid-feedback">
+                      {% for error in form.name.errors %}{{ error }}{% endfor %}
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  {{ form.slug.label(class="form-label fw-bold") }}
+                  {{ form.slug(class="form-control" + (" is-invalid" if form.slug.errors else ""), placeholder="premium-wheat-seeds") }}
+                  <small class="text-muted">URL-friendly identifier (lowercase, hyphens)</small>
+                  {% if form.slug.errors %}
+                    <div class="invalid-feedback">
+                      {% for error in form.slug.errors %}{{ error }}{% endfor %}
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              {{ form.description.label(class="form-label fw-bold") }}
+              {{ form.description(class="form-control" + (" is-invalid" if form.description.errors else ""), rows=4, placeholder="Detailed product description...") }}
+              {% if form.description.errors %}
+                <div class="invalid-feedback">
+                  {% for error in form.description.errors %}{{ error }}{% endfor %}
+                </div>
+              {% endif %}
+            </div>
+
+            <!-- Category & Classification -->
+            <h5 class="mb-3 mt-4"><i class="fas fa-tags me-2 text-success"></i>Category & Classification</h5>
+            <div class="row mb-3">
+              <div class="col-md-4">
+                <div class="mb-3">
+                  {{ form.category.label(class="form-label fw-bold") }}
+                  {{ form.category(class="form-control" + (" is-invalid" if form.category.errors else ""), placeholder="e.g., Seeds, Fertilizers") }}
+                  {% if form.category.errors %}
+                    <div class="invalid-feedback">
+                      {% for error in form.category.errors %}{{ error }}{% endfor %}
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="mb-3">
+                  {{ form.subcategory.label(class="form-label fw-bold") }}
+                  {{ form.subcategory(class="form-control", placeholder="Optional subcategory") }}
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="mb-3">
+                  {{ form.sku.label(class="form-label fw-bold") }}
+                  {{ form.sku(class="form-control", placeholder="Stock Keeping Unit") }}
+                  <small class="text-muted">Optional product code</small>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pricing & Stock -->
+            <h5 class="mb-3 mt-4"><i class="fas fa-dollar-sign me-2 text-warning"></i>Pricing & Stock</h5>
+            <div class="row mb-3">
+              <div class="col-md-3">
+                <div class="mb-3">
+                  {{ form.price.label(class="form-label fw-bold") }}
+                  <div class="input-group">
+                    <span class="input-group-text">Rs.</span>
+                    {{ form.price(class="form-control" + (" is-invalid" if form.price.errors else ""), placeholder="0.00") }}
+                    {% if form.price.errors %}
+                      <div class="invalid-feedback">
+                        {% for error in form.price.errors %}{{ error }}{% endfor %}
+                      </div>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="mb-3">
+                  {{ form.original_price.label(class="form-label fw-bold") }}
+                  <div class="input-group">
+                    <span class="input-group-text">Rs.</span>
+                    {{ form.original_price(class="form-control", placeholder="0.00") }}
+                  </div>
+                  <small class="text-muted">For showing discounts</small>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="mb-3">
+                  {{ form.stock_quantity.label(class="form-label fw-bold") }}
+                  {{ form.stock_quantity(class="form-control" + (" is-invalid" if form.stock_quantity.errors else ""), placeholder="0") }}
+                  {% if form.stock_quantity.errors %}
+                    <div class="invalid-feedback">
+                      {% for error in form.stock_quantity.errors %}{{ error }}{% endfor %}
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="mb-3">
+                  {{ form.unit.label(class="form-label fw-bold") }}
+                  {{ form.unit(class="form-control", placeholder="kg, liter, piece") }}
+                </div>
+              </div>
+            </div>
+
+            <!-- Product Details -->
+            <h5 class="mb-3 mt-4"><i class="fas fa-box me-2 text-info"></i>Product Details</h5>
+            <div class="row mb-3">
+              <div class="col-md-4">
+                <div class="mb-3">
+                  {{ form.weight.label(class="form-label fw-bold") }}
+                  <div class="input-group">
+                    {{ form.weight(class="form-control", placeholder="0.0") }}
+                    <span class="input-group-text">kg</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="mb-3">
+                  {{ form.brand.label(class="form-label fw-bold") }}
+                  {{ form.brand(class="form-control", placeholder="Brand name") }}
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="mb-3">
+                  {{ form.manufacturer.label(class="form-label fw-bold") }}
+                  {{ form.manufacturer(class="form-control", placeholder="Manufacturer name") }}
+                </div>
+              </div>
+            </div>
+
+            <!-- Image & Settings -->
+            <h5 class="mb-3 mt-4"><i class="fas fa-image me-2 text-danger"></i>Image & Settings</h5>
+            <div class="mb-3">
+              {{ form.image_url.label(class="form-label fw-bold") }}
+              {{ form.image_url(class="form-control", placeholder="/static/images/products/your-image.jpg") }}
+              <small class="text-muted">Leave empty to auto-assign based on product name/category</small>
+            </div>
+
+            <div class="row mb-4">
+              <div class="col-md-6">
+                <div class="form-check form-switch">
+                  {{ form.is_active(class="form-check-input") }}
+                  {{ form.is_active.label(class="form-check-label") }}
+                  <small class="d-block text-muted">Product visible to buyers</small>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-check form-switch">
+                  {{ form.is_featured(class="form-check-input") }}
+                  {{ form.is_featured.label(class="form-check-label") }}
+                  <small class="d-block text-muted">Show in featured section</small>
+                </div>
+              </div>
+            </div>
+
+            <!-- Submit Buttons -->
+            <div class="d-flex justify-content-between align-items-center mt-4 pt-3 border-top">
+              <a href="{{ url_for('marketplace.index') }}" class="btn btn-outline-secondary">
+                <i class="fas fa-times me-2"></i>Cancel
+              </a>
+              {{ form.submit(class="btn btn-success btn-lg px-5") }}
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Auto-generate slug from name
+document.addEventListener('DOMContentLoaded', function() {
+  const nameField = document.querySelector('input[name="name"]');
+  const slugField = document.querySelector('input[name="slug"]');
+  
+  if (nameField && slugField && !slugField.value) {
+    nameField.addEventListener('input', function() {
+      const slug = this.value
+        .toLowerCase()
+        .replace(/[^\w\s-]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
+        .trim();
+      slugField.value = slug;
+    });
+  }
+});
+</script>
+{% endblock %}

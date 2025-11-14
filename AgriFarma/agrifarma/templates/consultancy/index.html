@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="mb-4">Consultancy Services</h1>
+    <p class="lead">Get expert agricultural advice from certified consultants.</p>
+    
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <h5>How It Works</h5>
+                    <ol class="mb-0">
+                        <li>Browse our list of verified agricultural consultants</li>
+                        <li>Choose a consultant based on specialization and ratings</li>
+                        <li>Book a consultation session</li>
+                        <li>Get expert advice for your farming needs</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <h4>Our Consultants</h4>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body text-center text-muted py-5">
+                    <i class="bi bi-person-workspace display-1 mb-3"></i>
+                    <p>No consultants available yet. We're onboarding experts!</p>
+                    {% if current_user.is_authenticated and current_user.is_consultant() %}
+                        <p class="text-success">Your consultant profile will appear here once verified.</p>
+                    {% elif not current_user.is_authenticated %}
+                        <a href="{{ url_for('auth.register') }}" class="btn btn-success mt-2">Register as Consultant</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

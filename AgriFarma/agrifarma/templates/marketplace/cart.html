@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container my-4">
+  <h2>Your Cart</h2>
+  <form method="post" action="{{ url_for('marketplace.cart_update') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <table class="table table-sm table-striped">
+      <thead><tr><th>Product</th><th>Price</th><th>Qty</th><th>Total</th><th></th></tr></thead>
+      <tbody>
+      {% for item in items %}
+        <tr>
+          <td><a href="{{ url_for('marketplace.product', product_id=item.product.id) }}">{{ item.product.name }}</a></td>
+          <td>PKR {{ '%.2f'|format(item.unit_price) }}</td>
+          <td><input type="number" name="qty_{{ item.product.id }}" value="{{ item.quantity }}" min="0" max="{{ item.product.stock_quantity }}" class="form-control form-control-sm w-80"></td>
+          <td>PKR {{ '%.2f'|format(item.total_price) }}</td>
+          <td>
+            <button type="submit"
+                    class="btn btn-sm btn-link text-danger"
+                    formmethod="post"
+                    formaction="{{ url_for('marketplace.cart_remove', product_id=item.product.id) }}"
+                    title="Remove item">
+              ×
+            </button>
+          </td>
+        </tr>
+      {% else %}
+        <tr><td colspan="5" class="text-center text-muted">Cart is empty.</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    <div class="d-flex justify-content-between">
+      <div>
+        <button type="submit" class="btn btn-secondary btn-sm">Update Cart</button>
+        <a href="{{ url_for('marketplace.index') }}" class="btn btn-link btn-sm">Continue Shopping</a>
+      </div>
+      <div class="text-right">
+        <p class="mb-1">Subtotal: <strong>PKR {{ '%.2f'|format(subtotal) }}</strong></p>
+        <p class="mb-1">Shipping: <strong>PKR {{ '%.2f'|format(shipping_fee) }}</strong></p>
+        <p class="mb-1">Tax: <strong>PKR {{ '%.2f'|format(tax_amount) }}</strong></p>
+        <h5>Total: PKR {{ '%.2f'|format(total) }}</h5>
+        <a href="{{ url_for('marketplace.checkout') }}" class="btn btn-primary btn-sm {% if not items %}disabled{% endif %}">Checkout</a>
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock %}
